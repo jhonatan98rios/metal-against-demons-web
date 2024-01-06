@@ -3,7 +3,6 @@ import { isThereIntersection } from "../utils/utils";
 import { Enemy } from "./Enemy";
 import { Game } from "./Game";
 import { PlayerStatus } from "./PlayerStatus";
-import { Scenario } from "./Scenario";
 import { XPOrb } from "./XPOrb";
 import { CachedImages } from "./CachedImages";
 
@@ -28,7 +27,6 @@ export class Player {
     srcY: number
     direction: DIRECTION
     countAnim: number
-    scenario: Scenario
     spritesheet: HTMLImageElement
 
 
@@ -42,7 +40,6 @@ export class Player {
         this.srcX = 0
         this.srcY = 100
         this.direction = DIRECTION.RIGHT
-        this.scenario = Scenario.getInstance()
         this.countAnim = 0
         this.spritesheet = CachedImages.getInstance().getPlayer()
     }

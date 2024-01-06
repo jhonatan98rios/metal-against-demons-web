@@ -1,7 +1,9 @@
+import { EnemyService } from "@/application/services/EnemyService";
 import { UUID, generateUUID } from "../../utils/utils";
 import { CachedImages } from "../CachedImages";
 import { Enemy } from "../Enemy";
 import { AbstractSkill } from "./AbstractSkill";
+import { OrbService } from "@/application/services/OrbService";
 
 interface ISoundAttackLevel_1 {
     initialX: number
@@ -68,12 +70,12 @@ export class SoundAttackLevel_1 implements AbstractSkill {
         throw new Error("Method not implemented.");
     }
 
-    checkCollision(enemies: Enemy[], callback: (skill: AbstractSkill, enemy: Enemy) => void) {
+    checkCollision(enemies: Enemy[], enemyService: EnemyService, orbService: OrbService, callback: (skill: AbstractSkill, enemy: Enemy, enemyService: EnemyService, orbService: OrbService) => void) {
         for (let index = 0; index < enemies.length; index++) {
             let enemy = enemies[index]
 
             if ((this.x <= enemy.x + enemy.width) && (this.x + this.width >= enemy.x) && (this.y <= enemy.y + enemy.height && this.y + this.height >= enemy.y)) {
-                return callback(this, enemy) //SkillService.collision.bind(this)
+                return callback(this, enemy, enemyService, orbService) //SkillService.collision.bind(this)
             }
         }
     }

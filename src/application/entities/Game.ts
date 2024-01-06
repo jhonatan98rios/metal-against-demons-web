@@ -50,9 +50,14 @@ export class Game {
         this.enemyService = EnemyService.getInstance()
         this.skillService = SkillService.getInstance()
         this.orbService = OrbService.getInstance()
-
         this.fps = 0
         this.fpsCounter = 0
+
+        this.start()
+    }
+    
+    start() {
+        this.skillService.start(this.player, this.enemyService)
         
         setInterval(() => {
             this.fps = this.fpsCounter
@@ -66,7 +71,7 @@ export class Game {
         this.playerEventService.execute(this)
         this.enemyService.move(this)
         this.skillService.move()
-        this.skillService.checkCollision()
+        this.skillService.checkCollision(this.enemyService, this.orbService)
         this.moveCamera()
     }
 
@@ -98,6 +103,7 @@ export class Game {
     public static getInstance(): Game {
         if (!Game.instance) {
             Game.instance = new Game();
+            console.log(Game.instance)
         }
 
         return Game.instance;

@@ -12,21 +12,18 @@ export class EnemyService {
 
     player: Player
     enemies: Enemy[]
-    orbService: OrbService
 
     constructor() {
         this.player = Player.getInstance()
         this.enemies = []
         this.spawn()
-
-        this.orbService = OrbService.getInstance()
     }
 
     spawn() {
         this.sortEnemies()
         setTimeout(this.spawn.bind(this), 300)
         
-        if (this.enemies.length >= 200) return
+        if (this.enemies.length >= 2) return
 
         const randomDistance = {
             x: Math.floor(Math.random() * 1000) + (SCREEN_WIDTH / 2),
@@ -61,18 +58,18 @@ export class EnemyService {
         });
     }
 
-    applyDamage(enemy: Enemy, damage: number) {
+    applyDamage(enemy: Enemy, damage: number, orbService: OrbService) {
         enemy.currentHealth -= damage
 
         if (enemy.currentHealth <= 0) {
-            this.remove(enemy)
+            this.remove(enemy, orbService)
         }
     }
 
-    remove(enemy: Enemy) {
+    remove(enemy: Enemy, orbService: OrbService) {
         const { id, x, y, height, width } = enemy
         this.enemies = this.enemies.filter(e => e.id != id)
-        this.orbService.spawnXpOrb({
+        orbService.spawnXpOrb({
             value: enemy.maxHealth,
             x: x + (width / 2), 
             y: y + (height / 2)

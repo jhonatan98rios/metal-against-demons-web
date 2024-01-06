@@ -17,27 +17,23 @@ import { drawDeathNotification } from "../components/drawDeathNotification";
 export class Canvas {
 
     private static instance: Canvas;
-    
-    htmlCanvas: HTMLCanvasElement
     context: CanvasRenderingContext2D;
     scenario: Scenario
     width: number
     height: number
     camera: Camera
     player: Player
-    enemyService: EnemyService
     
 
     constructor() {
-        this.htmlCanvas = document.querySelector("canvas") as HTMLCanvasElement
-        this.htmlCanvas.width = SCREEN_WIDTH
-        this.htmlCanvas.height = SCREEN_HEIGHT
+        const htmlCanvas = document.querySelector("canvas") as HTMLCanvasElement
+        htmlCanvas.width = SCREEN_WIDTH
+        htmlCanvas.height = SCREEN_HEIGHT
         
-        this.context = this.htmlCanvas.getContext("2d", { alpha: false }) as CanvasRenderingContext2D
+        this.context = htmlCanvas.getContext("2d", { alpha: false }) as CanvasRenderingContext2D
         this.scenario = Scenario.getInstance()
         this.camera = Camera.getInstance()
         this.player = Player.getInstance()
-        this.enemyService = EnemyService.getInstance()
         this.width = SCREEN_WIDTH, 
         this.height = SCREEN_HEIGHT
     }
@@ -55,14 +51,14 @@ export class Canvas {
 
         this.renderOrbs(game.orbService.xpOrbs)
         
-        this.renderEnemies(this.enemyService.enemies.filter(enemy => enemy.y <= this.player.y))
+        this.renderEnemies(game.enemyService.enemies.filter(enemy => enemy.y <= this.player.y))
         this.renderPlayer(this.player)
-        this.renderEnemies(this.enemyService.enemies.filter(enemy => enemy.y > this.player.y))
+        this.renderEnemies(game.enemyService.enemies.filter(enemy => enemy.y > this.player.y))
 
         this.renderSkills(game.skillService.activeSkills)
         this.renderStatus()
 
-        this.renderEnemiesHEalth()
+        this.renderEnemiesHealth(game.enemyService)
         
         this.renderBenchmark(game)
 
@@ -198,8 +194,8 @@ export class Canvas {
         })
     }
 
-    renderEnemiesHEalth() {
-        this.enemyService.enemies.forEach(enemy => {
+    renderEnemiesHealth(enemyService: EnemyService) {
+        enemyService.enemies.forEach(enemy => {
 
             if (enemy.currentHealth === enemy.maxHealth) return
 
