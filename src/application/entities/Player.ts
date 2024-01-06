@@ -29,7 +29,6 @@ export class Player {
     direction: DIRECTION
     countAnim: number
     scenario: Scenario
-    images: CachedImages
     game?: Game
     spritesheet: HTMLImageElement
 
@@ -54,6 +53,8 @@ export class Player {
     }
 
     update({ mvLeft, mvUp, mvRight, mvDown }: Direction) {
+        if (!this.game)return
+        
         this.move({ mvLeft, mvUp, mvRight, mvDown })
         this.checkCollision(this.game.enemyService.enemies)
         this.checkXpOrbsCollection(this.game.orbService.xpOrbs)
@@ -133,6 +134,8 @@ export class Player {
     }
 
     public checkXpOrbsCollection(xpOrbs: XPOrb[]) {
+        if (!this.game)return
+
         for (let index = 0; index < xpOrbs.length; index++) {
             let xpOrb = xpOrbs[index]
 
@@ -144,6 +147,7 @@ export class Player {
     }
 
     public die() {
+        if (!this.game)return
         this.game.canvas.renderDeathNotification()
     }
 

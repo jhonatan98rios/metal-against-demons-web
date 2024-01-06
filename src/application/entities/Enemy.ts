@@ -1,6 +1,5 @@
 import { Element2D, UUID, calculate2DMovement, generateUUID, isThereIntersection } from "../utils/utils";
-import { Player } from "./Player";
-import { Scenario } from "./Scenario";
+import { Player } from "./Player"
 
 export enum DIRECTION {
     LEFT = 0,
@@ -37,7 +36,6 @@ export class Enemy {
     srcY: number
     direction: DIRECTION
     countAnim: number
-    scenario: Scenario
     spritesheet: HTMLImageElement
 
     constructor({ maxHealth, damage, x, y, width, height, speed, srcX, srcY, direction, spritesheet }: IEnemy) {
@@ -72,6 +70,8 @@ export class Enemy {
     }
 
     positionAnimation(player: Player) {
+
+        if (!player.game) return
         
         const { x: directionX, y: directionY } = calculate2DMovement(this, player)
         const velocityX = directionX * this.speed

@@ -1,5 +1,11 @@
 import { UUID, generateUUID } from "../utils/utils"
 
+export interface IXPOrb {
+    x: number
+    y: number
+    value: number
+}
+
 export class XPOrb {
     id: UUID = generateUUID()
     x: number
@@ -9,7 +15,7 @@ export class XPOrb {
     value: number
     color: string
 
-    constructor({ x, y, value=1 }: Partial<XPOrb>) {
+    constructor({ x, y, value=1 }: IXPOrb) {
         this.id = generateUUID()
         this.x = x
         this.y = y

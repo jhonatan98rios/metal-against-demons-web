@@ -232,6 +232,7 @@ export class Canvas {
     }
 
     renderDeathNotification() {
+        if (!this.game) return
 
         this.game.status = GameStatus.stopped
 

@@ -9,7 +9,7 @@ interface IdrawText{
     posY: number,
 }
 
-export function drawText({ context, value, font, camera=null, posX, posY }: IdrawText) {
+export function drawText({ context, value, font, camera=undefined, posX, posY }: IdrawText) {
 
     context.beginPath();
 

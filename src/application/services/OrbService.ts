@@ -1,5 +1,5 @@
 import { Player } from "../entities/Player";
-import { XPOrb } from "../entities/XPOrb";
+import { IXPOrb, XPOrb } from "../entities/XPOrb";
 
 export class OrbService {
 
@@ -13,7 +13,7 @@ export class OrbService {
         this.xpOrbs = []
     }
 
-    spawnXpOrb({ x, y, value }: Partial<XPOrb>) {
+    spawnXpOrb({ x, y, value }: IXPOrb) {
         this.xpOrbs.push(
             new XPOrb({ x, y, value })
         )       

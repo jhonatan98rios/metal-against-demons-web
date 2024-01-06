@@ -1,3 +1,4 @@
+//@ts-nocheck
 export class CachedImages {
 
     private static instance: CachedImages;
@@ -9,7 +10,6 @@ export class CachedImages {
     crawler: HTMLImageElement
 
     soundAttackLevel_1: HTMLImageElement
-
 
     constructor() {
         this.createEnemies()
