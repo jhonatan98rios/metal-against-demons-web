@@ -7,6 +7,8 @@ import { PlayerEventService } from "../services/PlayerEventService"
 import { EnemyService } from "../services/EnemyService"
 import { SkillService } from "../services/SkillService"
 import { OrbService } from "../services/OrbService"
+import { Observer } from "../utils/Observer"
+
 
 
 export enum GameStatus {
@@ -102,8 +104,7 @@ export class Game {
 
     public static getInstance(): Game {
         if (!Game.instance) {
-            Game.instance = new Game();
-            console.log(Game.instance)
+            Game.instance = new Game()
         }
 
         return Game.instance;

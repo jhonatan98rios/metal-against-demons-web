@@ -56,7 +56,6 @@ export class Canvas {
         this.renderEnemies(game.enemyService.enemies.filter(enemy => enemy.y > this.player.y))
 
         this.renderSkills(game.skillService.activeSkills)
-        this.renderStatus()
 
         this.renderEnemiesHealth(game.enemyService)
         
@@ -154,43 +153,6 @@ export class Canvas {
                     Math.floor(orb.height)
                 );
             }
-        })
-    }
-
-    private renderStatus() {
-        const { currentHealth, maxHealth, currentXP, nextLevelXp } =  this.player.status
-
-        drawText({
-            font: "20px Arial",
-            context: this.context,
-            camera: this.camera,
-            value: `Level: ${ this.player.status.level}`,
-            posX: 20,
-            posY: 30
-        })
-
-        drawAnimatedBar({
-            context: this.context,
-            curentValue: currentHealth,
-            maxValue: maxHealth,
-            minColor: "#FF5555",
-            maxColor: "#55FF55",
-            height: 20,
-            width: 200,
-            posX: this.camera.x + 20,
-            posY: this.camera.y + 40
-        })
-
-        drawAnimatedBar({
-            context: this.context,
-            curentValue: currentXP,
-            maxValue: nextLevelXp,
-            minColor: "#5555FF",
-            maxColor: "#AAAAFF",
-            height: 20,
-            width: 200,
-            posX: this.camera.x + 20,
-            posY: this.camera.y + 70
         })
     }
 
