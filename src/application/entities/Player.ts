@@ -29,7 +29,6 @@ export class Player {
     direction: DIRECTION
     countAnim: number
     scenario: Scenario
-    game?: Game
     spritesheet: HTMLImageElement
 
 
@@ -46,18 +45,20 @@ export class Player {
         this.scenario = Scenario.getInstance()
         this.countAnim = 0
         this.spritesheet = CachedImages.getInstance().getPlayer()
-
+    }
+    
+    loadSpritesheetEventListener(game: Game) {
         this.spritesheet.addEventListener("load", () => {
-            requestAnimationFrame(this.game?.loop.bind(this.game)!);
+            requestAnimationFrame(game.loop.bind(game));
         }, false);
     }
 
-    update({ mvLeft, mvUp, mvRight, mvDown }: Direction) {
-        if (!this.game)return
+    update({ mvLeft, mvUp, mvRight, mvDown }: Direction, game: Game) {
+        if (!game) return
         
         this.move({ mvLeft, mvUp, mvRight, mvDown })
-        this.checkCollision(this.game.enemyService.enemies)
-        this.checkXpOrbsCollection(this.game.orbService.xpOrbs)
+        this.checkCollision(game.enemyService.enemies, game)
+        this.checkXpOrbsCollection(game.orbService.xpOrbs, game)
 
         this.setDirection({ mvLeft, mvUp, mvRight, mvDown })
         this.spriteAnimation()
@@ -122,33 +123,33 @@ export class Player {
         this.srcX = SELECTED_FRAME * this.width;
     }
 
-    public checkCollision(enemies: Enemy[]) {
+    public checkCollision(enemies: Enemy[], game: Game) {
 
         for (let index = 0; index < enemies.length; index++) {
             let enemy = enemies[index]
 
             if (isThereIntersection(this, enemy)) {
-                return this.status.takeDamage(this, enemy.damage)
+                return this.status.takeDamage(this, enemy.damage, game)
             }
         }
     }
 
-    public checkXpOrbsCollection(xpOrbs: XPOrb[]) {
-        if (!this.game)return
+    public checkXpOrbsCollection(xpOrbs: XPOrb[], game: Game) {
+        if (!game) return
 
         for (let index = 0; index < xpOrbs.length; index++) {
             let xpOrb = xpOrbs[index]
 
             if (isThereIntersection(this, xpOrb)) {
                 this.status.takeXp(xpOrb.value)
-                this.game.orbService.remove(xpOrb.id)
+                game.orbService.remove(xpOrb.id)
             }
         }
     }
 
-    public die() {
-        if (!this.game)return
-        this.game.canvas.renderDeathNotification()
+    public die(game: Game) {
+        if (!game) return
+        game.canvas.renderDeathNotification()
     }
 
     public static getInstance(): Player {

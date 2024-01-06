@@ -49,7 +49,7 @@ export class EnemyService {
 
     move(game: Game) {
         this.enemies.forEach(enemy => {
-            enemy.move(game.player, isThereIntersection(game.camera, enemy))
+            enemy.move(game, isThereIntersection(game.camera, enemy))
         })
     }
 

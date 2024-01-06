@@ -39,6 +39,8 @@ export class Game {
         this.status = GameStatus.running
 
         this.player = Player.getInstance()
+        this.player.loadSpritesheetEventListener(this)
+
         this.canvas = Canvas.getInstance()
         this.scenario = Scenario.getInstance()
         this.eventHandler = EventHandler.getInstance()
@@ -50,7 +52,6 @@ export class Game {
         this.orbService = OrbService.getInstance()
 
         this.canvas.game = this
-        this.player.game = this
 
         this.fps = 0
         this.fpsCounter = 0
@@ -64,7 +65,7 @@ export class Game {
     update(){
         if (this.status != GameStatus.running) return
             
-        this.playerEventService.execute()
+        this.playerEventService.execute(this)
         this.enemyService.move(this)
         this.skillService.move()
         this.skillService.checkCollision()

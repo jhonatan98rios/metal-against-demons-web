@@ -1,3 +1,4 @@
+import { Game } from "./Game";
 import { Player } from "./Player";
 
 export class PlayerStatus {
@@ -27,9 +28,9 @@ export class PlayerStatus {
         return PlayerStatus.instance;
     }
 
-    takeDamage(player: Player, damage: number) {
+    takeDamage(player: Player, damage: number, game: Game) {
         if (this.currentHealth <= 0) {
-            player.die()
+            player.die(game)
             return
         } 
         

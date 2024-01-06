@@ -1,4 +1,5 @@
 import { Element2D, UUID, calculate2DMovement, generateUUID, isThereIntersection } from "../utils/utils";
+import { Game } from "./Game";
 import { Player } from "./Player"
 
 export enum DIRECTION {
@@ -55,25 +56,25 @@ export class Enemy {
         this.spritesheet = spritesheet
     }
 
-    move(player: Player, isVisible: boolean) {
-        this.positionAnimation(player)
+    move(game: Game, isVisible: boolean) {
+        this.positionAnimation(game)
 
         if (isVisible) {
             this.setDirection({ 
-                mvLeft: player.x < this.x,
-                mvRight: player.x > this.x,
-                mvUp: player.y < this.y,
-                mvDown: player.y > this.y,
+                mvLeft: game.player.x < this.x,
+                mvRight: game.player.x > this.x,
+                mvUp: game.player.y < this.y,
+                mvDown: game.player.y > this.y,
             })
             this.spriteAnimation()
         }
     }
 
-    positionAnimation(player: Player) {
+    positionAnimation(game: Game) {
 
-        if (!player.game) return
+        if (!game) return
         
-        const { x: directionX, y: directionY } = calculate2DMovement(this, player)
+        const { x: directionX, y: directionY } = calculate2DMovement(this, game.player)
         const velocityX = directionX * this.speed
         const velocityY = directionY * this.speed
 
@@ -82,11 +83,11 @@ export class Enemy {
 
         let shouldMoveX = !this.checkCollision(
             { ...this, x: newX }, 
-            player.game.enemyService.enemies
+            game.enemyService.enemies
         )
         let shouldMoveY = !this.checkCollision(
             { ...this, y: newY }, 
-            player.game.enemyService.enemies
+            game.enemyService.enemies
         )
 
         this.x = shouldMoveX ? newX : this.x

@@ -1,4 +1,5 @@
 import { EventHandler } from "../entities/EventHandler"
+import { Game } from "../entities/Game";
 import { Player } from "../entities/Player"
 
 export class PlayerEventService {
@@ -13,13 +14,13 @@ export class PlayerEventService {
         this.player = Player.getInstance()
     }
 
-    execute() {
+    execute(game: Game) {
         this.player.update({ 
             mvDown: this.eventHandler.mvDown,
             mvLeft: this.eventHandler.mvLeft,
             mvRight: this.eventHandler.mvRight,
             mvUp: this.eventHandler.mvUp
-         })
+         }, game)
     }
 
     public static getInstance(): PlayerEventService {
