@@ -51,8 +51,6 @@ export class Game {
         this.skillService = SkillService.getInstance()
         this.orbService = OrbService.getInstance()
 
-        this.canvas.game = this
-
         this.fps = 0
         this.fpsCounter = 0
         
@@ -89,7 +87,7 @@ export class Game {
 
     loop(){
         this.update()
-        this.canvas.render()
+        this.canvas.render(this)
 
         this.fpsCounter += 1
 

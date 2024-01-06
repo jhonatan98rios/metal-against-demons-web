@@ -149,7 +149,7 @@ export class Player {
 
     public die(game: Game) {
         if (!game) return
-        game.canvas.renderDeathNotification()
+        game.canvas.renderDeathNotification(game)
     }
 
     public static getInstance(): Player {

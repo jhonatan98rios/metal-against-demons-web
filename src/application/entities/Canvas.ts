@@ -25,7 +25,6 @@ export class Canvas {
     height: number
     camera: Camera
     player: Player
-    game?: Game
     enemyService: EnemyService
     
 
@@ -43,9 +42,9 @@ export class Canvas {
         this.height = SCREEN_HEIGHT
     }
 
-    render(){
+    render(game: Game){
 
-        if (!this.game || this.game.status !== GameStatus.running) return
+        if (!game || game.status !== GameStatus.running) return
 
         this.clearCanvas()
         this.moveCamera()
@@ -54,18 +53,18 @@ export class Canvas {
             this.renderElement(element)
         })
 
-        this.renderOrbs(this.game.orbService.xpOrbs)
+        this.renderOrbs(game.orbService.xpOrbs)
         
         this.renderEnemies(this.enemyService.enemies.filter(enemy => enemy.y <= this.player.y))
         this.renderPlayer(this.player)
         this.renderEnemies(this.enemyService.enemies.filter(enemy => enemy.y > this.player.y))
 
-        this.renderSkills(this.game.skillService.activeSkills)
+        this.renderSkills(game.skillService.activeSkills)
         this.renderStatus()
 
         this.renderEnemiesHEalth()
         
-        this.renderBenchmark()
+        this.renderBenchmark(game)
 
 
         this.scenario.layers.aboveThePlayers.forEach(element => {
@@ -218,23 +217,23 @@ export class Canvas {
         })
     }
 
-    renderBenchmark() {
-        if (this.game) {
+    renderBenchmark(game: Game) {
+        if (game) {
             drawText({
                 font: "30px Arial",
                 context: this.context,
                 camera: this.camera,
-                value: this.game.fps.toString(),
+                value: game.fps.toString(),
                 posX: this.camera.width - 50,
                 posY: 40
             })
         }
     }
 
-    renderDeathNotification() {
-        if (!this.game) return
+    renderDeathNotification(game: Game) {
+        if (!game) return
 
-        this.game.status = GameStatus.stopped
+        game.status = GameStatus.stopped
 
         drawDeathNotification({
             context: this.context,
