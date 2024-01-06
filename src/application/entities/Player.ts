@@ -1,7 +1,7 @@
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../constants";
 import { isThereIntersection } from "../utils/utils";
 import { Enemy } from "./Enemy";
-import { Game } from "./Game";
+import { Game, GameStatus } from "./Game";
 import { PlayerStatus } from "./PlayerStatus";
 import { XPOrb } from "./XPOrb";
 import { CachedImages } from "./CachedImages";
@@ -146,7 +146,7 @@ export class Player {
 
     public die(game: Game) {
         if (!game) return
-        game.canvas.renderDeathNotification(game)
+        game.state.status = GameStatus.stopped
     }
 
     public static getInstance(): Player {

@@ -7,9 +7,6 @@ import { PlayerEventService } from "../services/PlayerEventService"
 import { EnemyService } from "../services/EnemyService"
 import { SkillService } from "../services/SkillService"
 import { OrbService } from "../services/OrbService"
-import { Observer } from "../utils/Observer"
-
-
 
 export enum GameStatus {
     stopped = 0,
@@ -17,12 +14,15 @@ export enum GameStatus {
     paused = 2,
 }
 
+type GameState = {
+    status: GameStatus
+}
+
 export class Game {
 
     private static instance: Game;
 
-    status: GameStatus
-    
+    state: GameState 
     player: Player
     canvas: Canvas
     scenario: Scenario
@@ -38,7 +38,9 @@ export class Game {
     fpsCounter: number
 
     constructor() {
-        this.status = GameStatus.running
+        this.state = {
+            status: GameStatus.running
+        }
 
         this.player = Player.getInstance()
         this.player.loadSpritesheetEventListener(this)
@@ -68,7 +70,7 @@ export class Game {
     }
 
     update(){
-        if (this.status != GameStatus.running) return
+        if (this.state.status != GameStatus.running) return
             
         this.playerEventService.execute(this)
         this.enemyService.move(this)

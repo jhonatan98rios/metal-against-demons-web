@@ -22,7 +22,7 @@ export function AnimatedBar({ curentValue, maxValue, minColor, maxColor, height,
 
     const fillStyle: CSSProperties = {
         backgroundColor: curentValue > maxValue * 0.5 ? maxColor : minColor,
-        width: (curentValue / maxValue) * width
+        width: curentValue ? (curentValue / maxValue) * width : 0
     }
 
     return (

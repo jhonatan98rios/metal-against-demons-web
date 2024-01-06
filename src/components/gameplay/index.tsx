@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Game } from "@/application/entities/Game"
+import { Game, GameStatus } from "@/application/entities/Game"
 import { CachedImages } from "@/application/entities/CachedImages"
 import { Observer } from "@/application/utils/Observer"
 import { PlayerStatus } from "@/application/entities/PlayerStatus"
@@ -17,25 +17,42 @@ export default function GamePlay() {
     const [ playerStatusNextLevelXp, setPlayerStatusNextLevelXp ] = useState<number>()
     const [ playerStatusCurrentXP, setPlayerStatusCurrentXP ] = useState<number>()
 
+    const [ gameStatus, setGameStatus ] = useState<GameStatus>()
+
     useEffect(() => {
         if (window !== undefined) {
             CachedImages.getInstance()
             const game = Game.getInstance()
+
             updatePlayerStatus(game.player.status)
+            updateGameStatus(game.state)
 
             Observer.observe(game.player.status, () => {
                 updatePlayerStatus(game.player.status)
-                
+            })
+
+            Observer.observe(game.state, () => {
+                updateGameStatus(game.state)
+                console.log(game.state)
             })
         }
     }, [])
 
     function updatePlayerStatus({ level, maxHealth, currentHealth, nextLevelXp, currentXP }: PlayerStatus) {
-        setPlayerStatusLevel(level)
+        if (playerStatusLevel !== level) {
+            setPlayerStatusLevel(level)
+        }
         setPlayerStatusMaxHealth(maxHealth)
         setPlayerStatusCurrentHealth(currentHealth)
         setPlayerStatusNextLevelXp(nextLevelXp)
         setPlayerStatusCurrentXP(currentXP)
+    }
+
+    function updateGameStatus({ status }: any) {
+
+        if (gameStatus != status) {
+            setGameStatus(status)
+        }
     }
 
     return (
@@ -49,6 +66,9 @@ export default function GamePlay() {
                     nextLevelXp: playerStatusNextLevelXp!,
                     currentXP: playerStatusCurrentXP!
                 }} 
+                gameStatus={{
+                    status: gameStatus!
+                }}
             />
         </main>
     )

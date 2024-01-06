@@ -40,7 +40,7 @@ export class Canvas {
 
     render(game: Game){
 
-        if (!game || game.status !== GameStatus.running) return
+        if (!game || game.state.status !== GameStatus.running) return
 
         this.clearCanvas()
         this.moveCamera()
@@ -186,20 +186,6 @@ export class Canvas {
                 posY: 40
             })
         }
-    }
-
-    renderDeathNotification(game: Game) {
-        if (!game) return
-
-        game.status = GameStatus.stopped
-
-        drawDeathNotification({
-            context: this.context,
-            height: 300,
-            width: 500,
-            posY: 200,
-            posX: (SCREEN_WIDTH / 2) - 250
-        })
     }
 
     public static getInstance(): Canvas {
