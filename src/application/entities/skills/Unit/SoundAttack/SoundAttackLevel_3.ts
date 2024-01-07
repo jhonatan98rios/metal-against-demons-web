@@ -76,7 +76,7 @@ export class SoundAttackLevel_3 implements AbstractSkill {
 
     private spriteAnimation() {
         const FRAMES_AMOUNT = 4
-        const ANIMATION_SPEED = 2
+        const ANIMATION_SPEED = 3
         const TIME_TO_RESTART = 60 / ANIMATION_SPEED
         const SELECTED_FRAME = Math.floor(this.countAnim / (TIME_TO_RESTART / FRAMES_AMOUNT))
         

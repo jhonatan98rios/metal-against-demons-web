@@ -1,6 +1,7 @@
 import { CachedImages } from "../../../CachedImages";
 import { ISpawn } from "../../Unit/AbstractSkill";
 import { SoundAttackLevel_3 } from "../../Unit/SoundAttack/SoundAttackLevel_3";
+import { AbstractSkillkManager } from "../AbstractSkillManager";
 
 
 export class SoundAttackManager3 {
@@ -16,13 +17,13 @@ export class SoundAttackManager3 {
     
     constructor() {
         this.isActive = true
-        this.name = "Simple Musical Note"
+        this.name = "Musical Note"
         this.width = 47
         this.height = 47
-        this.speed = 10
+        this.speed = 5
         this.damage = 2
         this.spritesheet = CachedImages.getInstance().soundAttackLevel_3
-        this.interval = 1500
+        this.interval = 300
     }
 
     spawn({ player, enemyService, activeSkills }: ISpawn) {
@@ -43,7 +44,7 @@ export class SoundAttackManager3 {
         })
 
         if (nearby_enemies.length > 0) {
-            const sound_attack_level_1 = new SoundAttackLevel_3({ 
+            const sound_attack_level = new SoundAttackLevel_3({ 
                 initialX: player.x,
                 initialY: player.y + (player.height / 2),
                 targetX: enemyService.enemies[0].x,
@@ -55,15 +56,17 @@ export class SoundAttackManager3 {
                 spritesheet: this.spritesheet
             })
     
-            activeSkills.push(sound_attack_level_1)
-
-            console.log("Attack!!")
-            console.log(activeSkills.length)
+            activeSkills.push(sound_attack_level)
         }
     }
 
     stop() {
         this.isActive = false
-        clearInterval(this.interval)
+        console.log('STOP 2')
+    }
+
+    update(): AbstractSkillkManager {
+        console.log("UPDATE!! MAX")
+        return new SoundAttackManager3()
     }
 }

@@ -2,11 +2,10 @@ import { Enemy } from "../entities/Enemy";
 import { Player } from "../entities/Player";
 import { AbstractSkill } from "../entities/skills/Unit/AbstractSkill";
 import { AbstractSkillkManager } from "../entities/skills/Managers/AbstractSkillManager";
-import { SoundAttackManager1 } from "../entities/skills/Managers/SoundAttack/SoundAttackManager1";
 import { EnemyService } from "./EnemyService";
 import { OrbService } from "./OrbService";
-import { SoundAttackManager2 } from "../entities/skills/Managers/SoundAttack/SoundAttackManager2";
 import { SoundAttackManager3 } from "../entities/skills/Managers/SoundAttack/SoundAttackManager3";
+import { SoundAttackManager1 } from "../entities/skills/Managers/SoundAttack/SoundAttackManager1";
 
 export class SkillService {
 
@@ -19,8 +18,6 @@ export class SkillService {
         this.availableSkills = []
         this.availableSkills.push(
             new SoundAttackManager1(),
-            new SoundAttackManager2(),
-            new SoundAttackManager3(),
         )
     }
     

@@ -12,4 +12,6 @@ export abstract class AbstractSkillkManager {
     spritesheet: HTMLImageElement
     
     abstract spawn({ player, enemyService, activeSkills }: ISpawn): void
+    abstract update(): AbstractSkillkManager
+    abstract stop(): void
 }

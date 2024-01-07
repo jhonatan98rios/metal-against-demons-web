@@ -17,7 +17,7 @@ export class PlayerStatus {
         this.currentHealth = 10
         this.vulnerable = true
         this.currentXP = 0
-        this.nextLevelXp = 5
+        this.nextLevelXp = 15
     }
 
     public static getInstance(): PlayerStatus {
@@ -44,20 +44,33 @@ export class PlayerStatus {
         }, 1000)
     }
 
-    takeXp(xp: number) {
+    takeXp(xp: number, game: Game) {
         if (this.currentXP + xp >= this.nextLevelXp) {
-            return this.upgrade()
+            return this.upgrade(game)
         } 
 
         this.currentXP += xp
     }
 
-    upgrade() {
+    upgrade(game: Game) {
         this.level++
         this.nextLevelXp += this.nextLevelXp * 0.75
         this.currentXP = 0
         
         this.maxHealth += 1
         this.currentHealth += 1
+
+        game.skillService.availableSkills = game.skillService.availableSkills.map(skill => {
+            console.log(skill.name)
+            if (skill.name == "Musical Note") {
+                skill.stop()
+                skill = skill.update()
+            }
+            return skill
+        })
+
+        game.skillService.startSpawn(game.player, game.enemyService)
+        
+        console.log(game.skillService.availableSkills)
     }
 }
