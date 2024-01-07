@@ -1,17 +1,27 @@
 import { Enemy } from "../entities/Enemy";
 import { Player } from "../entities/Player";
-import { AbstractSkill } from "../entities/skills/AbstractSkill";
-import { SoundAttackLevel_1 } from "../entities/skills/SoundAttackLevel_1";
+import { AbstractSkill } from "../entities/skills/Unit/AbstractSkill";
+import { AbstractSkillkManager } from "../entities/skills/Managers/AbstractSkillManager";
+import { SoundAttackManager1 } from "../entities/skills/Managers/SoundAttack/SoundAttackManager1";
 import { EnemyService } from "./EnemyService";
 import { OrbService } from "./OrbService";
+import { SoundAttackManager2 } from "../entities/skills/Managers/SoundAttack/SoundAttackManager2";
+import { SoundAttackManager3 } from "../entities/skills/Managers/SoundAttack/SoundAttackManager3";
 
 export class SkillService {
 
     private static instance: SkillService
     public activeSkills: AbstractSkill[]
+    public availableSkills: AbstractSkillkManager[]
 
     constructor() {
         this.activeSkills = []
+        this.availableSkills = []
+        this.availableSkills.push(
+            new SoundAttackManager1(),
+            new SoundAttackManager2(),
+            new SoundAttackManager3(),
+        )
     }
     
     public static getInstance(): SkillService {
@@ -22,46 +32,19 @@ export class SkillService {
         return SkillService.instance
     }
     
-    start(player: Player, enemyService: EnemyService) {
-        
-        setTimeout(() => {
-            this.spawn(player, enemyService)
-        }, 500)
+    startSpawn(player: Player, enemyService: EnemyService) {
+        this.availableSkills.forEach((skillManager) => {
+            this.intervaledSpawn(skillManager, player, enemyService)
+        })
     }
 
-    spawn(player: Player, enemyService: EnemyService) {
+    intervaledSpawn(skillManager: AbstractSkillkManager, player: Player, enemyService: EnemyService) {
+        skillManager.spawn({ player, enemyService, activeSkills: this.activeSkills })
 
-        setTimeout(() => {
-            this.spawn(player, enemyService)
-        }, 500)
-
-        if (!player) return
-        if (this.activeSkills.length > 2) return
-
-        const range_area = {
-            left: player.x - 500,
-            top: player.y - 500,
-            right: player.x + 500,
-            bottom: player.y + 500,
-        }
-
-        const nearby_enemies = enemyService.enemies.filter(enemy => {
-            return enemy.x >= range_area.left
-                && enemy.x <= range_area.right
-                && enemy.y >= range_area.top
-                && enemy.y <= range_area.bottom
-        })
-        
-
-        if (nearby_enemies.length > 0) {
-            const sound_attack_level_1 = new SoundAttackLevel_1({ 
-                initialX: player.x,
-                initialY: player.y + (player.height / 2),
-                targetX: enemyService.enemies[0].x,
-                targetY: enemyService.enemies[0].y + (enemyService.enemies[0].height / 2),
-            })
-    
-            this.activeSkills.push(sound_attack_level_1)
+        if (skillManager.isActive) {
+            setTimeout(() => {
+                this.intervaledSpawn(skillManager, player, enemyService)
+            }, skillManager.interval)
         }
     }
 

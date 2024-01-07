@@ -126,7 +126,7 @@ export class Player {
             let enemy = enemies[index]
 
             if (isThereIntersection(this, enemy)) {
-                return this.status.takeDamage(this, enemy.damage, game)
+                //return this.status.takeDamage(this, enemy.damage, game)
             }
         }
     }

@@ -61,7 +61,7 @@ export class Game {
     }
     
     start() {
-        this.skillService.start(this.player, this.enemyService)
+        this.skillService.startSpawn(this.player, this.enemyService)
         
         setInterval(() => {
             this.fps = this.fpsCounter

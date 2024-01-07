@@ -1,20 +1,26 @@
 import { EnemyService } from "@/application/services/EnemyService";
-import { UUID, generateUUID } from "../../utils/utils";
-import { CachedImages } from "../CachedImages";
-import { Enemy } from "../Enemy";
-import { AbstractSkill } from "./AbstractSkill";
+import { UUID, generateUUID } from "@/application/utils/utils";
+import { CachedImages } from "@/application/entities/CachedImages";
+import { Enemy } from "@/application/entities/Enemy";
+import { AbstractSkill, ISpawn } from "../AbstractSkill";
 import { OrbService } from "@/application/services/OrbService";
 
-interface ISoundAttackLevel_1 {
+interface ISoundAttackLevel_3 {
     initialX: number
     initialY: number
     targetX: number
     targetY: number
+    width: number
+    height: number
+    speed: number
+    damage: number
+    spritesheet: HTMLImageElement
 }
 
-export class SoundAttackLevel_1 implements AbstractSkill {
+export class SoundAttackLevel_3 implements AbstractSkill {
 
     id: UUID
+    name: string
     width: number
     height: number
     initialX: number
@@ -31,7 +37,7 @@ export class SoundAttackLevel_1 implements AbstractSkill {
     speed: number
     damage: number
     
-    constructor({ initialX, initialY, targetX, targetY }: ISoundAttackLevel_1) {
+    constructor({ initialX, initialY, targetX, targetY, width, height, speed, damage, spritesheet }: ISoundAttackLevel_3) {
 
         this.id = generateUUID()
         this.x = initialX
@@ -41,15 +47,15 @@ export class SoundAttackLevel_1 implements AbstractSkill {
         this.targetX = targetX
         this.targetY = targetY
 
+        this.width = width
+        this.height = height
+        this.speed = speed
+        this.damage = damage
+        
         this.srcX = 0
         this.srcY = 0
-        this.width = 26
-        this.height = 26
-        this.speed = 5
-        this.damage = 1
-        
         this.countAnim = 0
-        this.spritesheet = CachedImages.getInstance().getSoundAttackLevel_1()
+        this.spritesheet = spritesheet
     }
 
     move() {
@@ -64,10 +70,23 @@ export class SoundAttackLevel_1 implements AbstractSkill {
 
         this.x += velocityX
         this.y += velocityY
+
+        this.spriteAnimation()
     }
 
-    animate() {
-        throw new Error("Method not implemented.");
+    private spriteAnimation() {
+        const FRAMES_AMOUNT = 4
+        const ANIMATION_SPEED = 2
+        const TIME_TO_RESTART = 60 / ANIMATION_SPEED
+        const SELECTED_FRAME = Math.floor(this.countAnim / (TIME_TO_RESTART / FRAMES_AMOUNT))
+        
+        this.countAnim++;
+
+        if (this.countAnim >= TIME_TO_RESTART) {
+            this.countAnim = 0;
+        }
+
+        this.srcX = SELECTED_FRAME * this.width;
     }
 
     checkCollision(enemies: Enemy[], enemyService: EnemyService, orbService: OrbService, callback: (skill: AbstractSkill, enemy: Enemy, enemyService: EnemyService, orbService: OrbService) => void) {
@@ -79,8 +98,8 @@ export class SoundAttackLevel_1 implements AbstractSkill {
             }
         }
     }
-    
-    effect() {
+
+    update(): void {
         throw new Error("Method not implemented.");
     }
 }

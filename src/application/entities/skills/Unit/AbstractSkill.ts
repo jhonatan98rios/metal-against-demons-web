@@ -1,10 +1,18 @@
 import { EnemyService } from "@/application/services/EnemyService";
-import { Enemy } from "../Enemy";
+import { Enemy } from "@/application/entities/Enemy";
 import { OrbService } from "@/application/services/OrbService";
+import { Player } from "@/application/entities/Player";
+
+export interface ISpawn {
+    player: Player
+    enemyService: EnemyService
+    activeSkills: AbstractSkill[]
+}
 
 export abstract class AbstractSkill {
 
     abstract id: string
+    abstract name: string
     abstract width: number
     abstract height: number
     abstract x: number
@@ -18,6 +26,6 @@ export abstract class AbstractSkill {
 
     abstract move(): void
     abstract checkCollision(enemies: Enemy[], enemyService: EnemyService, orbService: OrbService, callback: Function): void
-    abstract animate(): void
-    abstract effect(): void
+    static startSpawn(props: ISpawn): void {}
+    static spawn(props: ISpawn): void {}
 }
