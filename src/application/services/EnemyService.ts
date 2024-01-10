@@ -5,7 +5,6 @@ import { Player } from "../entities/Player";
 import { EventClient } from "../event/EventClient";
 import { Element2D, isThereIntersection } from "../utils/utils";
 import { EnemyFactory } from "./EnemyFactory";
-import { OrbService } from "./OrbService";
 
 export class EnemyService extends EventClient {
 
@@ -23,9 +22,9 @@ export class EnemyService extends EventClient {
 
     spawn() {
         this.sortEnemies()
-        setTimeout(this.spawn.bind(this), 500)
+        setTimeout(this.spawn.bind(this), 1000 - (this.player.status.level * 20))
         
-        if (this.enemies.length >= 100) return
+        if (this.enemies.length >= 50 * this.player.status.level) return
 
         const randomDistance = {
             x: Math.floor(Math.random() * 1000) + (SCREEN_WIDTH / 2),

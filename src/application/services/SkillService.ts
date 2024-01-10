@@ -3,11 +3,9 @@ import { Player } from "../entities/Player";
 import { AbstractSkill } from "../entities/skills/Unit/AbstractSkill";
 import { AbstractSkillkManager } from "../entities/skills/Managers/AbstractSkillManager";
 import { EnemyService } from "./EnemyService";
-import { OrbService } from "./OrbService";
 import { SoundAttackManager1 } from "../entities/skills/Managers/SoundAttack/SoundAttackManager1";
 import { EventManager } from "../event/EventManager";
 import { EventClient } from "../event/EventClient";
-import { SoundAttackManager4 } from "../entities/skills/Managers/SoundAttack/SoundAttackManager4";
 
 export class SkillService extends EventClient {
 
@@ -22,7 +20,7 @@ export class SkillService extends EventClient {
         this.activeSkills = []
         this.availableSkills = []
         this.availableSkills.push(
-            new SoundAttackManager4(),
+            new SoundAttackManager1(),
         )
     }
     
