@@ -4,20 +4,25 @@ import { AbstractSkill } from "../entities/skills/Unit/AbstractSkill";
 import { AbstractSkillkManager } from "../entities/skills/Managers/AbstractSkillManager";
 import { EnemyService } from "./EnemyService";
 import { OrbService } from "./OrbService";
-import { SoundAttackManager3 } from "../entities/skills/Managers/SoundAttack/SoundAttackManager3";
 import { SoundAttackManager1 } from "../entities/skills/Managers/SoundAttack/SoundAttackManager1";
+import { EventManager } from "../event/EventManager";
+import { EventClient } from "../event/EventClient";
+import { SoundAttackManager4 } from "../entities/skills/Managers/SoundAttack/SoundAttackManager4";
 
-export class SkillService {
+export class SkillService extends EventClient {
 
+    public eventManager: EventManager
     private static instance: SkillService
     public activeSkills: AbstractSkill[]
     public availableSkills: AbstractSkillkManager[]
 
     constructor() {
+        super()
+        this.eventManager = EventManager.getInstance()
         this.activeSkills = []
         this.availableSkills = []
         this.availableSkills.push(
-            new SoundAttackManager1(),
+            new SoundAttackManager4(),
         )
     }
     
@@ -36,6 +41,7 @@ export class SkillService {
     }
 
     intervaledSpawn(skillManager: AbstractSkillkManager, player: Player, enemyService: EnemyService) {
+        /* Each skill manaager is a type of attack */
         skillManager.spawn({ player, enemyService, activeSkills: this.activeSkills })
 
         if (skillManager.isActive) {
@@ -49,27 +55,44 @@ export class SkillService {
         this.activeSkills.forEach(activeSkill => activeSkill.move())
     }
     
-    checkCollision(enemyService: EnemyService, orbService: OrbService) {
+    checkSkillsCollision(enemyService: EnemyService) {
         for (let index = 0; index <= this.activeSkills.length; index++) {
             let activeSkill = this.activeSkills[index]
 
             if (activeSkill) {
                 activeSkill.checkCollision(
                     enemyService.enemies,
-                    enemyService,
-                    orbService,
                     this.collision.bind(this),
                 )
             }
         }
     }
 
-    collision(skill: AbstractSkill, enemy: Enemy, enemyService: EnemyService, orbService: OrbService) {
+    collision(skill: AbstractSkill, enemy: Enemy) {
         this.remove(skill.id)
-        enemyService.applyDamage(enemy, skill.damage, orbService)
+        this.eventManager.emit("skill:damage", { enemy, damage: skill.damage })
     }
 
     remove(id: string) {
         this.activeSkills = this.activeSkills.filter(skill => skill.id != id)
+    }
+
+    upgrade(skillName: string) {
+        this.availableSkills = this.availableSkills.map(skill => {
+            if (skill.name == skillName) {
+                skill.stop()
+                skill = skill.update()
+            }
+            return skill
+        })
+    }
+
+    createEventListeners() {
+        this.eventManager.on('player:upgrade', ({ player, enemyService, skillName }: { player: Player, enemyService: EnemyService, skillName: string }) => {
+            console.log("Event emmited: player:upgrade")
+            this.upgrade(skillName)
+            
+            this.startSpawn(player, enemyService)
+        });
     }
 }

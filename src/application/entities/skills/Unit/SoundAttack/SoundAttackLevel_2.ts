@@ -72,12 +72,12 @@ export class SoundAttackLevel_2 implements AbstractSkill {
         this.y += velocityY
     }
 
-    checkCollision(enemies: Enemy[], enemyService: EnemyService, orbService: OrbService, callback: (skill: AbstractSkill, enemy: Enemy, enemyService: EnemyService, orbService: OrbService) => void) {
+    checkCollision(enemies: Enemy[], callback: (skill: AbstractSkill, enemy: Enemy) => void) {
         for (let index = 0; index < enemies.length; index++) {
             let enemy = enemies[index]
 
             if ((this.x <= enemy.x + enemy.width) && (this.x + this.width >= enemy.x) && (this.y <= enemy.y + enemy.height && this.y + this.height >= enemy.y)) {
-                return callback(this, enemy, enemyService, orbService) //SkillService.collision.bind(this)
+                return callback(this, enemy) //SkillService.collision()
             }
         }
     }

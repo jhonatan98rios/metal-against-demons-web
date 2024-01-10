@@ -1,7 +1,9 @@
+import { EventClient } from "../event/EventClient";
+import { EnemyService } from "../services/EnemyService";
 import { Game } from "./Game";
 import { Player } from "./Player";
 
-export class PlayerStatus {
+export class PlayerStatus extends EventClient {
 
     private static instance: PlayerStatus;
     public level: number
@@ -12,6 +14,7 @@ export class PlayerStatus {
     public nextLevelXp: number
 
     constructor () {
+        super()
         this.level = 1
         this.maxHealth = 10
         this.currentHealth = 10
@@ -28,9 +31,9 @@ export class PlayerStatus {
         return PlayerStatus.instance;
     }
 
-    takeDamage(player: Player, damage: number, game: Game) {
+    takeDamage(player: Player, damage: number) {
         if (this.currentHealth <= 0) {
-            player.die(game)
+            player.die()
             return
         } 
         
@@ -46,13 +49,13 @@ export class PlayerStatus {
 
     takeXp(xp: number, game: Game) {
         if (this.currentXP + xp >= this.nextLevelXp) {
-            return this.upgrade(game)
+            return this.upgrade(game.player, game.enemyService)
         } 
 
         this.currentXP += xp
     }
 
-    upgrade(game: Game) {
+    upgrade(player: Player, enemyService: EnemyService) {
         this.level++
         this.nextLevelXp += this.nextLevelXp * 0.75
         this.currentXP = 0
@@ -60,17 +63,11 @@ export class PlayerStatus {
         this.maxHealth += 1
         this.currentHealth += 1
 
-        game.skillService.availableSkills = game.skillService.availableSkills.map(skill => {
-            console.log(skill.name)
-            if (skill.name == "Musical Note") {
-                skill.stop()
-                skill = skill.update()
-            }
-            return skill
+        console.log("Trying to emmit: player:upgrade")
+        this.eventManager.emit('player:upgrade', { 
+            skillName: "Musical Note", 
+            player, 
+            enemyService 
         })
-
-        game.skillService.startSpawn(game.player, game.enemyService)
-        
-        console.log(game.skillService.availableSkills)
     }
 }

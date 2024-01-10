@@ -31,7 +31,7 @@ export class EnemyFactory {
             srcX: 0,
             srcY: 0,
             direction: DIRECTION.LEFT,
-            spritesheet: CachedImages.getInstance().getSpirit()
+            spritesheet: CachedImages.getInstance().spirit
         })
     }
 
@@ -47,7 +47,7 @@ export class EnemyFactory {
             srcX: 0,
             srcY: 0,
             direction: DIRECTION.LEFT,
-            spritesheet: CachedImages.getInstance().getCyclop()
+            spritesheet: CachedImages.getInstance().cyclop
         })
     }
 
@@ -63,7 +63,7 @@ export class EnemyFactory {
             srcX: 0,
             srcY: 0,
             direction: DIRECTION.LEFT,
-            spritesheet: CachedImages.getInstance().getDragon()
+            spritesheet: CachedImages.getInstance().dragon
         })
     } 
 
@@ -79,7 +79,7 @@ export class EnemyFactory {
             srcX: 0,
             srcY: 0,
             direction: DIRECTION.LEFT,
-            spritesheet: CachedImages.getInstance().getCrawler()
+            spritesheet: CachedImages.getInstance().crawler
         })
     } 
 }

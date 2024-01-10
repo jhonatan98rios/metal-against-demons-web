@@ -11,10 +11,10 @@ import { XPOrb } from "./XPOrb";
 import { isThereIntersection } from "../utils/utils";
 import { drawAnimatedBar } from "../components/drawAnimatedBar";
 import { drawText } from "../components/drawText";
-import { drawDeathNotification } from "../components/drawDeathNotification";
+import { EventClient } from "../event/EventClient";
 
 
-export class Canvas {
+export class Canvas extends EventClient {
 
     private static instance: Canvas;
     context: CanvasRenderingContext2D;
@@ -26,6 +26,8 @@ export class Canvas {
     
 
     constructor() {
+        super()
+
         const htmlCanvas = document.querySelector("canvas") as HTMLCanvasElement
         htmlCanvas.width = SCREEN_WIDTH
         htmlCanvas.height = SCREEN_HEIGHT
@@ -34,7 +36,7 @@ export class Canvas {
         this.scenario = Scenario.getInstance()
         this.camera = Camera.getInstance()
         this.player = Player.getInstance()
-        this.width = SCREEN_WIDTH, 
+        this.width = SCREEN_WIDTH
         this.height = SCREEN_HEIGHT
     }
 
@@ -60,7 +62,6 @@ export class Canvas {
         this.renderEnemiesHealth(game.enemyService)
         
         this.renderBenchmark(game)
-
 
         this.scenario.layers.aboveThePlayers.forEach(element => {
             this.renderElement(element)
@@ -185,6 +186,12 @@ export class Canvas {
                 posY: 40
             })
         }
+    }
+
+    createEventListeners() {
+        this.eventManager.on('canvas:render', (game: Game) => {
+            this.render(game)
+        });
     }
 
     public static getInstance(): Canvas {

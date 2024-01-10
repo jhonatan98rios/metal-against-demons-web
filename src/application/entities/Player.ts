@@ -5,6 +5,8 @@ import { Game, GameStatus } from "./Game";
 import { PlayerStatus } from "./PlayerStatus";
 import { XPOrb } from "./XPOrb";
 import { CachedImages } from "./CachedImages";
+import { EventManager } from "../event/EventManager";
+import { EventClient } from "../event/EventClient";
 
 export enum DIRECTION {
     LEFT = 0,
@@ -13,7 +15,7 @@ export enum DIRECTION {
 
 type Direction = { mvLeft?: boolean, mvUp?: boolean, mvRight?: boolean, mvDown?: boolean }
 
-export class Player {
+export class Player extends EventClient {
 
     private static instance: Player;
 
@@ -31,6 +33,8 @@ export class Player {
 
 
     constructor() {
+        super()
+
         this.status = PlayerStatus.getInstance()
         this.x = SCREEN_WIDTH / 2
         this.y = SCREEN_HEIGHT / 2
@@ -41,7 +45,7 @@ export class Player {
         this.srcY = 100
         this.direction = DIRECTION.RIGHT
         this.countAnim = 0
-        this.spritesheet = CachedImages.getInstance().getPlayer()
+        this.spritesheet = CachedImages.getInstance().player
     }
     
     loadSpritesheetEventListener(game: Game) {
@@ -54,8 +58,8 @@ export class Player {
         if (!game) return
         
         this.move({ mvLeft, mvUp, mvRight, mvDown })
-        this.checkCollision(game.enemyService.enemies, game)
-        this.checkXpOrbsCollection(game.orbService.xpOrbs, game)
+        this.checkCollision(game.enemyService.enemies)
+        this.checkXpOrbsCollection(game)
 
         this.setDirection({ mvLeft, mvUp, mvRight, mvDown })
         this.spriteAnimation()
@@ -120,19 +124,21 @@ export class Player {
         this.srcX = SELECTED_FRAME * this.width;
     }
 
-    public checkCollision(enemies: Enemy[], game: Game) {
+    public checkCollision(enemies: Enemy[]) {
 
         for (let index = 0; index < enemies.length; index++) {
             let enemy = enemies[index]
 
             if (isThereIntersection(this, enemy)) {
-                return this.status.takeDamage(this, enemy.damage, game)
+                //return this.status.takeDamage(this, enemy.damage)
             }
         }
     }
 
-    public checkXpOrbsCollection(xpOrbs: XPOrb[], game: Game) {
+    public checkXpOrbsCollection(game: Game) {
         if (!game) return
+
+        const xpOrbs = game.orbService.xpOrbs
 
         for (let index = 0; index < xpOrbs.length; index++) {
             let xpOrb = xpOrbs[index]
@@ -144,9 +150,8 @@ export class Player {
         }
     }
 
-    public die(game: Game) {
-        if (!game) return
-        game.state.status = GameStatus.stopped
+    public die() {
+        this.eventManager.emit('player:die')
     }
 
     public static getInstance(): Player {
