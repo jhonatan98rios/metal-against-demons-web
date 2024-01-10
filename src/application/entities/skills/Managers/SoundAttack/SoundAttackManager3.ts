@@ -2,6 +2,7 @@ import { CachedImages } from "../../../CachedImages";
 import { ISpawn } from "../../Unit/AbstractSkill";
 import { SoundAttackLevel_3 } from "../../Unit/SoundAttack/SoundAttackLevel_3";
 import { AbstractSkillkManager } from "../AbstractSkillManager";
+import { SoundAttackManager4 } from "./SoundAttackManager4";
 
 
 export class SoundAttackManager3 {
@@ -62,11 +63,9 @@ export class SoundAttackManager3 {
 
     stop() {
         this.isActive = false
-        console.log('STOP 2')
     }
 
     update(): AbstractSkillkManager {
-        console.log("UPDATE!! MAX")
-        return new SoundAttackManager3()
+        return new SoundAttackManager4()
     }
 }

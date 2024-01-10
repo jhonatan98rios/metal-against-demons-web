@@ -63,11 +63,9 @@ export class SoundAttackManager2 {
 
     stop() {
         this.isActive = false
-        console.log('STOP 2')
     }
 
     update(): AbstractSkillkManager {
-        console.log("UPDATE!! para o 3")
         return new SoundAttackManager3()
     }
 }
