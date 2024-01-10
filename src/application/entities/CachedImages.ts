@@ -13,6 +13,7 @@ export class CachedImages {
     soundAttackLevel_2: HTMLImageElement
     soundAttackLevel_3: HTMLImageElement
     soundAttackLevel_4: HTMLImageElement
+    soundAttackLevel_5: HTMLImageElement
 
     constructor() {
         this.createEnemies()
@@ -44,6 +45,9 @@ export class CachedImages {
 
         this.soundAttackLevel_4 = new Image()
         this.soundAttackLevel_4.src = "img/skills/sound_attack_level_4.png"
+
+        this.soundAttackLevel_5 = new Image()
+        this.soundAttackLevel_5.src = "img/skills/sound_attack_level_5.png"
     }
 
     public static getInstance(): CachedImages {
