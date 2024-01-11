@@ -5,6 +5,7 @@ export abstract class AbstractSkillkManager {
     isActive: boolean
     interval: number
     name: string
+    category: string
     width: number
     height: number
     speed: number

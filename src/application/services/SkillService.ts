@@ -76,11 +76,11 @@ export class SkillService extends EventClient {
         this.activeSkills = this.activeSkills.filter(skill => skill.id != id)
     }
 
-    upgrade(skillName: string, game: Game) {
+    upgrade(category: string, game: Game) {
         let alreadyExists = false
 
         this.availableSkills = this.availableSkills.map(skill => {
-            if (skill.name == skillName) {
+            if (skill.category == category) {
 
                 console.log(skill.name)
 

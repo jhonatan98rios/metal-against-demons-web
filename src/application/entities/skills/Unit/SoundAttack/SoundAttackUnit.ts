@@ -1,11 +1,8 @@
-import { EnemyService } from "@/application/services/EnemyService";
 import { UUID, generateUUID } from "@/application/utils/utils";
-import { CachedImages } from "@/application/entities/CachedImages";
 import { Enemy } from "@/application/entities/Enemy";
-import { AbstractSkill, ISpawn } from "../AbstractSkill";
-import { OrbService } from "@/application/services/OrbService";
+import { AbstractSkill } from "../AbstractSkill";
 
-interface ISoundAttackLevel_2 {
+interface ISoundAttackUnit {
     initialX: number
     initialY: number
     targetX: number
@@ -15,9 +12,11 @@ interface ISoundAttackLevel_2 {
     speed: number
     damage: number
     spritesheet: HTMLImageElement
+    frame_amount: number
+    isAnimated?: boolean
 }
 
-export class SoundAttackLevel_2 implements AbstractSkill {
+export class SoundAttackUnit implements AbstractSkill {
 
     id: UUID
     name: string
@@ -34,10 +33,12 @@ export class SoundAttackLevel_2 implements AbstractSkill {
     srcY: number
     countAnim: number
     spritesheet: HTMLImageElement
+    frame_amount: number
     speed: number
     damage: number
+    isAnimated: boolean
     
-    constructor({ initialX, initialY, targetX, targetY, width, height, speed, damage, spritesheet }: ISoundAttackLevel_2) {
+    constructor({ initialX, initialY, targetX, targetY, width, height, speed, damage, spritesheet, frame_amount, isAnimated }: ISoundAttackUnit) {
 
         this.id = generateUUID()
         this.x = initialX
@@ -56,6 +57,9 @@ export class SoundAttackLevel_2 implements AbstractSkill {
         this.srcY = 0
         this.countAnim = 0
         this.spritesheet = spritesheet
+        this.frame_amount = frame_amount
+
+        this.isAnimated = !!isAnimated
     }
 
     move() {
@@ -70,6 +74,10 @@ export class SoundAttackLevel_2 implements AbstractSkill {
 
         this.x += velocityX
         this.y += velocityY
+
+        if (this.isAnimated) {
+            this.spriteAnimation()
+        }
     }
 
     checkCollision(enemies: Enemy[], callback: (skill: AbstractSkill, enemy: Enemy) => void) {
@@ -77,12 +85,22 @@ export class SoundAttackLevel_2 implements AbstractSkill {
             let enemy = enemies[index]
 
             if ((this.x <= enemy.x + enemy.width) && (this.x + this.width >= enemy.x) && (this.y <= enemy.y + enemy.height && this.y + this.height >= enemy.y)) {
-                return callback(this, enemy) //SkillService.collision()
+                return callback(this, enemy) //SkillService.collision.bind(this)
             }
         }
     }
 
-    update(): void {
-        throw new Error("Method not implemented.");
+    private spriteAnimation() {
+        const ANIMATION_SPEED = 3
+        const TIME_TO_RESTART = 60 / ANIMATION_SPEED
+        const SELECTED_FRAME = Math.floor(this.countAnim / (TIME_TO_RESTART / this.frame_amount))
+        
+        this.countAnim++;
+
+        if (this.countAnim >= TIME_TO_RESTART) {
+            this.countAnim = 0;
+        }
+
+        this.srcX = SELECTED_FRAME * this.width;
     }
 }

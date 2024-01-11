@@ -1,14 +1,11 @@
 import { Modal } from "../../Modal"
-import { SoundAttackManager2 } from "@/application/entities/skills/Managers/SoundAttack/SoundAttackManager2"
 import { Skill } from "../Skill"
-
-const listSkills = [
-    new SoundAttackManager2(),
-    new SoundAttackManager2(),
-    new SoundAttackManager2(),
-]
+import { Game } from "@/application/entities/Game"
 
 export function UpgradeModal() {
+    
+    const skillsUpgrade = Game.getInstance().skillService.availableSkills.map(skill => skill.update())
+    const listSkills = [...skillsUpgrade]
 
     return (
         <Modal className="w-4/5 max-w-3xl h-[54%] md:h-64 py-6 md:top-56">

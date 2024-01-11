@@ -1,15 +1,14 @@
 import { CachedImages } from "../../../CachedImages";
 import { ISpawn } from "../../Unit/AbstractSkill";
-import { SoundAttackLevel_3 } from "../../Unit/SoundAttack/SoundAttackLevel_3";
-import { SoundAttackLevel_4 } from "../../Unit/SoundAttack/SoundAttackLevel_4";
-import { SoundAttackLevel_5 } from "../../Unit/SoundAttack/SoundAttackLevel_5";
+import { SoundAttackUnit } from "../../Unit/SoundAttack/SoundAttackUnit";
 import { AbstractSkillkManager } from "../AbstractSkillManager";
 
 
-export class SoundAttackManager5 {
+export class SoundAttackManager5 implements AbstractSkillkManager {
 
     isActive: boolean
     name: string
+    category: string;
     width: number
     height: number
     speed: number
@@ -19,13 +18,14 @@ export class SoundAttackManager5 {
     
     constructor() {
         this.isActive = true
-        this.name = "Musical Note"
+        this.name = "Extreme Musical Note"
+        this.category = "Musical Note"
         this.width = 48
         this.height = 48
-        this.speed = 7
-        this.damage = 2
+        this.speed = 4
+        this.damage = 3
         this.spritesheet = CachedImages.getInstance().soundAttackLevel_5
-        this.interval = 200
+        this.interval = 400
     }
 
     spawn({ player, enemyService, activeSkills }: ISpawn) {
@@ -46,7 +46,7 @@ export class SoundAttackManager5 {
         })
 
         if (nearby_enemies.length > 0) {
-            const sound_attack_level = new SoundAttackLevel_5({ 
+            const sound_attack_level = new SoundAttackUnit({ 
                 initialX: player.x,
                 initialY: player.y + (player.height / 2),
                 targetX: enemyService.enemies[0].x,
@@ -55,7 +55,9 @@ export class SoundAttackManager5 {
                 width: this.width,
                 height: this.height,
                 speed: this.speed,
-                spritesheet: this.spritesheet
+                spritesheet: this.spritesheet,
+                frame_amount: 8,
+                isAnimated: true
             })
     
             activeSkills.push(sound_attack_level)
@@ -67,6 +69,13 @@ export class SoundAttackManager5 {
     }
 
     update(): AbstractSkillkManager {
-        return new SoundAttackManager5()
+        const sam = new SoundAttackManager5()
+        sam.interval = this.interval - 50
+        sam.speed = this.speed + 0.2
+        sam.damage = this.damage + 0.2
+        sam.name = this.name + "+"
+
+        console.log(sam)
+        return sam
     }
 }

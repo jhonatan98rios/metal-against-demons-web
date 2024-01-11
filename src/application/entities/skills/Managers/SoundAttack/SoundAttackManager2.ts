@@ -1,14 +1,15 @@
 import { CachedImages } from "../../../CachedImages";
 import { ISpawn } from "../../Unit/AbstractSkill";
-import { SoundAttackLevel_2 } from "../../Unit/SoundAttack/SoundAttackLevel_2";
+import { SoundAttackUnit } from "../../Unit/SoundAttack/SoundAttackUnit";
 import { AbstractSkillkManager } from "../AbstractSkillManager";
 import { SoundAttackManager3 } from "./SoundAttackManager3";
 
 
-export class SoundAttackManager2 {
+export class SoundAttackManager2 implements AbstractSkillkManager {
 
     isActive: boolean
     name: string
+    category: string;
     width: number
     height: number
     speed: number
@@ -18,7 +19,8 @@ export class SoundAttackManager2 {
     
     constructor() {
         this.isActive = true
-        this.name = "Musical Note"
+        this.name = "Reforced Musical Note"
+        this.category = "Musical Note"
         this.width = 38
         this.height = 38
         this.speed = 4
@@ -45,7 +47,7 @@ export class SoundAttackManager2 {
         })
 
         if (nearby_enemies.length > 0) {
-            const sound_attack_level = new SoundAttackLevel_2({ 
+            const sound_attack_level = new SoundAttackUnit({ 
                 initialX: player.x,
                 initialY: player.y + (player.height / 2),
                 targetX: enemyService.enemies[0].x,
@@ -54,7 +56,8 @@ export class SoundAttackManager2 {
                 width: this.width,
                 height: this.height,
                 speed: this.speed,
-                spritesheet: this.spritesheet
+                spritesheet: this.spritesheet,
+                frame_amount: 1
             })
     
             activeSkills.push(sound_attack_level)
