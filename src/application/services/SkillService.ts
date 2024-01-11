@@ -6,6 +6,7 @@ import { EnemyService } from "./EnemyService";
 import { SoundAttackManager1 } from "../entities/skills/Managers/SoundAttack/SoundAttackManager1";
 import { EventManager } from "../event/EventManager";
 import { EventClient } from "../event/EventClient";
+import { Game } from "../entities/Game";
 
 export class SkillService extends EventClient {
 
@@ -75,22 +76,36 @@ export class SkillService extends EventClient {
         this.activeSkills = this.activeSkills.filter(skill => skill.id != id)
     }
 
-    upgrade(skillName: string) {
+    upgrade(skillName: string, game: Game) {
+        let alreadyExists = false
+
         this.availableSkills = this.availableSkills.map(skill => {
             if (skill.name == skillName) {
+
+                console.log(skill.name)
+
                 skill.stop()
                 skill = skill.update()
+                alreadyExists = true
             }
             return skill
         })
+
+        if (!alreadyExists) {
+            console.log("O item não existe ainda")
+        } 
+
+        this.startSpawn(game.player, game.enemyService)
+
+        console.log(this.availableSkills)
+        
     }
 
-    createEventListeners() {
-        this.eventManager.on('player:upgrade', ({ player, enemyService, skillName }: { player: Player, enemyService: EnemyService, skillName: string }) => {
-            console.log("Event emmited: player:upgrade")
-            this.upgrade(skillName)
-            
-            this.startSpawn(player, enemyService)
-        });
-    }
+    // createEventListeners() {
+    //     this.eventManager.on('skill:upgrade', (props: { player: Player, enemyService: EnemyService, skillName: string }) => {
+    //         const { player, enemyService, skillName } = props
+    //         this.upgrade(skillName)
+    //         this.startSpawn(player, enemyService)
+    //     });
+    // }
 }

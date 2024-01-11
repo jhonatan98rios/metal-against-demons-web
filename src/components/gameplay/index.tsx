@@ -33,7 +33,6 @@ export default function GamePlay() {
 
             Observer.observe(game.state, () => {
                 updateGameStatus(game.state)
-                console.log(game.state)
             })
         }
     }, [])

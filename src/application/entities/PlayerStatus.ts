@@ -64,10 +64,6 @@ export class PlayerStatus extends EventClient {
         this.currentHealth += 1
 
         console.log("Trying to emmit: player:upgrade")
-        this.eventManager.emit('player:upgrade', { 
-            skillName: "Musical Note", 
-            player, 
-            enemyService 
-        })
+        this.eventManager.emit('player:upgrade')
     }
 }

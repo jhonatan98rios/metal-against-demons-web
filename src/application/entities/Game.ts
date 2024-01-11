@@ -14,6 +14,7 @@ export enum GameStatus {
     stopped = 0,
     running = 1,
     paused = 2,
+    upgrade = 3,
 }
 
 type GameState = {
@@ -116,6 +117,10 @@ export class Game extends EventClient {
     createEventListeners() {
         this.eventManager.on('player:die', () => {
             this.stopGame();
+        });
+
+        this.eventManager.on('player:upgrade', () => {           
+            this.state.status = GameStatus.upgrade
         });
     }
     
