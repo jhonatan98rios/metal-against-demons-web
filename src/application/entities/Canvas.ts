@@ -54,12 +54,14 @@ export class Canvas extends EventClient {
 
         this.renderOrbs(game.orbService.xpOrbs)
         
-        this.renderSkills(game.skillService.availableSkills)
         
         this.renderEnemies(game.enemyService.enemies.filter(enemy => enemy.y <= this.player.y))
+        
         this.renderPlayer(this.player)
-        this.renderEnemies(game.enemyService.enemies.filter(enemy => enemy.y > this.player.y))
+        this.renderSkills(game.skillService.availableSkills)
 
+        this.renderEnemies(game.enemyService.enemies.filter(enemy => enemy.y > this.player.y))
+        
 
         this.renderEnemiesHealth(game.enemyService)
         

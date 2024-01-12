@@ -42,7 +42,7 @@ export class SoundAttackManagerBase extends EventClient implements AbstractSkill
     intervaledSpawn(player: Player, enemyService: EnemyService) {
         /* Each skill manaager is a type of attack */
         if (this.isActive) {
-            this.spawn({ player, enemyService, activeSkills: this.activeSkills })
+            this.spawn({ player, enemyService })
 
             setTimeout(() => {
                 this.intervaledSpawn(player, enemyService)

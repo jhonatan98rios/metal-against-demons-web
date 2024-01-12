@@ -5,11 +5,11 @@ import { AbstractSkill, ISpawn } from "../../Unit/AbstractSkill";
 import { ForceFieldUnit } from "../../Unit/ForceField/ForceFieldUnit";
 import { AbstractSkillManager } from "../AbstractSkillManager";
 import { ForceFieldManagerBase } from "./ForceFieldManagerBase";
-import { ForceFieldManager2 } from "./ForceFieldManager2";
+import { ForceFieldManager4 } from "./ForceFieldManager4";
 
 
 
-export class ForceFieldManager1 extends ForceFieldManagerBase implements AbstractSkillManager {
+export class ForceFieldManager3 extends ForceFieldManagerBase implements AbstractSkillManager {
 
     isActive: boolean
     name: string
@@ -25,13 +25,13 @@ export class ForceFieldManager1 extends ForceFieldManagerBase implements Abstrac
     constructor() {
         super()
         this.isActive = true
-        this.name = "Light Force Field"
+        this.name = "Vortex Force Field"
         this.category = "Force Field"
-        this.width = 152
-        this.height = 152
+        this.width = 170
+        this.height = 170
         this.speed = 0
-        this.damage = 0.02
-        this.spritesheet = CachedImages.getInstance().forceFieldLevel_1
+        this.damage = 0.07
+        this.spritesheet = CachedImages.getInstance().forceFieldLevel_3
         this.interval = 100
         this.activeSkills = []
     }
@@ -62,6 +62,6 @@ export class ForceFieldManager1 extends ForceFieldManagerBase implements Abstrac
     }
 
     upgrade(): AbstractSkillManager {
-        return new ForceFieldManager2()
+        return new ForceFieldManager4()
     }
 }

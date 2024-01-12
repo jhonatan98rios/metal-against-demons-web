@@ -16,7 +16,7 @@ export abstract class AbstractSkillManager {
     activeSkills: AbstractSkill[]  
     
     abstract startSpawn(player: Player, enemyService: EnemyService)
-    abstract spawn({ player, enemyService, activeSkills }: ISpawn): void
+    abstract spawn({ player, enemyService }: ISpawn): void
     abstract update(): void
     abstract upgrade(): AbstractSkillManager
     abstract stop(): void

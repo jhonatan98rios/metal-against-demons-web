@@ -16,6 +16,10 @@ export class CachedImages {
     soundAttackLevel_5: HTMLImageElement
 
     forceFieldLevel_1: HTMLImageElement
+    forceFieldLevel_2: HTMLImageElement
+    forceFieldLevel_3: HTMLImageElement
+    forceFieldLevel_4: HTMLImageElement
+    forceFieldLevel_5: HTMLImageElement
 
     constructor() {
         this.createEnemies()
@@ -53,6 +57,18 @@ export class CachedImages {
 
         this.forceFieldLevel_1 = new Image()
         this.forceFieldLevel_1.src = "img/skills/force_field_1.png"
+
+        this.forceFieldLevel_2 = new Image()
+        this.forceFieldLevel_2.src = "img/skills/force_field_2.png"
+
+        this.forceFieldLevel_3 = new Image()
+        this.forceFieldLevel_3.src = "img/skills/force_field_3.png"
+
+        this.forceFieldLevel_4 = new Image()
+        this.forceFieldLevel_4.src = "img/skills/force_field_4.png"
+
+        this.forceFieldLevel_5 = new Image()
+        this.forceFieldLevel_5.src = "img/skills/force_field_5.png"
     }
 
     public static getInstance(): CachedImages {

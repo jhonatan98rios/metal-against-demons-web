@@ -81,7 +81,6 @@ export class Game extends EventClient {
             
         this.playerEventService.execute(this)
         this.enemyService.move(this)
-        //this.skillService.move()
         this.skillService.update()
         this.moveCamera()
     }

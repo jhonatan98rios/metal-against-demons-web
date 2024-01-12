@@ -1,12 +1,8 @@
-import { EventManager } from "@/application/event/EventManager";
 import { CachedImages } from "../../../CachedImages";
 import { AbstractSkill, ISpawn } from "../../Unit/AbstractSkill";
 import { SoundAttackUnit } from "../../Unit/SoundAttack/SoundAttackUnit";
 import { AbstractSkillManager } from "../AbstractSkillManager";
 import { SoundAttackManager2 } from "./SoundAttackManager2";
-import { EventClient } from "@/application/event/EventClient";
-import { Enemy } from "@/application/entities/Enemy";
-import { EnemyService } from "@/application/services/EnemyService";
 import { SoundAttackManagerBase } from "./SoundAttackManagerBase";
 
 

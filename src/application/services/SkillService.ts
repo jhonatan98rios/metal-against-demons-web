@@ -7,6 +7,7 @@ import { SoundAttackManager1 } from "../entities/skills/Managers/SoundAttack/Sou
 import { EventManager } from "../event/EventManager";
 import { EventClient } from "../event/EventClient";
 import { Game } from "../entities/Game";
+import { ForceFieldManager1 } from "../entities/skills/Managers/ForceField/ForceFieldManager1";
 
 export class SkillService extends EventClient {
 
@@ -19,6 +20,7 @@ export class SkillService extends EventClient {
         this.activeSkills = []
         this.availableSkills = []
         this.availableSkills.push(
+            new ForceFieldManager1(),
             new SoundAttackManager1(),
         )
     }
@@ -31,9 +33,15 @@ export class SkillService extends EventClient {
         return SkillService.instance
     }
     
-    startSpawn(player: Player, enemyService: EnemyService) {
+    startSpawn(player: Player, enemyService: EnemyService, category?: string) {
         this.availableSkills.forEach((skillManager) => {
-            skillManager.startSpawn(player, enemyService)
+            if (category) {
+                if (skillManager.category === category) {
+                    skillManager.startSpawn(player, enemyService)
+                }
+            } else {
+                skillManager.startSpawn(player, enemyService)
+            }
         })
     }
 
@@ -60,7 +68,7 @@ export class SkillService extends EventClient {
             console.log("O item não existe ainda")
         } 
 
-        this.startSpawn(game.player, game.enemyService)
+        this.startSpawn(game.player, game.enemyService, category)
 
         console.log(this.availableSkills)
         

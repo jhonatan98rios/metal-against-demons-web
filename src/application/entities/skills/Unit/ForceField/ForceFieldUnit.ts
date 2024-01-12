@@ -64,23 +64,22 @@ export class ForceFieldUnit implements AbstractSkill {
     }
 
     move() {
-
         const player = Player.getInstance()
 
-        this.x = player.x - (this.width / 3)
-        this.y = player.y + player.height - (this.height / 2)
+        this.x = player.x + (player.width / 2) - (this.width / 2)
+        this.y = player.y + (player.height / 2) - (this.height / 2)
 
         if (this.isAnimated) {
             this.spriteAnimation()
         }
     }
 
-    checkCollision(enemies: Enemy[], callback: (skill: AbstractSkill, enemy: Enemy) => void) {
+    checkCollision(enemies: Enemy[], callback: (enemy: Enemy) => void) {
         for (let index = 0; index < enemies.length; index++) {
             let enemy = enemies[index]
 
             if ((this.x <= enemy.x + enemy.width) && (this.x + this.width >= enemy.x) && (this.y <= enemy.y + enemy.height && this.y + this.height >= enemy.y)) {
-                return callback(this, enemy) //SkillService.collision.bind(this)
+                return callback(enemy) //SkillService.collision.bind(this)
             }
         }
     }

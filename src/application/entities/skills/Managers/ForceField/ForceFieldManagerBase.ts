@@ -4,12 +4,12 @@ import { CachedImages } from "../../../CachedImages";
 import { AbstractSkill, ISpawn } from "../../Unit/AbstractSkill";
 import { ForceFieldUnit } from "../../Unit/ForceField/ForceFieldUnit";
 import { AbstractSkillManager } from "../AbstractSkillManager";
-import { ForceFieldManagerBase } from "./ForceFieldManagerBase";
-import { ForceFieldManager2 } from "./ForceFieldManager2";
+import { Enemy } from "@/application/entities/Enemy";
+import { EventClient } from "@/application/event/EventClient";
 
 
 
-export class ForceFieldManager1 extends ForceFieldManagerBase implements AbstractSkillManager {
+export class ForceFieldManagerBase extends EventClient implements AbstractSkillManager {
 
     isActive: boolean
     name: string
@@ -25,7 +25,7 @@ export class ForceFieldManager1 extends ForceFieldManagerBase implements Abstrac
     constructor() {
         super()
         this.isActive = true
-        this.name = "Light Force Field"
+        this.name = "Basic Force Field"
         this.category = "Force Field"
         this.width = 152
         this.height = 152
@@ -54,14 +54,48 @@ export class ForceFieldManager1 extends ForceFieldManagerBase implements Abstrac
             height: this.height,
             speed: this.speed,
             spritesheet: this.spritesheet,
-            frame_amount: 4,
-            isAnimated: true
+            frame_amount: 1
         })
 
         this.activeSkills.push(sound_attack_level)
     }
 
+    move() {
+        this.activeSkills.forEach(activeSkill => activeSkill.move())
+    }
+
+    update() {
+        const enemyService = EnemyService.getInstance()
+        this.move()
+        this.checkSkillsCollision(enemyService)
+    }
+
+    checkSkillsCollision(enemyService: EnemyService) {
+
+        if (!this.activeSkills) return
+        
+        for (let index = 0; index <= this.activeSkills.length; index++) {
+            let activeSkill = this.activeSkills[index]
+
+            if (activeSkill) {
+                activeSkill.checkCollision(
+                    enemyService.enemies,
+                    this.collision.bind(this),
+                )
+            }
+        }
+    }
+
+    collision(enemy: Enemy) {
+        console.log("collision")
+        this.eventManager.emit("skill:damage", { enemy, damage: this.damage })
+    }
+
+    stop() {
+        this.isActive = false
+    }
+
     upgrade(): AbstractSkillManager {
-        return new ForceFieldManager2()
+        return new ForceFieldManagerBase()
     }
 }

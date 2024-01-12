@@ -5,7 +5,6 @@ import { Player } from "@/application/entities/Player";
 export interface ISpawn {
     player: Player
     enemyService: EnemyService
-    activeSkills: AbstractSkill[]
 }
 
 export abstract class AbstractSkill {
