@@ -48,35 +48,9 @@ export class SkillService extends EventClient {
         }
     }
 
-    /* move() {
-        this.activeSkills.forEach(activeSkill => activeSkill.move())
-    } */
-
     update() {
         this.availableSkills.forEach(availableSkill => availableSkill.update())
     }
-    
-    /* checkSkillsCollision(enemyService: EnemyService) {
-        for (let index = 0; index <= this.activeSkills.length; index++) {
-            let activeSkill = this.activeSkills[index]
-
-            if (activeSkill) {
-                activeSkill.checkCollision(
-                    enemyService.enemies,
-                    this.collision.bind(this),
-                )
-            }
-        }
-    } */
-
-    /* collision(skill: AbstractSkill, enemy: Enemy) {
-        this.remove(skill.id)
-        this.eventManager.emit("skill:damage", { enemy, damage: skill.damage })
-    } */
-
-    /* remove(id: string) {
-        this.activeSkills = this.activeSkills.filter(skill => skill.id != id)
-    } */
 
     upgrade(category: string, game: Game) {
         let alreadyExists = false
@@ -102,12 +76,4 @@ export class SkillService extends EventClient {
         console.log(this.availableSkills)
         
     }
-
-    // createEventListeners() {
-    //     this.eventManager.on('skill:upgrade', (props: { player: Player, enemyService: EnemyService, skillName: string }) => {
-    //         const { player, enemyService, skillName } = props
-    //         this.upgrade(skillName)
-    //         this.startSpawn(player, enemyService)
-    //     });
-    // }
 }
