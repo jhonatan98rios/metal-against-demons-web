@@ -1,7 +1,9 @@
+import { EventClient } from "../event/EventClient";
+import { EnemyService } from "../services/EnemyService";
 import { Game } from "./Game";
 import { Player } from "./Player";
 
-export class PlayerStatus {
+export class PlayerStatus extends EventClient {
 
     private static instance: PlayerStatus;
     public level: number
@@ -12,12 +14,13 @@ export class PlayerStatus {
     public nextLevelXp: number
 
     constructor () {
+        super()
         this.level = 1
         this.maxHealth = 10
         this.currentHealth = 10
         this.vulnerable = true
         this.currentXP = 0
-        this.nextLevelXp = 5
+        this.nextLevelXp = 15
     }
 
     public static getInstance(): PlayerStatus {
@@ -28,9 +31,9 @@ export class PlayerStatus {
         return PlayerStatus.instance;
     }
 
-    takeDamage(player: Player, damage: number, game: Game) {
+    takeDamage(player: Player, damage: number) {
         if (this.currentHealth <= 0) {
-            player.die(game)
+            player.die()
             return
         } 
         
@@ -44,20 +47,23 @@ export class PlayerStatus {
         }, 1000)
     }
 
-    takeXp(xp: number) {
+    takeXp(xp: number, game: Game) {
         if (this.currentXP + xp >= this.nextLevelXp) {
-            return this.upgrade()
+            return this.upgrade(game.player, game.enemyService)
         } 
 
         this.currentXP += xp
     }
 
-    upgrade() {
+    upgrade(player: Player, enemyService: EnemyService) {
         this.level++
         this.nextLevelXp += this.nextLevelXp * 0.75
         this.currentXP = 0
         
         this.maxHealth += 1
         this.currentHealth += 1
+
+        console.log("Trying to emmit: player:upgrade")
+        this.eventManager.emit('player:upgrade')
     }
 }

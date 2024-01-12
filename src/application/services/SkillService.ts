@@ -1,17 +1,30 @@
 import { Enemy } from "../entities/Enemy";
 import { Player } from "../entities/Player";
-import { AbstractSkill } from "../entities/skills/AbstractSkill";
-import { SoundAttackLevel_1 } from "../entities/skills/SoundAttackLevel_1";
+import { AbstractSkill } from "../entities/skills/Unit/AbstractSkill";
+import { AbstractSkillManager } from "../entities/skills/Managers/AbstractSkillManager";
 import { EnemyService } from "./EnemyService";
-import { OrbService } from "./OrbService";
+import { SoundAttackManager1 } from "../entities/skills/Managers/SoundAttack/SoundAttackManager1";
+import { EventManager } from "../event/EventManager";
+import { EventClient } from "../event/EventClient";
+import { Game } from "../entities/Game";
+import { ForceFieldManager1 } from "../entities/skills/Managers/ForceField/ForceFieldManager1";
+import { BatAttackManager1 } from "../entities/skills/Managers/BatAttack/BatAttackManager1";
 
-export class SkillService {
+export class SkillService extends EventClient {
 
     private static instance: SkillService
     public activeSkills: AbstractSkill[]
+    public availableSkills: AbstractSkillManager[]
 
     constructor() {
+        super()
         this.activeSkills = []
+        this.availableSkills = []
+        this.availableSkills.push(
+            new SoundAttackManager1(),
+            new ForceFieldManager1(),
+            new BatAttackManager1(),
+        )
     }
     
     public static getInstance(): SkillService {
@@ -22,74 +35,44 @@ export class SkillService {
         return SkillService.instance
     }
     
-    start(player: Player, enemyService: EnemyService) {
-        
-        setTimeout(() => {
-            this.spawn(player, enemyService)
-        }, 500)
-    }
-
-    spawn(player: Player, enemyService: EnemyService) {
-
-        setTimeout(() => {
-            this.spawn(player, enemyService)
-        }, 500)
-
-        if (!player) return
-        if (this.activeSkills.length > 2) return
-
-        const range_area = {
-            left: player.x - 500,
-            top: player.y - 500,
-            right: player.x + 500,
-            bottom: player.y + 500,
-        }
-
-        const nearby_enemies = enemyService.enemies.filter(enemy => {
-            return enemy.x >= range_area.left
-                && enemy.x <= range_area.right
-                && enemy.y >= range_area.top
-                && enemy.y <= range_area.bottom
-        })
-        
-
-        if (nearby_enemies.length > 0) {
-            const sound_attack_level_1 = new SoundAttackLevel_1({ 
-                initialX: player.x,
-                initialY: player.y + (player.height / 2),
-                targetX: enemyService.enemies[0].x,
-                targetY: enemyService.enemies[0].y + (enemyService.enemies[0].height / 2),
-            })
-    
-            this.activeSkills.push(sound_attack_level_1)
-        }
-    }
-
-    move() {
-        this.activeSkills.forEach(activeSkill => activeSkill.move())
-    }
-    
-    checkCollision(enemyService: EnemyService, orbService: OrbService) {
-        for (let index = 0; index <= this.activeSkills.length; index++) {
-            let activeSkill = this.activeSkills[index]
-
-            if (activeSkill) {
-                activeSkill.checkCollision(
-                    enemyService.enemies,
-                    enemyService,
-                    orbService,
-                    this.collision.bind(this),
-                )
+    startSpawn(player: Player, enemyService: EnemyService, category?: string) {
+        this.availableSkills.forEach((skillManager) => {
+            if (category) {
+                if (skillManager.category === category) {
+                    skillManager.startSpawn(player, enemyService)
+                }
+            } else {
+                skillManager.startSpawn(player, enemyService)
             }
-        }
+        })
     }
 
-    collision(skill: AbstractSkill, enemy: Enemy, enemyService: EnemyService, orbService: OrbService) {
-        this.remove(skill.id)
-        enemyService.applyDamage(enemy, skill.damage, orbService)
+    update() {
+        this.availableSkills.forEach(availableSkill => availableSkill.update())
     }
 
-    remove(id: string) {
-        this.activeSkills = this.activeSkills.filter(skill => skill.id != id)
+    upgrade(category: string, game: Game) {
+        let alreadyExists = false
+
+        this.availableSkills = this.availableSkills.map(skill => {
+            if (skill.category == category) {
+
+                console.log(skill.name)
+
+                skill.stop()
+                skill = skill.upgrade()
+                alreadyExists = true
+            }
+            return skill
+        })
+
+        if (!alreadyExists) {
+            console.log("O item não existe ainda")
+        } 
+
+        this.startSpawn(game.player, game.enemyService, category)
+
+        console.log(this.availableSkills)
+        
     }
 }

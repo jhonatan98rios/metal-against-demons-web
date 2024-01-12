@@ -2,11 +2,11 @@ import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../constants";
 import { Enemy } from "../entities/Enemy"
 import { Game } from "../entities/Game";
 import { Player } from "../entities/Player";
+import { EventClient } from "../event/EventClient";
 import { Element2D, isThereIntersection } from "../utils/utils";
 import { EnemyFactory } from "./EnemyFactory";
-import { OrbService } from "./OrbService";
 
-export class EnemyService {
+export class EnemyService extends EventClient {
 
     private static instance: EnemyService;
 
@@ -14,6 +14,7 @@ export class EnemyService {
     enemies: Enemy[]
 
     constructor() {
+        super()
         this.player = Player.getInstance()
         this.enemies = []
         this.spawn()
@@ -21,9 +22,9 @@ export class EnemyService {
 
     spawn() {
         this.sortEnemies()
-        setTimeout(this.spawn.bind(this), 500)
+        setTimeout(this.spawn.bind(this), 1000 - (this.player.status.level * 75))
         
-        if (this.enemies.length >= 200) return
+        if (this.enemies.length >= this.player.status.level * 250) return
 
         const randomDistance = {
             x: Math.floor(Math.random() * 1000) + (SCREEN_WIDTH / 2),
@@ -58,18 +59,19 @@ export class EnemyService {
         });
     }
 
-    applyDamage(enemy: Enemy, damage: number, orbService: OrbService) {
+    applyDamage({ enemy, damage }: {enemy: Enemy, damage: number}) {
         enemy.currentHealth -= damage
 
         if (enemy.currentHealth <= 0) {
-            this.remove(enemy, orbService)
+            this.remove(enemy)
         }
     }
 
-    remove(enemy: Enemy, orbService: OrbService) {
+    remove(enemy: Enemy) {
         const { id, x, y, height, width } = enemy
         this.enemies = this.enemies.filter(e => e.id != id)
-        orbService.spawnXpOrb({
+
+        this.eventManager.emit("orb:spawn", {
             value: enemy.maxHealth,
             x: x + (width / 2), 
             y: y + (height / 2)
@@ -87,6 +89,12 @@ export class EnemyService {
         }
 
         return true
+    }
+
+    createEventListeners(): void {
+        this.eventManager.on('skill:damage', (props) => {
+            this.applyDamage(props)
+        });
     }
 
     public static getInstance(): EnemyService {

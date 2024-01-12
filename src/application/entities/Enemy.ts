@@ -1,6 +1,5 @@
-import { Element2D, UUID, calculate2DMovement, generateUUID, isThereIntersection } from "../utils/utils";
+import {  UUID, calculate2DMovement, generateUUID, isThereIntersection } from "../utils/utils";
 import { Game } from "./Game";
-import { Player } from "./Player"
 
 export enum DIRECTION {
     LEFT = 0,

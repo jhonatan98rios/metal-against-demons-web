@@ -6,15 +6,16 @@ import { Element } from "../../database/scenarios/mock";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../constants";
 import { EnemyService } from "../services/EnemyService";
 import { Enemy } from "./Enemy";
-import { AbstractSkill } from "./skills/AbstractSkill";
+import { AbstractSkill } from "@/application/entities/skills/Unit/AbstractSkill";
 import { XPOrb } from "./XPOrb";
 import { isThereIntersection } from "../utils/utils";
 import { drawAnimatedBar } from "../components/drawAnimatedBar";
 import { drawText } from "../components/drawText";
-import { drawDeathNotification } from "../components/drawDeathNotification";
+import { EventClient } from "../event/EventClient";
+import { AbstractSkillManager } from "./skills/Managers/AbstractSkillManager";
 
 
-export class Canvas {
+export class Canvas extends EventClient {
 
     private static instance: Canvas;
     context: CanvasRenderingContext2D;
@@ -26,6 +27,8 @@ export class Canvas {
     
 
     constructor() {
+        super()
+
         const htmlCanvas = document.querySelector("canvas") as HTMLCanvasElement
         htmlCanvas.width = SCREEN_WIDTH
         htmlCanvas.height = SCREEN_HEIGHT
@@ -34,7 +37,7 @@ export class Canvas {
         this.scenario = Scenario.getInstance()
         this.camera = Camera.getInstance()
         this.player = Player.getInstance()
-        this.width = SCREEN_WIDTH, 
+        this.width = SCREEN_WIDTH
         this.height = SCREEN_HEIGHT
     }
 
@@ -51,16 +54,18 @@ export class Canvas {
 
         this.renderOrbs(game.orbService.xpOrbs)
         
+        
         this.renderEnemies(game.enemyService.enemies.filter(enemy => enemy.y <= this.player.y))
+        
         this.renderPlayer(this.player)
-        this.renderEnemies(game.enemyService.enemies.filter(enemy => enemy.y > this.player.y))
+        this.renderSkills(game.skillService.availableSkills)
 
-        this.renderSkills(game.skillService.activeSkills)
+        this.renderEnemies(game.enemyService.enemies.filter(enemy => enemy.y > this.player.y))
+        
 
         this.renderEnemiesHealth(game.enemyService)
         
         this.renderBenchmark(game)
-
 
         this.scenario.layers.aboveThePlayers.forEach(element => {
             this.renderElement(element)
@@ -122,23 +127,26 @@ export class Canvas {
         })
     }
 
-    private renderSkills(activeSkills: AbstractSkill[]) {
+    private renderSkills(availableSkills: AbstractSkillManager[]) {
 
-        activeSkills.forEach(activeSkill => {
-            if (isThereIntersection(this.camera, activeSkill)){
-                this.context.drawImage(
-                    activeSkill.spritesheet,
-                    Math.floor(activeSkill.srcX),
-                    Math.floor(activeSkill.srcY),
-                    Math.floor(activeSkill.width),
-                    Math.floor(activeSkill.height),
-                    Math.floor(activeSkill.x),
-                    Math.floor(activeSkill.y),
-                    Math.floor(activeSkill.width), 
-                    Math.floor(activeSkill.height)
-                );
-            }
+        availableSkills.forEach(availableSkill => {
+            availableSkill.activeSkills.forEach(activeSkill => {
+                if (isThereIntersection(this.camera, activeSkill)){
+                    this.context.drawImage(
+                        activeSkill.spritesheet,
+                        Math.floor(activeSkill.srcX),
+                        Math.floor(activeSkill.srcY),
+                        Math.floor(activeSkill.width),
+                        Math.floor(activeSkill.height),
+                        Math.floor(activeSkill.x),
+                        Math.floor(activeSkill.y),
+                        Math.floor(activeSkill.width), 
+                        Math.floor(activeSkill.height)
+                    );
+                }
+            })
         })
+
     }
 
     private renderOrbs(orbs: XPOrb[]) {
@@ -186,6 +194,12 @@ export class Canvas {
                 posY: 40
             })
         }
+    }
+
+    createEventListeners() {
+        this.eventManager.on('canvas:render', (game: Game) => {
+            this.render(game)
+        });
     }
 
     public static getInstance(): Canvas {

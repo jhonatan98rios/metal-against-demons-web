@@ -10,6 +10,18 @@ export class CachedImages {
     crawler: HTMLImageElement
 
     soundAttackLevel_1: HTMLImageElement
+    soundAttackLevel_2: HTMLImageElement
+    soundAttackLevel_3: HTMLImageElement
+    soundAttackLevel_4: HTMLImageElement
+    soundAttackLevel_5: HTMLImageElement
+
+    forceFieldLevel_1: HTMLImageElement
+    forceFieldLevel_2: HTMLImageElement
+    forceFieldLevel_3: HTMLImageElement
+    forceFieldLevel_4: HTMLImageElement
+    forceFieldLevel_5: HTMLImageElement
+
+    batAttackLevel_1: HTMLImageElement
 
     constructor() {
         this.createEnemies()
@@ -31,31 +43,37 @@ export class CachedImages {
 
     createSkills() {
         this.soundAttackLevel_1 = new Image()
-        this.soundAttackLevel_1.src = "img/skills/sound_attack_level_1.png"
-    }
-    
-    getPlayer() {
-        return this.player
-    }
-    
-    getSpirit() {
-        return this.spirit
-    }
-    
-    getCyclop() {
-        return this.cyclop
-    }
-    
-    getDragon() {
-        return this.dragon
-    }
-    
-    getCrawler() {
-        return this.crawler
-    }
+        this.soundAttackLevel_1.src = "img/skills/sound_attack_1.png"
 
-    getSoundAttackLevel_1() {
-        return this.soundAttackLevel_1
+        this.soundAttackLevel_2 = new Image()
+        this.soundAttackLevel_2.src = "img/skills/sound_attack_2.png"
+
+        this.soundAttackLevel_3 = new Image()
+        this.soundAttackLevel_3.src = "img/skills/sound_attack_3.png"
+
+        this.soundAttackLevel_4 = new Image()
+        this.soundAttackLevel_4.src = "img/skills/sound_attack_4.png"
+
+        this.soundAttackLevel_5 = new Image()
+        this.soundAttackLevel_5.src = "img/skills/sound_attack_5.png"
+
+        this.forceFieldLevel_1 = new Image()
+        this.forceFieldLevel_1.src = "img/skills/force_field_1.png"
+
+        this.forceFieldLevel_2 = new Image()
+        this.forceFieldLevel_2.src = "img/skills/force_field_2.png"
+
+        this.forceFieldLevel_3 = new Image()
+        this.forceFieldLevel_3.src = "img/skills/force_field_3.png"
+
+        this.forceFieldLevel_4 = new Image()
+        this.forceFieldLevel_4.src = "img/skills/force_field_4.png"
+
+        this.forceFieldLevel_5 = new Image()
+        this.forceFieldLevel_5.src = "img/skills/force_field_5.png"
+
+        this.batAttackLevel_1 = new Image()
+        this.batAttackLevel_1.src = "img/skills/bat_attack_1.png"
     }
 
     public static getInstance(): CachedImages {

@@ -7,18 +7,21 @@ import { PlayerEventService } from "../services/PlayerEventService"
 import { EnemyService } from "../services/EnemyService"
 import { SkillService } from "../services/SkillService"
 import { OrbService } from "../services/OrbService"
+import { EventManager } from "../event/EventManager"
+import { EventClient } from "../event/EventClient"
 
 export enum GameStatus {
     stopped = 0,
     running = 1,
     paused = 2,
+    upgrade = 3,
 }
 
 type GameState = {
     status: GameStatus
 }
 
-export class Game {
+export class Game extends EventClient {
 
     private static instance: Game;
 
@@ -37,7 +40,11 @@ export class Game {
     fps: number
     fpsCounter: number
 
+    eventManager: EventManager
+
     constructor() {
+        super()
+
         this.state = {
             status: GameStatus.running
         }
@@ -61,7 +68,7 @@ export class Game {
     }
     
     start() {
-        this.skillService.start(this.player, this.enemyService)
+        this.skillService.startSpawn(this.player, this.enemyService)
         
         setInterval(() => {
             this.fps = this.fpsCounter
@@ -74,8 +81,7 @@ export class Game {
             
         this.playerEventService.execute(this)
         this.enemyService.move(this)
-        this.skillService.move()
-        this.skillService.checkCollision(this.enemyService, this.orbService)
+        this.skillService.update()
         this.moveCamera()
     }
 
@@ -96,13 +102,27 @@ export class Game {
 
     loop(){
         this.update()
-        this.canvas.render(this)
-
         this.fpsCounter += 1
-
+        this.eventManager.emit("canvas:render", this)
         requestAnimationFrame(this.loop.bind(this))
     }
 
+
+    stopGame(){
+        this.state.status = GameStatus.stopped
+    }
+
+
+    createEventListeners() {
+        this.eventManager.on('player:die', () => {
+            this.stopGame();
+        });
+
+        this.eventManager.on('player:upgrade', () => {           
+            this.state.status = GameStatus.upgrade
+        });
+    }
+    
 
     public static getInstance(): Game {
         if (!Game.instance) {

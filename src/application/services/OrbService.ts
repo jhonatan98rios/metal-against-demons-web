@@ -1,7 +1,8 @@
 import { Player } from "../entities/Player";
 import { IXPOrb, XPOrb } from "../entities/XPOrb";
+import { EventClient } from "../event/EventClient";
 
-export class OrbService {
+export class OrbService extends EventClient {
 
     private static instance: OrbService;
 
@@ -9,6 +10,7 @@ export class OrbService {
     xpOrbs: XPOrb[]
 
     constructor() {
+        super()
         this.player = Player.getInstance()
         this.xpOrbs = []
     }
@@ -30,6 +32,12 @@ export class OrbService {
 
     remove(id: string) {
         this.xpOrbs = this.xpOrbs.filter(orb => orb.id != id)
+    }
+
+    createEventListeners(): void {
+        this.eventManager.on('orb:spawn', (props) => {
+            this.spawnXpOrb(props)
+        });
     }
 
     public static getInstance(): OrbService {
