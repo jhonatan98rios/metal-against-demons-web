@@ -22,8 +22,8 @@ export class SoundAttackManager1 extends SoundAttackManagerBase implements Abstr
     constructor() {
         super()
         this.isActive = true
-        this.name = "Basic Musical Note"
-        this.category = "Musical Note"
+        this.name = "Sound Attack"
+        this.category = "Sound Attack"
         this.width = 26
         this.height = 26
         this.speed = 3

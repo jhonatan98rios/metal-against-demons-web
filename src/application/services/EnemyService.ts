@@ -24,7 +24,7 @@ export class EnemyService extends EventClient {
         this.sortEnemies()
         setTimeout(this.spawn.bind(this), 1000 - (this.player.status.level * 75))
         
-        if (this.enemies.length >= this.player.status.level * 150) return
+        if (this.enemies.length >= this.player.status.level * 250) return
 
         const randomDistance = {
             x: Math.floor(Math.random() * 1000) + (SCREEN_WIDTH / 2),

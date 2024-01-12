@@ -87,7 +87,6 @@ export class ForceFieldManagerBase extends EventClient implements AbstractSkillM
     }
 
     collision(enemy: Enemy) {
-        console.log("collision")
         this.eventManager.emit("skill:damage", { enemy, damage: this.damage })
     }
 

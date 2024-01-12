@@ -11,6 +11,6 @@ export class EventClient {
     }
 
     createEventListeners() {
-        console.log("createEventListeners not implemented")
+        return
     }
 }

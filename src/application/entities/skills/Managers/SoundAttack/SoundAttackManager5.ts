@@ -21,8 +21,8 @@ export class SoundAttackManager5 extends SoundAttackManagerBase implements Abstr
     constructor() {
         super()
         this.isActive = true
-        this.name = "Extreme Musical Note"
-        this.category = "Musical Note"
+        this.name = "Guitar Supplication"
+        this.category = "Sound Attack"
         this.width = 48
         this.height = 48
         this.speed = 4
@@ -68,13 +68,13 @@ export class SoundAttackManager5 extends SoundAttackManagerBase implements Abstr
     }
 
     upgrade(): AbstractSkillManager {
-        const sam = new SoundAttackManager5()
-        sam.interval = this.interval - 50
-        sam.speed = this.speed + 0.2
-        sam.damage = this.damage + 0.2
-        sam.name = this.name + "+"
+        const temp = new SoundAttackManager5()
+        temp.interval = this.interval - 50
+        temp.speed = this.speed + 0.2
+        temp.damage = this.damage + 0.2
+        temp.name = this.name + "+"
 
-        console.log(sam)
-        return sam
+        console.log(temp)
+        return temp
     }
 }
