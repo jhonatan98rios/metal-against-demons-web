@@ -1,11 +1,13 @@
+import { Enemy } from "@/application/entities/Enemy";
 import { CachedImages } from "../../../CachedImages";
-import { ISpawn } from "../../Unit/AbstractSkill";
+import { AbstractSkill, ISpawn } from "../../Unit/AbstractSkill";
 import { SoundAttackUnit } from "../../Unit/SoundAttack/SoundAttackUnit";
-import { AbstractSkillkManager } from "../AbstractSkillManager";
+import { AbstractSkillManager } from "../AbstractSkillManager";
 import { SoundAttackManager3 } from "./SoundAttackManager3";
+import { SoundAttackManagerBase } from "./SoundAttackManagerBase";
 
 
-export class SoundAttackManager2 implements AbstractSkillkManager {
+export class SoundAttackManager2 extends SoundAttackManagerBase implements AbstractSkillManager {
 
     isActive: boolean
     name: string
@@ -16,22 +18,24 @@ export class SoundAttackManager2 implements AbstractSkillkManager {
     damage: number
     spritesheet: HTMLImageElement
     interval: number
+    activeSkills: AbstractSkill[]  
     
     constructor() {
+        super()
         this.isActive = true
         this.name = "Reforced Musical Note"
         this.category = "Musical Note"
         this.width = 38
         this.height = 38
-        this.speed = 4
+        this.speed = 3.5
         this.damage = 1.5
         this.spritesheet = CachedImages.getInstance().soundAttackLevel_2
         this.interval = 400
     }
 
-    spawn({ player, enemyService, activeSkills }: ISpawn) {
+    spawn({ player, enemyService }: ISpawn) {
 
-        if (!(player && enemyService && activeSkills)) return
+        if (!(player && enemyService)) return
         const range_area = {
             left: player.x - 500,
             top: player.y - 500,
@@ -60,15 +64,11 @@ export class SoundAttackManager2 implements AbstractSkillkManager {
                 frame_amount: 1
             })
     
-            activeSkills.push(sound_attack_level)
+            this.activeSkills.push(sound_attack_level)
         }
     }
 
-    stop() {
-        this.isActive = false
-    }
-
-    update(): AbstractSkillkManager {
+    upgrade(): AbstractSkillManager {
         return new SoundAttackManager3()
     }
 }

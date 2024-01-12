@@ -1,16 +1,13 @@
-import { EventManager } from "@/application/event/EventManager";
 import { CachedImages } from "../../../CachedImages";
 import { AbstractSkill, ISpawn } from "../../Unit/AbstractSkill";
 import { SoundAttackUnit } from "../../Unit/SoundAttack/SoundAttackUnit";
 import { AbstractSkillManager } from "../AbstractSkillManager";
-import { SoundAttackManager2 } from "./SoundAttackManager2";
 import { EventClient } from "@/application/event/EventClient";
 import { Enemy } from "@/application/entities/Enemy";
 import { EnemyService } from "@/application/services/EnemyService";
-import { SoundAttackManagerBase } from "./SoundAttackManagerBase";
 
 
-export class SoundAttackManager1 extends SoundAttackManagerBase implements AbstractSkillManager {
+export class SoundAttackManagerBase extends EventClient implements AbstractSkillManager {
 
     isActive: boolean
     name: string
@@ -73,7 +70,46 @@ export class SoundAttackManager1 extends SoundAttackManagerBase implements Abstr
         }
     }
 
+    move() {
+        this.activeSkills.forEach(activeSkill => activeSkill.move())
+    }
+
+    update() {
+        const enemyService = EnemyService.getInstance()
+        this.move()
+        this.checkSkillsCollision(enemyService)
+    }
+
+    checkSkillsCollision(enemyService: EnemyService) {
+        
+        if (!this.activeSkills) return
+
+        for (let index = 0; index <= this.activeSkills.length; index++) {
+            let activeSkill = this.activeSkills[index]
+
+            if (activeSkill) {
+                activeSkill.checkCollision(
+                    enemyService.enemies,
+                    this.collision.bind(this),
+                )
+            }
+        }
+    }
+
+    collision(skill: AbstractSkill, enemy: Enemy) {
+        this.remove(skill.id)
+        this.eventManager.emit("skill:damage", { enemy, damage: this.damage })
+    }
+
+    remove(id: string) {
+        this.activeSkills = this.activeSkills.filter(skill => skill.id != id)
+    }
+
+    stop() {
+        this.isActive = false
+    }
+
     upgrade(): AbstractSkillManager {
-        return new SoundAttackManager2()
+        return new SoundAttackManagerBase()
     }
 }

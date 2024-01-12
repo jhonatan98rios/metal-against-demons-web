@@ -1,6 +1,6 @@
-import { ISpawn } from "../Unit/AbstractSkill";
+import { AbstractSkill, ISpawn } from "../Unit/AbstractSkill";
 
-export abstract class AbstractSkillkManager {
+export abstract class AbstractSkillManager {
 
     isActive: boolean
     interval: number
@@ -11,8 +11,10 @@ export abstract class AbstractSkillkManager {
     speed: number
     damage: number
     spritesheet: HTMLImageElement
+    activeSkills: AbstractSkill[]  
     
     abstract spawn({ player, enemyService, activeSkills }: ISpawn): void
-    abstract update(): AbstractSkillkManager
+    abstract update(): void
+    abstract upgrade(): AbstractSkillManager
     abstract stop(): void
 }

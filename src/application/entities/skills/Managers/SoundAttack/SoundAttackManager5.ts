@@ -1,10 +1,11 @@
 import { CachedImages } from "../../../CachedImages";
-import { ISpawn } from "../../Unit/AbstractSkill";
+import { AbstractSkill, ISpawn } from "../../Unit/AbstractSkill";
 import { SoundAttackUnit } from "../../Unit/SoundAttack/SoundAttackUnit";
-import { AbstractSkillkManager } from "../AbstractSkillManager";
+import { AbstractSkillManager } from "../AbstractSkillManager";
+import { SoundAttackManagerBase } from "./SoundAttackManagerBase";
 
 
-export class SoundAttackManager5 implements AbstractSkillkManager {
+export class SoundAttackManager5 extends SoundAttackManagerBase implements AbstractSkillManager {
 
     isActive: boolean
     name: string
@@ -15,8 +16,10 @@ export class SoundAttackManager5 implements AbstractSkillkManager {
     damage: number
     spritesheet: HTMLImageElement
     interval: number
+    activeSkills: AbstractSkill[]  
     
     constructor() {
+        super()
         this.isActive = true
         this.name = "Extreme Musical Note"
         this.category = "Musical Note"
@@ -28,9 +31,9 @@ export class SoundAttackManager5 implements AbstractSkillkManager {
         this.interval = 400
     }
 
-    spawn({ player, enemyService, activeSkills }: ISpawn) {
+    spawn({ player, enemyService }: ISpawn) {
 
-        if (!(player && enemyService && activeSkills)) return
+        if (!(player && enemyService)) return
         const range_area = {
             left: player.x - 500,
             top: player.y - 500,
@@ -60,15 +63,11 @@ export class SoundAttackManager5 implements AbstractSkillkManager {
                 isAnimated: true
             })
     
-            activeSkills.push(sound_attack_level)
+            this.activeSkills.push(sound_attack_level)
         }
     }
 
-    stop() {
-        this.isActive = false
-    }
-
-    update(): AbstractSkillkManager {
+    upgrade(): AbstractSkillManager {
         const sam = new SoundAttackManager5()
         sam.interval = this.interval - 50
         sam.speed = this.speed + 0.2

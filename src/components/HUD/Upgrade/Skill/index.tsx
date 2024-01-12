@@ -1,9 +1,9 @@
 import { Game, GameStatus } from "@/application/entities/Game"
-import { AbstractSkillkManager } from "@/application/entities/skills/Managers/AbstractSkillManager"
+import { AbstractSkillManager } from "@/application/entities/skills/Managers/AbstractSkillManager"
 import { SkillService } from "@/application/services/SkillService"
 
 
-export function Skill(props: AbstractSkillkManager) {
+export function Skill(props: AbstractSkillManager) {
 
     const { name, category, spritesheet, speed, damage, interval } = props
 

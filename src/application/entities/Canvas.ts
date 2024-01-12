@@ -12,6 +12,7 @@ import { isThereIntersection } from "../utils/utils";
 import { drawAnimatedBar } from "../components/drawAnimatedBar";
 import { drawText } from "../components/drawText";
 import { EventClient } from "../event/EventClient";
+import { AbstractSkillManager } from "./skills/Managers/AbstractSkillManager";
 
 
 export class Canvas extends EventClient {
@@ -53,11 +54,12 @@ export class Canvas extends EventClient {
 
         this.renderOrbs(game.orbService.xpOrbs)
         
+        this.renderSkills(game.skillService.availableSkills)
+        
         this.renderEnemies(game.enemyService.enemies.filter(enemy => enemy.y <= this.player.y))
         this.renderPlayer(this.player)
         this.renderEnemies(game.enemyService.enemies.filter(enemy => enemy.y > this.player.y))
 
-        this.renderSkills(game.skillService.activeSkills)
 
         this.renderEnemiesHealth(game.enemyService)
         
@@ -123,22 +125,26 @@ export class Canvas extends EventClient {
         })
     }
 
-    private renderSkills(activeSkills: AbstractSkill[]) {
-        activeSkills.forEach(activeSkill => {
-            if (isThereIntersection(this.camera, activeSkill)){
-                this.context.drawImage(
-                    activeSkill.spritesheet,
-                    Math.floor(activeSkill.srcX),
-                    Math.floor(activeSkill.srcY),
-                    Math.floor(activeSkill.width),
-                    Math.floor(activeSkill.height),
-                    Math.floor(activeSkill.x),
-                    Math.floor(activeSkill.y),
-                    Math.floor(activeSkill.width), 
-                    Math.floor(activeSkill.height)
-                );
-            }
+    private renderSkills(availableSkills: AbstractSkillManager[]) {
+
+        availableSkills.forEach(availableSkill => {
+            availableSkill.activeSkills.forEach(activeSkill => {
+                if (isThereIntersection(this.camera, activeSkill)){
+                    this.context.drawImage(
+                        activeSkill.spritesheet,
+                        Math.floor(activeSkill.srcX),
+                        Math.floor(activeSkill.srcY),
+                        Math.floor(activeSkill.width),
+                        Math.floor(activeSkill.height),
+                        Math.floor(activeSkill.x),
+                        Math.floor(activeSkill.y),
+                        Math.floor(activeSkill.width), 
+                        Math.floor(activeSkill.height)
+                    );
+                }
+            })
         })
+
     }
 
     private renderOrbs(orbs: XPOrb[]) {

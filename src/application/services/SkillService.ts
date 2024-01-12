@@ -1,7 +1,7 @@
 import { Enemy } from "../entities/Enemy";
 import { Player } from "../entities/Player";
 import { AbstractSkill } from "../entities/skills/Unit/AbstractSkill";
-import { AbstractSkillkManager } from "../entities/skills/Managers/AbstractSkillManager";
+import { AbstractSkillManager } from "../entities/skills/Managers/AbstractSkillManager";
 import { EnemyService } from "./EnemyService";
 import { SoundAttackManager1 } from "../entities/skills/Managers/SoundAttack/SoundAttackManager1";
 import { EventManager } from "../event/EventManager";
@@ -10,14 +10,12 @@ import { Game } from "../entities/Game";
 
 export class SkillService extends EventClient {
 
-    public eventManager: EventManager
     private static instance: SkillService
     public activeSkills: AbstractSkill[]
-    public availableSkills: AbstractSkillkManager[]
+    public availableSkills: AbstractSkillManager[]
 
     constructor() {
         super()
-        this.eventManager = EventManager.getInstance()
         this.activeSkills = []
         this.availableSkills = []
         this.availableSkills.push(
@@ -39,7 +37,7 @@ export class SkillService extends EventClient {
         })
     }
 
-    intervaledSpawn(skillManager: AbstractSkillkManager, player: Player, enemyService: EnemyService) {
+    intervaledSpawn(skillManager: AbstractSkillManager, player: Player, enemyService: EnemyService) {
         /* Each skill manaager is a type of attack */
         skillManager.spawn({ player, enemyService, activeSkills: this.activeSkills })
 
@@ -50,11 +48,15 @@ export class SkillService extends EventClient {
         }
     }
 
-    move() {
+    /* move() {
         this.activeSkills.forEach(activeSkill => activeSkill.move())
+    } */
+
+    update() {
+        this.availableSkills.forEach(availableSkill => availableSkill.update())
     }
     
-    checkSkillsCollision(enemyService: EnemyService) {
+    /* checkSkillsCollision(enemyService: EnemyService) {
         for (let index = 0; index <= this.activeSkills.length; index++) {
             let activeSkill = this.activeSkills[index]
 
@@ -65,16 +67,16 @@ export class SkillService extends EventClient {
                 )
             }
         }
-    }
+    } */
 
-    collision(skill: AbstractSkill, enemy: Enemy) {
+    /* collision(skill: AbstractSkill, enemy: Enemy) {
         this.remove(skill.id)
         this.eventManager.emit("skill:damage", { enemy, damage: skill.damage })
-    }
+    } */
 
-    remove(id: string) {
+    /* remove(id: string) {
         this.activeSkills = this.activeSkills.filter(skill => skill.id != id)
-    }
+    } */
 
     upgrade(category: string, game: Game) {
         let alreadyExists = false
@@ -85,7 +87,7 @@ export class SkillService extends EventClient {
                 console.log(skill.name)
 
                 skill.stop()
-                skill = skill.update()
+                skill = skill.upgrade()
                 alreadyExists = true
             }
             return skill
