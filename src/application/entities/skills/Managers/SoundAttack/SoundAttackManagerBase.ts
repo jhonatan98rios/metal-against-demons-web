@@ -5,6 +5,7 @@ import { AbstractSkillManager } from "../AbstractSkillManager";
 import { EventClient } from "@/application/event/EventClient";
 import { Enemy } from "@/application/entities/Enemy";
 import { EnemyService } from "@/application/services/EnemyService";
+import { Player } from "@/application/entities/Player";
 
 
 export class SoundAttackManagerBase extends EventClient implements AbstractSkillManager {
@@ -32,6 +33,21 @@ export class SoundAttackManagerBase extends EventClient implements AbstractSkill
         this.spritesheet = CachedImages.getInstance().soundAttackLevel_1
         this.interval = 500
         this.activeSkills = []
+    }
+
+    startSpawn(player: Player, enemyService: EnemyService) {
+        this.intervaledSpawn(player, enemyService)
+    }
+
+    intervaledSpawn(player: Player, enemyService: EnemyService) {
+        /* Each skill manaager is a type of attack */
+        if (this.isActive) {
+            this.spawn({ player, enemyService, activeSkills: this.activeSkills })
+
+            setTimeout(() => {
+                this.intervaledSpawn(player, enemyService)
+            }, this.interval)
+        }
     }
 
     spawn({ player, enemyService }: ISpawn) {

@@ -33,19 +33,8 @@ export class SkillService extends EventClient {
     
     startSpawn(player: Player, enemyService: EnemyService) {
         this.availableSkills.forEach((skillManager) => {
-            this.intervaledSpawn(skillManager, player, enemyService)
+            skillManager.startSpawn(player, enemyService)
         })
-    }
-
-    intervaledSpawn(skillManager: AbstractSkillManager, player: Player, enemyService: EnemyService) {
-        /* Each skill manaager is a type of attack */
-        skillManager.spawn({ player, enemyService, activeSkills: this.activeSkills })
-
-        if (skillManager.isActive) {
-            setTimeout(() => {
-                this.intervaledSpawn(skillManager, player, enemyService)
-            }, skillManager.interval)
-        }
     }
 
     update() {
