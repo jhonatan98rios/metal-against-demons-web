@@ -10,7 +10,8 @@ export function Skill(props: AbstractSkillManager) {
 
     function handleClick() {
         const game = Game.getInstance()
-        SkillService.getInstance().upgrade(category, game)
+        const skillService = SkillService.getInstance()
+        skillService.upgrade(category, game)
         game.state.status = GameStatus.running
     }
 

@@ -8,6 +8,8 @@ import { SoundAttackManagerBase } from "./SoundAttackManagerBase";
 
 export class SoundAttackManager3 extends SoundAttackManagerBase implements AbstractSkillManager {
 
+    static category = "Sound Attack"
+
     isActive: boolean
     name: string
     width: number

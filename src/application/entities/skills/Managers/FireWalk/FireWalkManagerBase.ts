@@ -10,6 +10,7 @@ import { Player } from "@/application/entities/Player";
 
 export class FireWalkManagerBase extends EventClient implements AbstractSkillManager {
 
+    static category = "Fire Walk"
     isActive: boolean
     name: string
     category: string

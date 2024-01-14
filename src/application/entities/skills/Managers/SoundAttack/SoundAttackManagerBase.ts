@@ -10,6 +10,7 @@ import { Player } from "@/application/entities/Player";
 
 export class SoundAttackManagerBase extends EventClient implements AbstractSkillManager {
 
+    static category = "Sound Attack"
     isActive: boolean
     name: string
     category: string

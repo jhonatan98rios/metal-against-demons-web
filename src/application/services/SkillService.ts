@@ -2,11 +2,9 @@ import { Player } from "../entities/Player";
 import { AbstractSkill } from "../entities/skills/Unit/AbstractSkill";
 import { AbstractSkillManager } from "../entities/skills/Managers/AbstractSkillManager";
 import { EnemyService } from "./EnemyService";
-import { SoundAttackManager1 } from "../entities/skills/Managers/SoundAttack/SoundAttackManager1";
 import { EventClient } from "../event/EventClient";
 import { Game } from "../entities/Game";
-import { BatAttackManager1 } from "../entities/skills/Managers/BatAttack/BatAttackManager1";
-import { FireWalkManager1 } from "../entities/skills/Managers/FireWalk/FireWalkManager1";
+import { selectRandomSkills } from "../entities/skills/Managers/skillUtils";
 
 export class SkillService extends EventClient {
 
@@ -19,9 +17,7 @@ export class SkillService extends EventClient {
         this.activeSkills = []
         this.availableSkills = []
         this.availableSkills.push(
-            new FireWalkManager1(),
-            new SoundAttackManager1(),
-            new BatAttackManager1(),
+            ...selectRandomSkills(4),
         )
     }
     

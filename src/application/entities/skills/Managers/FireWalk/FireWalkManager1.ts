@@ -1,7 +1,6 @@
 import { CachedImages } from "../../../CachedImages";
-import { AbstractSkill, ISpawn } from "../../Unit/AbstractSkill";
+import { ISpawn } from "../../Unit/AbstractSkill";
 import { FireWalkUnit } from "../../Unit/FireWalk/FireWalkUnit";
-import { SoundAttackUnit } from "../../Unit/SoundAttack/SoundAttackUnit";
 import { AbstractSkillManager } from "../AbstractSkillManager";
 import { FireWalkManager2 } from "./FireWalkManager2";
 import { FireWalkManagerBase } from "./FireWalkManagerBase";

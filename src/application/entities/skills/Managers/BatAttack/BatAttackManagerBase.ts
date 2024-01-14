@@ -10,6 +10,7 @@ import { Player } from "@/application/entities/Player";
 
 export class BatAttackManagerBase extends EventClient implements AbstractSkillManager {
 
+    static category = "Bat Attack"
     isActive: boolean
     name: string
     category: string
