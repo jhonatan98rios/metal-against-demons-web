@@ -27,6 +27,8 @@ export class CachedImages {
     batAttackLevel_4: HTMLImageElement
     batAttackLevel_5: HTMLImageElement
 
+    fireWalkLevel_1: HTMLImageElement
+
 
     constructor() {
         this.createEnemies()
@@ -93,6 +95,9 @@ export class CachedImages {
 
         this.batAttackLevel_5 = new Image()
         this.batAttackLevel_5.src = "img/skills/bat_attack_5.png"
+
+        this.fireWalkLevel_1 = new Image()
+        this.fireWalkLevel_1.src = "img/skills/fire_walk_1.png"
     }
 
     public static getInstance(): CachedImages {
