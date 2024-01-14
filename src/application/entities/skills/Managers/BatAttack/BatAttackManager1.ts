@@ -50,10 +50,6 @@ export class BatAttackManager1 extends BatAttackManagerBase implements AbstractS
         this.activeSkills.push(sound_attack_level)
     }
 
-    checkLifeTime() {
-        this.activeSkills = this.activeSkills.filter(skill => skill['distance'] <= (this.lifeTime * 60))
-    }
-
     upgrade(): AbstractSkillManager {
         return new BatAttackManager2()
     }

@@ -82,7 +82,7 @@ export class BatAttackUnit implements AbstractSkill {
         this.y = (player.y + (player.height / 2)) + offsetY;
 
         this.angle += this.speed;
-        //this.speed -= 0.01
+        this.speed -= 0.00005
         this.distance += 1;
         this.radius += 1
 

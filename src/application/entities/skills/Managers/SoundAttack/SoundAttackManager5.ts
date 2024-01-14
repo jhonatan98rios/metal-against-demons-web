@@ -1,3 +1,4 @@
+import { Enemy } from "@/application/entities/Enemy";
 import { CachedImages } from "../../../CachedImages";
 import { AbstractSkill, ISpawn } from "../../Unit/AbstractSkill";
 import { SoundAttackUnit } from "../../Unit/SoundAttack/SoundAttackUnit";
@@ -9,14 +10,12 @@ export class SoundAttackManager5 extends SoundAttackManagerBase implements Abstr
 
     isActive: boolean
     name: string
-    category: string;
     width: number
     height: number
     speed: number
     damage: number
     spritesheet: HTMLImageElement
     interval: number
-    activeSkills: AbstractSkill[]  
     
     constructor() {
         super()
@@ -29,6 +28,7 @@ export class SoundAttackManager5 extends SoundAttackManagerBase implements Abstr
         this.damage = 3
         this.spritesheet = CachedImages.getInstance().soundAttackLevel_5
         this.interval = 400
+        this.lifeTime = 10 //s
     }
 
     spawn({ player, enemyService }: ISpawn) {
@@ -65,6 +65,10 @@ export class SoundAttackManager5 extends SoundAttackManagerBase implements Abstr
     
             this.activeSkills.push(sound_attack_level)
         }
+    }
+
+    collision(skill: AbstractSkill, enemy: Enemy) {
+        this.eventManager.emit("skill:damage", { enemy, damage: this.damage })
     }
 
     upgrade(): AbstractSkillManager {

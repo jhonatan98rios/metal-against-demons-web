@@ -20,7 +20,7 @@ export class BatAttackManagerBase extends EventClient implements AbstractSkillMa
     spritesheet: HTMLImageElement
     interval: number
     activeSkills: AbstractSkill[]  
-    lifeTime: number  
+    lifeTime: number
     
     constructor() {
         super()
@@ -76,7 +76,7 @@ export class BatAttackManagerBase extends EventClient implements AbstractSkillMa
     }
 
     checkLifeTime() {
-        return
+        this.activeSkills = this.activeSkills.filter(skill => skill['distance'] <= (this.lifeTime * 60))
     }
 
     collision(enemy: Enemy) {

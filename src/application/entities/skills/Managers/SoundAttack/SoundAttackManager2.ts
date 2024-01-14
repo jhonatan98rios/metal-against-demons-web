@@ -11,19 +11,17 @@ export class SoundAttackManager2 extends SoundAttackManagerBase implements Abstr
 
     isActive: boolean
     name: string
-    category: string;
     width: number
     height: number
     speed: number
     damage: number
     spritesheet: HTMLImageElement
     interval: number
-    activeSkills: AbstractSkill[]  
     
     constructor() {
         super()
         this.isActive = true
-        this.name = "Evolved Sound Attack"
+        this.name = "Super Sound Attack"
         this.category = "Sound Attack"
         this.width = 38
         this.height = 38
@@ -31,6 +29,7 @@ export class SoundAttackManager2 extends SoundAttackManagerBase implements Abstr
         this.damage = 1.5
         this.spritesheet = CachedImages.getInstance().soundAttackLevel_2
         this.interval = 400
+        this.lifeTime = 10 //s
     }
 
     spawn({ player, enemyService }: ISpawn) {
