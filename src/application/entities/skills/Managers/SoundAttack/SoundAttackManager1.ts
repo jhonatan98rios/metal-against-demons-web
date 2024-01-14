@@ -57,7 +57,7 @@ export class SoundAttackManager1 extends SoundAttackManagerBase implements Abstr
                 initialY: player.y + (player.height / 2),
                 targetX: enemyService.enemies[0].x,
                 targetY: enemyService.enemies[0].y + (enemyService.enemies[0].height / 2),
-                damage: this.damage,
+                damage: this.damage * player.status.baseDamage,
                 width: this.width,
                 height: this.height,
                 speed: this.speed,

@@ -19,19 +19,13 @@ export class BatAttackManagerBase extends EventClient implements AbstractSkillMa
     damage: number
     spritesheet: HTMLImageElement
     interval: number
-    activeSkills: AbstractSkill[]    
+    activeSkills: AbstractSkill[]  
+    lifeTime: number  
     
     constructor() {
         super()
         this.isActive = true
-        this.name = "Bat Attack"
         this.category = "Bat Attack"
-        this.width = 45
-        this.height = 20
-        this.speed = 2
-        this.damage = 0.25
-        this.spritesheet = CachedImages.getInstance().soundAttackLevel_1
-        this.interval = 0
         this.activeSkills = []
     }
 
