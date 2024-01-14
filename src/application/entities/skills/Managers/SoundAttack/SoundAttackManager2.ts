@@ -30,8 +30,7 @@ export class SoundAttackManager2 extends SoundAttackManagerBase implements Abstr
         this.damage = 1.5
         this.spritesheet = CachedImages.getInstance().soundAttackLevel_2
         this.interval = 400
-        this.lifeTime = 10 //s
-        this.lifeTime = 60 * 2 //frames * sec
+        this.lifeTime = 60 * 3 //frames * sec
     }
 
     spawn({ player, enemyService }: ISpawn) {

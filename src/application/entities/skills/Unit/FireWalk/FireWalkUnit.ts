@@ -64,8 +64,6 @@ export class FireWalkUnit implements AbstractSkill {
 
         this.isAnimated = !!isAnimated
         this.lifeTime = lifeTime
-
-        console.log("Spawn")
     }
 
     move() {

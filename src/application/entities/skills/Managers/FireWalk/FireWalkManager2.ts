@@ -3,12 +3,12 @@ import { AbstractSkill, ISpawn } from "../../Unit/AbstractSkill";
 import { FireWalkUnit } from "../../Unit/FireWalk/FireWalkUnit";
 import { SoundAttackUnit } from "../../Unit/SoundAttack/SoundAttackUnit";
 import { AbstractSkillManager } from "../AbstractSkillManager";
-import { FireWalkManager2 } from "./FireWalkManager2";
+import { FireWalkManager3 } from "./FireWalkManager3";
 import { FireWalkManagerBase } from "./FireWalkManagerBase";
 
 
 
-export class FireWalkManager1 extends FireWalkManagerBase implements AbstractSkillManager {
+export class FireWalkManager2 extends FireWalkManagerBase implements AbstractSkillManager {
 
     isActive: boolean
     name: string
@@ -23,12 +23,12 @@ export class FireWalkManager1 extends FireWalkManagerBase implements AbstractSki
     constructor() {
         super()
         this.isActive = true
-        this.name = "Fire Walk"
-        this.width = 40
-        this.height = 40
+        this.name = "Burning Walk"
+        this.width = 48
+        this.height = 48
         this.speed = 0
-        this.damage = 0.01
-        this.spritesheet = CachedImages.getInstance().fireWalkLevel_1
+        this.damage = 0.015
+        this.spritesheet = CachedImages.getInstance().fireWalkLevel_2
         this.interval = 1000
         this.lifeTime = 60 * 5 //frames * sec
     }
@@ -56,6 +56,6 @@ export class FireWalkManager1 extends FireWalkManagerBase implements AbstractSki
     }
 
     upgrade(): AbstractSkillManager {
-        return new FireWalkManager2()
+        return new FireWalkManager3()
     }
 }

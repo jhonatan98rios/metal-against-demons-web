@@ -28,6 +28,10 @@ export class CachedImages {
     batAttackLevel_5: HTMLImageElement
 
     fireWalkLevel_1: HTMLImageElement
+    fireWalkLevel_2: HTMLImageElement
+    fireWalkLevel_3: HTMLImageElement
+    fireWalkLevel_4: HTMLImageElement
+    fireWalkLevel_5: HTMLImageElement
 
 
     constructor() {
@@ -96,8 +100,21 @@ export class CachedImages {
         this.batAttackLevel_5 = new Image()
         this.batAttackLevel_5.src = "img/skills/bat_attack_5.png"
 
+        /* Fire Walk */
         this.fireWalkLevel_1 = new Image()
         this.fireWalkLevel_1.src = "img/skills/fire_walk_1.png"
+
+        this.fireWalkLevel_2 = new Image()
+        this.fireWalkLevel_2.src = "img/skills/fire_walk_2.png"
+
+        this.fireWalkLevel_3 = new Image()
+        this.fireWalkLevel_3.src = "img/skills/fire_walk_3.png"
+
+        this.fireWalkLevel_4 = new Image()
+        this.fireWalkLevel_4.src = "img/skills/fire_walk_4.png"
+
+        this.fireWalkLevel_5 = new Image()
+        this.fireWalkLevel_5.src = "img/skills/fire_walk_5.png"
     }
 
     public static getInstance(): CachedImages {

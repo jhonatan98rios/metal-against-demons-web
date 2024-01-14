@@ -25,7 +25,7 @@ export class FireWalkManagerBase extends EventClient implements AbstractSkillMan
     constructor() {
         super()
         this.isActive = true
-        this.name = "Basic Sound Attack"
+        this.name = "Fire Walk"
         this.category = "Fire Walk"
         this.width = 26
         this.height = 26

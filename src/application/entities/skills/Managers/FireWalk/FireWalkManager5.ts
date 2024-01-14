@@ -3,12 +3,11 @@ import { AbstractSkill, ISpawn } from "../../Unit/AbstractSkill";
 import { FireWalkUnit } from "../../Unit/FireWalk/FireWalkUnit";
 import { SoundAttackUnit } from "../../Unit/SoundAttack/SoundAttackUnit";
 import { AbstractSkillManager } from "../AbstractSkillManager";
-import { FireWalkManager2 } from "./FireWalkManager2";
 import { FireWalkManagerBase } from "./FireWalkManagerBase";
 
 
 
-export class FireWalkManager1 extends FireWalkManagerBase implements AbstractSkillManager {
+export class FireWalkManager5 extends FireWalkManagerBase implements AbstractSkillManager {
 
     isActive: boolean
     name: string
@@ -23,14 +22,14 @@ export class FireWalkManager1 extends FireWalkManagerBase implements AbstractSki
     constructor() {
         super()
         this.isActive = true
-        this.name = "Fire Walk"
-        this.width = 40
-        this.height = 40
+        this.name = "Infernal Black Flames"
+        this.width = 100
+        this.height = 100
         this.speed = 0
-        this.damage = 0.01
-        this.spritesheet = CachedImages.getInstance().fireWalkLevel_1
-        this.interval = 1000
-        this.lifeTime = 60 * 5 //frames * sec
+        this.damage = 0.03
+        this.spritesheet = CachedImages.getInstance().fireWalkLevel_5
+        this.interval = 500
+        this.lifeTime = 60 * 12 //frames * sec
     }
 
     spawn({ player, enemyService }: ISpawn) {
@@ -38,8 +37,8 @@ export class FireWalkManager1 extends FireWalkManagerBase implements AbstractSki
         if (!(player && enemyService)) return
         
         const sound_attack_level = new FireWalkUnit({ 
-            initialX: player.x,
-            initialY: player.y + (player.height * 0.6),
+            initialX: player.x - 20,
+            initialY: player.y + (player.height * 0.3),
             targetX: enemyService.enemies[0].x,
             targetY: enemyService.enemies[0].y + (enemyService.enemies[0].height / 2),
             damage: this.damage * player.status.baseDamage,
@@ -47,7 +46,7 @@ export class FireWalkManager1 extends FireWalkManagerBase implements AbstractSki
             height: this.height,
             speed: this.speed,
             spritesheet: this.spritesheet,
-            frame_amount: 4,
+            frame_amount: 6,
             isAnimated: true,
             lifeTime: this.lifeTime
         })
@@ -56,6 +55,12 @@ export class FireWalkManager1 extends FireWalkManagerBase implements AbstractSki
     }
 
     upgrade(): AbstractSkillManager {
-        return new FireWalkManager2()
+        const temp = new FireWalkManager5()
+        temp.interval = this.interval - 50
+        temp.damage = this.damage + 0.2
+        temp.name = this.name + "+"
+
+        console.log(temp)
+        return temp
     }
 }
