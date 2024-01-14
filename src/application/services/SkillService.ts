@@ -9,6 +9,7 @@ import { EventClient } from "../event/EventClient";
 import { Game } from "../entities/Game";
 import { ForceFieldManager1 } from "../entities/skills/Managers/ForceField/ForceFieldManager1";
 import { BatAttackManager1 } from "../entities/skills/Managers/BatAttack/BatAttackManager1";
+import { FireWalkManager1 } from "../entities/skills/Managers/FireWalk/FireWalkManager1";
 
 export class SkillService extends EventClient {
 
@@ -21,8 +22,8 @@ export class SkillService extends EventClient {
         this.activeSkills = []
         this.availableSkills = []
         this.availableSkills.push(
+            new FireWalkManager1(),
             new SoundAttackManager1(),
-            new ForceFieldManager1(),
             new BatAttackManager1(),
         )
     }
