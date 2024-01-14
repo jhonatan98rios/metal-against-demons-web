@@ -16,6 +16,7 @@ export class SoundAttackManager1 extends SoundAttackManagerBase implements Abstr
     damage: number
     spritesheet: HTMLImageElement
     interval: number
+    lifeTime: number
     
     constructor() {
         super()
@@ -59,7 +60,8 @@ export class SoundAttackManager1 extends SoundAttackManagerBase implements Abstr
                 height: this.height,
                 speed: this.speed,
                 spritesheet: this.spritesheet,
-                frame_amount: 1
+                frame_amount: 1,
+                lifeTime: this.lifeTime
             })
     
             this.activeSkills.push(sound_attack_level)

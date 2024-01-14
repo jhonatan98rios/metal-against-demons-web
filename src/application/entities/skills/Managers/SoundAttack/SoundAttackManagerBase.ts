@@ -19,7 +19,7 @@ export class SoundAttackManagerBase extends EventClient implements AbstractSkill
     damage: number
     spritesheet: HTMLImageElement
     interval: number
-    activeSkills: AbstractSkill[]   
+    activeSkills: SoundAttackUnit[]   
     lifeTime: number 
     
     constructor() {
@@ -59,10 +59,16 @@ export class SoundAttackManagerBase extends EventClient implements AbstractSkill
         this.activeSkills.forEach(activeSkill => activeSkill.move())
     }
 
+    updateLifeTime() {
+        this.activeSkills.forEach(activeSkill => activeSkill.updateLifeTime())
+    }
+
     update() {
         const enemyService = EnemyService.getInstance()
         this.move()
+        this.updateLifeTime()
         this.checkSkillsCollision(enemyService)
+        this.checkLifeTime()
     }
 
     checkSkillsCollision(enemyService: EnemyService) {
@@ -87,7 +93,7 @@ export class SoundAttackManagerBase extends EventClient implements AbstractSkill
     }
 
     checkLifeTime() {
-        this.activeSkills = this.activeSkills.filter(skill => skill['distance'] <= (this.lifeTime * 60))
+        this.activeSkills = this.activeSkills.filter(skill => skill.lifeTime > 0)
     }
 
     remove(id: string) {

@@ -17,6 +17,7 @@ export class SoundAttackManager2 extends SoundAttackManagerBase implements Abstr
     damage: number
     spritesheet: HTMLImageElement
     interval: number
+    lifeTime: number
     
     constructor() {
         super()
@@ -30,6 +31,7 @@ export class SoundAttackManager2 extends SoundAttackManagerBase implements Abstr
         this.spritesheet = CachedImages.getInstance().soundAttackLevel_2
         this.interval = 400
         this.lifeTime = 10 //s
+        this.lifeTime = 60 * 2 //frames * sec
     }
 
     spawn({ player, enemyService }: ISpawn) {
@@ -60,7 +62,8 @@ export class SoundAttackManager2 extends SoundAttackManagerBase implements Abstr
                 height: this.height,
                 speed: this.speed,
                 spritesheet: this.spritesheet,
-                frame_amount: 1
+                frame_amount: 1,
+                lifeTime: 2000
             })
     
             this.activeSkills.push(sound_attack_level)
