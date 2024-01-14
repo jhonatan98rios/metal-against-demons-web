@@ -2,11 +2,11 @@ import { CachedImages } from "../../../CachedImages";
 import { ISpawn } from "../../Unit/AbstractSkill";
 import { BatAttackUnit } from "../../Unit/BatAttack/BatAttackUnit";
 import { AbstractSkillManager } from "../AbstractSkillManager";
-import { BatAttackManager2 } from "./BatAttackManager2";
+import { BatAttackManager4 } from "./BatAttackManager4";
 import { BatAttackManagerBase } from "./BatAttackManagerBase";
 
 
-export class BatAttackManager1 extends BatAttackManagerBase implements AbstractSkillManager {
+export class BatAttackManager3 extends BatAttackManagerBase implements AbstractSkillManager {
 
     name: string
     width: number
@@ -19,14 +19,14 @@ export class BatAttackManager1 extends BatAttackManagerBase implements AbstractS
     
     constructor() {
         super()
-        this.name = "Bat Attack"
-        this.width = 24
-        this.height = 24
+        this.name = "Horde of Vampires"
+        this.width = 32
+        this.height = 32
         this.speed = 0.05
-        this.damage = 0.5
-        this.spritesheet = CachedImages.getInstance().batAttackLevel_1
-        this.interval = 7000 //ms
-        this.lifeTime = 4 //s
+        this.damage = 0.75
+        this.spritesheet = CachedImages.getInstance().batAttackLevel_3
+        this.interval = 5000 //ms
+        this.lifeTime = 5 //s
     }
 
     spawn({ player, enemyService }: ISpawn) {
@@ -55,6 +55,6 @@ export class BatAttackManager1 extends BatAttackManagerBase implements AbstractS
     }
 
     upgrade(): AbstractSkillManager {
-        return new BatAttackManager2()
+        return new BatAttackManager4()
     }
 }
