@@ -24,8 +24,8 @@ export class FireWalkManager3 extends FireWalkManagerBase implements AbstractSki
         super()
         this.isActive = true
         this.name = "Damned Flames"
-        this.width = 56
-        this.height = 56
+        this.width = 64
+        this.height = 64
         this.speed = 0
         this.damage = 0.02
         this.spritesheet = CachedImages.getInstance().fireWalkLevel_3
