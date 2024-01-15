@@ -1,6 +1,6 @@
 import { CachedImages } from "../../../CachedImages";
 import { AbstractSkill, ISpawn } from "../../Unit/AbstractSkill";
-import { SoundAttackUnit } from "../../Unit/SoundAttack/SoundAttackUnit";
+import { FireWalkUnit } from "../../Unit/FireWalk/FireWalkUnit";
 import { AbstractSkillManager } from "../AbstractSkillManager";
 import { EventClient } from "@/application/event/EventClient";
 import { Enemy } from "@/application/entities/Enemy";
@@ -8,9 +8,9 @@ import { EnemyService } from "@/application/services/EnemyService";
 import { Player } from "@/application/entities/Player";
 
 
-export class SoundAttackManagerBase extends EventClient implements AbstractSkillManager {
+export class FireWalkManagerBase extends EventClient implements AbstractSkillManager {
 
-    static category = "Sound Attack"
+    static category = "Fire Walk"
     isActive: boolean
     name: string
     category: string
@@ -20,14 +20,14 @@ export class SoundAttackManagerBase extends EventClient implements AbstractSkill
     damage: number
     spritesheet: HTMLImageElement
     interval: number
-    activeSkills: SoundAttackUnit[]   
+    activeSkills: FireWalkUnit[]   
     lifeTime: number 
     
     constructor() {
         super()
         this.isActive = true
-        this.name = "Basic Sound Attack"
-        this.category = "Sound Attack"
+        this.name = "Fire Walk"
+        this.category = "Fire Walk"
         this.width = 26
         this.height = 26
         this.speed = 3
@@ -89,7 +89,6 @@ export class SoundAttackManagerBase extends EventClient implements AbstractSkill
     }
 
     collision(skill: AbstractSkill, enemy: Enemy) {
-        this.remove(skill.id)
         this.eventManager.emit("skill:damage", { enemy, damage: this.damage })
     }
 

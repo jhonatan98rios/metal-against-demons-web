@@ -1,13 +1,15 @@
 import { CachedImages } from "../../../CachedImages";
 import { ISpawn } from "../../Unit/AbstractSkill";
-import { BatAttackUnit } from "../../Unit/BatAttack/BatAttackUnit";
+import { FireWalkUnit } from "../../Unit/FireWalk/FireWalkUnit";
 import { AbstractSkillManager } from "../AbstractSkillManager";
-import { BatAttackManager2 } from "./BatAttackManager2";
-import { BatAttackManagerBase } from "./BatAttackManagerBase";
+import { FireWalkManager2 } from "./FireWalkManager2";
+import { FireWalkManagerBase } from "./FireWalkManagerBase";
 
 
-export class BatAttackManager1 extends BatAttackManagerBase implements AbstractSkillManager {
 
+export class FireWalkManager1 extends FireWalkManagerBase implements AbstractSkillManager {
+
+    isActive: boolean
     name: string
     width: number
     height: number
@@ -19,23 +21,24 @@ export class BatAttackManager1 extends BatAttackManagerBase implements AbstractS
     
     constructor() {
         super()
-        this.name = "Bat Attack"
-        this.width = 24
-        this.height = 24
-        this.speed = 0.05
-        this.damage = 0.5
-        this.spritesheet = CachedImages.getInstance().batAttackLevel_1
-        this.interval = 7000 //ms
-        this.lifeTime = 4 //s
+        this.isActive = true
+        this.name = "Fire Walk"
+        this.width = 40
+        this.height = 40
+        this.speed = 0
+        this.damage = 0.01
+        this.spritesheet = CachedImages.getInstance().fireWalkLevel_1
+        this.interval = 1000
+        this.lifeTime = 60 * 5 //frames * sec
     }
 
     spawn({ player, enemyService }: ISpawn) {
 
         if (!(player && enemyService)) return
-
-        const sound_attack_level = new BatAttackUnit({ 
+        
+        const sound_attack_level = new FireWalkUnit({ 
             initialX: player.x,
-            initialY: player.y + (player.height / 2),
+            initialY: player.y + (player.height * 0.6),
             targetX: enemyService.enemies[0].x,
             targetY: enemyService.enemies[0].y + (enemyService.enemies[0].height / 2),
             damage: this.damage * player.status.baseDamage,
@@ -43,14 +46,15 @@ export class BatAttackManager1 extends BatAttackManagerBase implements AbstractS
             height: this.height,
             speed: this.speed,
             spritesheet: this.spritesheet,
-            frame_amount: 2,
-            isAnimated: true
+            frame_amount: 4,
+            isAnimated: true,
+            lifeTime: this.lifeTime
         })
 
         this.activeSkills.push(sound_attack_level)
     }
 
     upgrade(): AbstractSkillManager {
-        return new BatAttackManager2()
+        return new FireWalkManager2()
     }
 }

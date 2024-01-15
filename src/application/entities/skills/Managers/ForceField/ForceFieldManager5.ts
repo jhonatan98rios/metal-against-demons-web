@@ -26,8 +26,8 @@ export class ForceFieldManager5 extends ForceFieldManagerBase implements Abstrac
         this.isActive = true
         this.name = "Blue Eye of the Dragon"
         this.category = "Force Field"
-        this.width = 200
-        this.height = 200
+        this.width = 220
+        this.height = 220
         this.speed = 0
         this.damage = 0.07
         this.spritesheet = CachedImages.getInstance().forceFieldLevel_5
@@ -48,7 +48,7 @@ export class ForceFieldManager5 extends ForceFieldManagerBase implements Abstrac
             initialY: player.y - (this.height / 2),
             targetX: enemyService.enemies[0].x,
             targetY: enemyService.enemies[0].y + (enemyService.enemies[0].height / 2),
-            damage: this.damage,
+            damage: this.damage * player.status.baseDamage,
             width: this.width,
             height: this.height,
             speed: this.speed,

@@ -12,6 +12,7 @@ export class PlayerStatus extends EventClient {
     public vulnerable: boolean
     public currentXP: number
     public nextLevelXp: number
+    public baseDamage: number
 
     constructor () {
         super()
@@ -21,6 +22,7 @@ export class PlayerStatus extends EventClient {
         this.vulnerable = true
         this.currentXP = 0
         this.nextLevelXp = 15
+        this.baseDamage = 1
     }
 
     public static getInstance(): PlayerStatus {

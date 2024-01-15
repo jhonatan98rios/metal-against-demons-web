@@ -2,11 +2,10 @@ import { CachedImages } from "../../../CachedImages";
 import { ISpawn } from "../../Unit/AbstractSkill";
 import { BatAttackUnit } from "../../Unit/BatAttack/BatAttackUnit";
 import { AbstractSkillManager } from "../AbstractSkillManager";
-import { BatAttackManager2 } from "./BatAttackManager2";
 import { BatAttackManagerBase } from "./BatAttackManagerBase";
 
 
-export class BatAttackManager1 extends BatAttackManagerBase implements AbstractSkillManager {
+export class BatAttackManager5 extends BatAttackManagerBase implements AbstractSkillManager {
 
     name: string
     width: number
@@ -19,14 +18,14 @@ export class BatAttackManager1 extends BatAttackManagerBase implements AbstractS
     
     constructor() {
         super()
-        this.name = "Bat Attack"
-        this.width = 24
-        this.height = 24
+        this.name = "Hellish Dracula Rage"
+        this.width = 48
+        this.height = 48
         this.speed = 0.05
-        this.damage = 0.5
-        this.spritesheet = CachedImages.getInstance().batAttackLevel_1
-        this.interval = 7000 //ms
-        this.lifeTime = 4 //s
+        this.damage = 0.75
+        this.spritesheet = CachedImages.getInstance().batAttackLevel_5
+        this.interval = 5000 //ms
+        this.lifeTime = 7 //s
     }
 
     spawn({ player, enemyService }: ISpawn) {
@@ -51,6 +50,12 @@ export class BatAttackManager1 extends BatAttackManagerBase implements AbstractS
     }
 
     upgrade(): AbstractSkillManager {
-        return new BatAttackManager2()
+        const temp = new BatAttackManager5()
+        temp.interval = this.interval > 1000 ? this.interval - 100 : this.interval
+        temp.damage = this.damage + 0.2
+        temp.name = this.name + "+"
+
+        console.log(temp)
+        return temp
     }
 }

@@ -32,3 +32,15 @@ body {
   align-items: center;
   overflow: hidden;
 }
+
+.main-bg {
+  background-image: url(../../public/img/background/mobile.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+}
+@media (min-width: 768px) {
+  .main-bg {
+    background-image: url(../../public/img/background/desktop.png);
+  } 
+}

@@ -1,9 +1,8 @@
 import { UUID, generateUUID } from "@/application/utils/utils";
 import { Enemy } from "@/application/entities/Enemy";
 import { AbstractSkill } from "../AbstractSkill";
-import { Player } from "@/application/entities/Player";
 
-interface IBatAttackUnit {
+interface IFireWalkUnit {
     initialX: number
     initialY: number
     targetX: number
@@ -15,9 +14,10 @@ interface IBatAttackUnit {
     spritesheet: HTMLImageElement
     frame_amount: number
     isAnimated?: boolean
+    lifeTime: number
 }
 
-export class BatAttackUnit implements AbstractSkill {
+export class FireWalkUnit implements AbstractSkill {
 
     id: UUID
     name: string
@@ -27,10 +27,6 @@ export class BatAttackUnit implements AbstractSkill {
     initialY: number
     targetX: number
     targetY: number
-
-    angle: number
-    radius: number
-    distance: number
 
     x: number
     y: number
@@ -42,8 +38,10 @@ export class BatAttackUnit implements AbstractSkill {
     speed: number
     damage: number
     isAnimated: boolean
+
+    lifeTime: number
     
-    constructor({ initialX, initialY, targetX, targetY, width, height, speed, damage, spritesheet, frame_amount, isAnimated }: IBatAttackUnit) {
+    constructor({ initialX, initialY, targetX, targetY, width, height, speed, damage, spritesheet, frame_amount, isAnimated, lifeTime }: IFireWalkUnit) {
 
         this.id = generateUUID()
         this.x = initialX
@@ -53,15 +51,11 @@ export class BatAttackUnit implements AbstractSkill {
         this.targetX = targetX
         this.targetY = targetY
 
-        this.angle = 0
-        this.radius = 20
-        this.distance = 0
-
         this.width = width
         this.height = height
         this.speed = speed
         this.damage = damage
-
+        
         this.srcX = 0
         this.srcY = 0
         this.countAnim = 0
@@ -69,36 +63,39 @@ export class BatAttackUnit implements AbstractSkill {
         this.frame_amount = frame_amount
 
         this.isAnimated = !!isAnimated
+        this.lifeTime = lifeTime
     }
 
     move() {
+        const deltaX = this.targetX - this.initialX
+        const deltaY = this.targetY - this.initialY
 
-        const player = Player.getInstance()
+        const distance = Math.sqrt((deltaX * deltaX) + (deltaY * deltaY))
+        const directionX = deltaX / distance
+        const directionY = deltaY / distance
+        const velocityX = directionX * this.speed
+        const velocityY = directionY * this.speed
 
-        const offsetX = Math.cos(this.angle) * this.radius;
-        const offsetY = Math.sin(this.angle) * this.radius;
-
-        this.x = (player.x + (player.width / 4)) + offsetX;
-        this.y = (player.y + (player.height / 2)) + offsetY;
-
-        this.angle += this.speed;
-        this.speed -= 0.00005
-        this.distance += 1;
-        this.radius += 1
+        this.x += velocityX
+        this.y += velocityY
 
         if (this.isAnimated) {
             this.spriteAnimation()
         }
     }
 
-    checkCollision(enemies: Enemy[], callback: (enemy: Enemy) => void) {
+    checkCollision(enemies: Enemy[], callback: (skill: AbstractSkill, enemy: Enemy) => void) {
         for (let index = 0; index < enemies.length; index++) {
             let enemy = enemies[index]
 
             if ((this.x <= enemy.x + enemy.width) && (this.x + this.width >= enemy.x) && (this.y <= enemy.y + enemy.height && this.y + this.height >= enemy.y)) {
-                return callback(enemy) //SkillService.collision.bind(this)
+                return callback(this, enemy) //SkillService.collision.bind(this)
             }
         }
+    }
+
+    updateLifeTime() {
+        this.lifeTime -= 1
     }
 
     private spriteAnimation() {

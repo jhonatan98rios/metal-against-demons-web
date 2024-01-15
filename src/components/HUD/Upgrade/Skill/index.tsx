@@ -1,3 +1,4 @@
+
 import { Game, GameStatus } from "@/application/entities/Game"
 import { AbstractSkillManager } from "@/application/entities/skills/Managers/AbstractSkillManager"
 import { SkillService } from "@/application/services/SkillService"
@@ -9,16 +10,17 @@ export function Skill(props: AbstractSkillManager) {
 
     function handleClick() {
         const game = Game.getInstance()
-        SkillService.getInstance().upgrade(category, game)
+        const skillService = SkillService.getInstance()
+        skillService.upgrade(category, game)
         game.state.status = GameStatus.running
     }
 
     return (
-        <div className="flex md:flex-col items-center md:items-start w-full md:max-w-[30%] h-[30%] md:h-full p-4 my-2 md:my-0 md:mx-2 border border-white" onClick={handleClick}>
-            <div className="flex justify-center mr-6 md:mr-0 md:w-full">
+        <div className="flex items-center md:items-start w-full h-[30%] md:h-full p-4 my-2 border border-white" onClick={handleClick}>
+            <div className="flex justify-center items-center mr-6 min-w-20 h-full">
                 <img src={spritesheet.src} alt="" className="h-16 w-16 object-cover object-left" />
             </div>
-            <div className="flex-col md:h-full mt-2 md:mt-4">
+            <div className="flex flex-col mt-2 h-full justify-center">
                 <p className="font-bold whitespace-nowrap"> { name } </p>
 
                 <p> Damage: { damage.toFixed(2) } </p>

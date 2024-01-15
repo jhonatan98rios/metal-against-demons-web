@@ -29,7 +29,7 @@ export default function HUD({ playerStatus, gameStatus }: IHUD) {
                 <UpgradeModal />
             }
 
-            <div className="md:hidden w-52 h-52 absolute bottom-5 left-0 right-0 m-auto" id="joyDiv" />
+            <div className="md:hidden w-52 h-52 absolute bottom-16 left-0 right-0 m-auto" id="joyDiv" />
         </div>
     )
 }

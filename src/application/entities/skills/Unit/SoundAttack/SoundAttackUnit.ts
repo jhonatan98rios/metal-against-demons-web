@@ -14,6 +14,7 @@ interface ISoundAttackUnit {
     spritesheet: HTMLImageElement
     frame_amount: number
     isAnimated?: boolean
+    lifeTime: number
 }
 
 export class SoundAttackUnit implements AbstractSkill {
@@ -37,8 +38,10 @@ export class SoundAttackUnit implements AbstractSkill {
     speed: number
     damage: number
     isAnimated: boolean
+    lifeTime: number
+
     
-    constructor({ initialX, initialY, targetX, targetY, width, height, speed, damage, spritesheet, frame_amount, isAnimated }: ISoundAttackUnit) {
+    constructor({ initialX, initialY, targetX, targetY, width, height, speed, damage, spritesheet, frame_amount, isAnimated, lifeTime }: ISoundAttackUnit) {
 
         this.id = generateUUID()
         this.x = initialX
@@ -60,6 +63,7 @@ export class SoundAttackUnit implements AbstractSkill {
         this.frame_amount = frame_amount
 
         this.isAnimated = !!isAnimated
+        this.lifeTime = lifeTime
     }
 
     move() {
@@ -88,6 +92,10 @@ export class SoundAttackUnit implements AbstractSkill {
                 return callback(this, enemy) //SkillService.collision.bind(this)
             }
         }
+    }
+
+    updateLifeTime() {
+        this.lifeTime -= 1
     }
 
     private spriteAnimation() {

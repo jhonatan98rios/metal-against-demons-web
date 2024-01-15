@@ -10,7 +10,7 @@ import { EventClient } from "@/application/event/EventClient";
 
 
 export class ForceFieldManagerBase extends EventClient implements AbstractSkillManager {
-
+    static category = "Force Field"
     isActive: boolean
     name: string
     category: string
@@ -25,7 +25,7 @@ export class ForceFieldManagerBase extends EventClient implements AbstractSkillM
     constructor() {
         super()
         this.isActive = true
-        this.name = "Basic Force Field"
+        this.name = "Force Field"
         this.category = "Force Field"
         this.width = 152
         this.height = 152
@@ -49,7 +49,7 @@ export class ForceFieldManagerBase extends EventClient implements AbstractSkillM
             initialY: player.y - (this.height / 2),
             targetX: enemyService.enemies[0].x,
             targetY: enemyService.enemies[0].y + (enemyService.enemies[0].height / 2),
-            damage: this.damage,
+            damage: this.damage * player.status.baseDamage,
             width: this.width,
             height: this.height,
             speed: this.speed,

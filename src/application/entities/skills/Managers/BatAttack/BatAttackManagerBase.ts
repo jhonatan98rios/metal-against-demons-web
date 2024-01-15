@@ -10,6 +10,7 @@ import { Player } from "@/application/entities/Player";
 
 export class BatAttackManagerBase extends EventClient implements AbstractSkillManager {
 
+    static category = "Bat Attack"
     isActive: boolean
     name: string
     category: string
@@ -19,19 +20,13 @@ export class BatAttackManagerBase extends EventClient implements AbstractSkillMa
     damage: number
     spritesheet: HTMLImageElement
     interval: number
-    activeSkills: AbstractSkill[]    
+    activeSkills: AbstractSkill[]  
+    lifeTime: number
     
     constructor() {
         super()
         this.isActive = true
-        this.name = "Bat Attack"
         this.category = "Bat Attack"
-        this.width = 45
-        this.height = 20
-        this.speed = 2
-        this.damage = 0.25
-        this.spritesheet = CachedImages.getInstance().soundAttackLevel_1
-        this.interval = 0
         this.activeSkills = []
     }
 
@@ -82,7 +77,7 @@ export class BatAttackManagerBase extends EventClient implements AbstractSkillMa
     }
 
     checkLifeTime() {
-        return
+        this.activeSkills = this.activeSkills.filter(skill => skill['distance'] <= (this.lifeTime * 60))
     }
 
     collision(enemy: Enemy) {
