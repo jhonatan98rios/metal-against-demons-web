@@ -79,8 +79,6 @@ export class SoundAttackManager5 extends SoundAttackManagerBase implements Abstr
         temp.speed = this.speed + 0.2
         temp.damage = this.damage + 0.2
         temp.name = this.name + "+"
-
-        console.log(temp)
         return temp
     }
 }

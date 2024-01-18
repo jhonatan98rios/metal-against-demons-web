@@ -1,18 +1,20 @@
 
 import { Game, GameStatus } from "@/application/entities/Game"
 import { AbstractSkillManager } from "@/application/entities/skills/Managers/AbstractSkillManager"
+import { EventManager } from "@/application/event/EventManager"
 import { SkillService } from "@/application/services/SkillService"
 
 
-export function Skill(props: AbstractSkillManager) {
+interface SkillProps {
+    skillManager: AbstractSkillManager
+}
 
-    const { name, category, spritesheet, speed, damage, interval } = props
+export function Skill(props: SkillProps) {
+    const { name, spritesheet, speed, damage, interval } = props.skillManager
 
     function handleClick() {
-        const game = Game.getInstance()
-        const skillService = SkillService.getInstance()
-        skillService.upgrade(category, game)
-        game.state.status = GameStatus.running
+        const eventManager = EventManager.getInstance()
+        eventManager.emit("skill:upgrade", props.skillManager)
     }
 
     return (

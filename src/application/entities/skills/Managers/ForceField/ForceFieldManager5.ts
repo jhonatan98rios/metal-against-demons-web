@@ -61,11 +61,9 @@ export class ForceFieldManager5 extends ForceFieldManagerBase implements Abstrac
     }
 
     upgrade(): AbstractSkillManager {
-        const sam = new ForceFieldManager5()
-        sam.damage = this.damage + 0.02
-        sam.name = this.name + "+"
-
-        console.log(sam)
-        return sam
+        const temp = new ForceFieldManager5()
+        temp.damage = this.damage + 0.02
+        temp.name = this.name + "+"
+        return temp
     }
 }

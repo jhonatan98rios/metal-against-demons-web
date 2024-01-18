@@ -4,7 +4,8 @@ import { AbstractSkillManager } from "../entities/skills/Managers/AbstractSkillM
 import { EnemyService } from "./EnemyService";
 import { EventClient } from "../event/EventClient";
 import { Game } from "../entities/Game";
-import { selectRandomSkills } from "../entities/skills/Managers/skillUtils";
+import { selectRandomSkillsAlreadyAcquired, selectRandomSkillsNotAcquired } from "../entities/skills/Managers/skillUtils";
+import { SoundAttackManager1 } from "../entities/skills/Managers/SoundAttack/SoundAttackManager1";
 
 export class SkillService extends EventClient {
 
@@ -17,7 +18,7 @@ export class SkillService extends EventClient {
         this.activeSkills = []
         this.availableSkills = []
         this.availableSkills.push(
-            ...selectRandomSkills(4),
+            new SoundAttackManager1(),
         )
     }
     
@@ -45,28 +46,28 @@ export class SkillService extends EventClient {
         this.availableSkills.forEach(availableSkill => availableSkill.update())
     }
 
-    upgrade(category: string, game: Game) {
-        let alreadyExists = false
 
-        this.availableSkills = this.availableSkills.map(skill => {
-            if (skill.category == category) {
+    getUpgradeOptions() {
+        const buyOptions = selectRandomSkillsNotAcquired(2)
+        const howManyUpgradesShouldBeAvailable = 3 - buyOptions.length
+        const upgradeOptions = selectRandomSkillsAlreadyAcquired(howManyUpgradesShouldBeAvailable)
 
-                console.log(skill.name)
+        return [
+            ...upgradeOptions,
+            ...buyOptions
+        ]
+    }
 
-                skill.stop()
-                skill = skill.upgrade()
-                alreadyExists = true
-            }
-            return skill
+
+    buyOrUpgradeSkill(newSkill: AbstractSkillManager) {
+        this.availableSkills = this.availableSkills.filter(skill => {
+            return skill.category != newSkill.category
         })
+        this.availableSkills.push(newSkill)
 
-        if (!alreadyExists) {
-            console.log("O item não existe ainda")
-        } 
+        const game = Game.getInstance()
 
-        this.startSpawn(game.player, game.enemyService, category)
+        this.startSpawn(game.player, game.enemyService, newSkill.category)
 
-        console.log(this.availableSkills)
-        
     }
 }

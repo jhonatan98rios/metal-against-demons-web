@@ -144,7 +144,7 @@ export class Player extends EventClient {
             let xpOrb = xpOrbs[index]
 
             if (isThereIntersection(this, xpOrb)) {
-                this.status.takeXp(xpOrb.value, game)
+                this.status.takeXp(xpOrb.value)
                 game.orbService.remove(xpOrb.id)
             }
         }

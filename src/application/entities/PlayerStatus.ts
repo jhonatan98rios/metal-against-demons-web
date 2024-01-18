@@ -49,23 +49,23 @@ export class PlayerStatus extends EventClient {
         }, 1000)
     }
 
-    takeXp(xp: number, game: Game) {
+    takeXp(xp: number) {
         if (this.currentXP + xp >= this.nextLevelXp) {
-            return this.upgrade(game.player, game.enemyService)
+            return this.levelup()
         } 
 
         this.currentXP += xp
     }
 
-    upgrade(player: Player, enemyService: EnemyService) {
+    levelup() {
         this.level++
-        this.nextLevelXp += this.nextLevelXp * 0.75
+        this.nextLevelXp += this.nextLevelXp * 0.1
         this.currentXP = 0
         
         this.maxHealth += 1
         this.currentHealth += 1
 
-        console.log("Trying to emmit: player:upgrade")
-        this.eventManager.emit('player:upgrade')
+        console.log("Trying to emmit: player:levelup")
+        this.eventManager.emit('player:levelup')
     }
 }

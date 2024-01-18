@@ -9,12 +9,13 @@ import { SkillService } from "../services/SkillService"
 import { OrbService } from "../services/OrbService"
 import { EventManager } from "../event/EventManager"
 import { EventClient } from "../event/EventClient"
+import { AbstractSkillManager } from "./skills/Managers/AbstractSkillManager"
 
 export enum GameStatus {
     stopped = 0,
     running = 1,
     paused = 2,
-    upgrade = 3,
+    levelup = 3,
 }
 
 type GameState = {
@@ -118,8 +119,14 @@ export class Game extends EventClient {
             this.stopGame();
         });
 
-        this.eventManager.on('player:upgrade', () => {           
-            this.state.status = GameStatus.upgrade
+        this.eventManager.on('player:levelup', () => {           
+            this.state.status = GameStatus.levelup
+        });
+
+
+        this.eventManager.on('skill:upgrade', (skillManager: AbstractSkillManager) => {           
+            this.skillService.buyOrUpgradeSkill(skillManager)
+            this.state.status = GameStatus.running
         });
     }
     

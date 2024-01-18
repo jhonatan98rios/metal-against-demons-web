@@ -55,7 +55,6 @@ export class BatAttackManager5 extends BatAttackManagerBase implements AbstractS
         temp.damage = this.damage + 0.2
         temp.name = this.name + "+"
 
-        console.log(temp)
         return temp
     }
 }

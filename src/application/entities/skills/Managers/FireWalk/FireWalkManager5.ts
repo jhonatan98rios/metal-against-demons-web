@@ -59,8 +59,6 @@ export class FireWalkManager5 extends FireWalkManagerBase implements AbstractSki
         temp.interval = this.interval - 50
         temp.damage = this.damage + 0.2
         temp.name = this.name + "+"
-
-        console.log(temp)
         return temp
     }
 }
