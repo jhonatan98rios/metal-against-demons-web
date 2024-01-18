@@ -20,8 +20,8 @@ export class BatAttackManager4 extends BatAttackManagerBase implements AbstractS
     constructor() {
         super()
         this.name = "Darkness Vampire Army"
-        this.width = 36
-        this.height = 36
+        this.width = 56
+        this.height = 56
         this.speed = 0.05
         this.damage = 0.75
         this.spritesheet = CachedImages.getInstance().batAttackLevel_4

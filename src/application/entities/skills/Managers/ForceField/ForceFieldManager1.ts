@@ -25,7 +25,7 @@ export class ForceFieldManager1 extends ForceFieldManagerBase implements Abstrac
     constructor() {
         super()
         this.isActive = true
-        this.name = "Light Force Field"
+        this.name = "Force Field"
         this.category = "Force Field"
         this.width = 152
         this.height = 152
