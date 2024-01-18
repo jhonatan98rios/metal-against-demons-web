@@ -19,12 +19,12 @@ export class BatAttackManager5 extends BatAttackManagerBase implements AbstractS
     constructor() {
         super()
         this.name = "Hellish Dracula Rage"
-        this.width = 48
-        this.height = 48
+        this.width = 80
+        this.height = 80
         this.speed = 0.05
         this.damage = 0.75
         this.spritesheet = CachedImages.getInstance().batAttackLevel_5
-        this.interval = 5000 //ms
+        this.interval = 3000 //ms
         this.lifeTime = 7 //s
     }
 
@@ -55,7 +55,6 @@ export class BatAttackManager5 extends BatAttackManagerBase implements AbstractS
         temp.damage = this.damage + 0.2
         temp.name = this.name + "+"
 
-        console.log(temp)
         return temp
     }
 }

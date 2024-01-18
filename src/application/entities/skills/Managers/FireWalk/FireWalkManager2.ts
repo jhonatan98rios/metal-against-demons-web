@@ -24,8 +24,8 @@ export class FireWalkManager2 extends FireWalkManagerBase implements AbstractSki
         super()
         this.isActive = true
         this.name = "Burning Walk"
-        this.width = 48
-        this.height = 48
+        this.width = 72
+        this.height = 72
         this.speed = 0
         this.damage = 0.015
         this.spritesheet = CachedImages.getInstance().fireWalkLevel_2
@@ -38,7 +38,7 @@ export class FireWalkManager2 extends FireWalkManagerBase implements AbstractSki
         if (!(player && enemyService)) return
         
         const sound_attack_level = new FireWalkUnit({ 
-            initialX: player.x,
+            initialX: player.x + (player.width/2) - (this.width / 2),
             initialY: player.y + (player.height * 0.6),
             targetX: enemyService.enemies[0].x,
             targetY: enemyService.enemies[0].y + (enemyService.enemies[0].height / 2),

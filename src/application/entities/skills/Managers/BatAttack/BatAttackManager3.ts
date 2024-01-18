@@ -20,8 +20,8 @@ export class BatAttackManager3 extends BatAttackManagerBase implements AbstractS
     constructor() {
         super()
         this.name = "Horde of Vampires"
-        this.width = 32
-        this.height = 32
+        this.width = 40
+        this.height = 40
         this.speed = 0.05
         this.damage = 0.75
         this.spritesheet = CachedImages.getInstance().batAttackLevel_3

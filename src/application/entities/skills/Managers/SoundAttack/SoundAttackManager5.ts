@@ -28,7 +28,7 @@ export class SoundAttackManager5 extends SoundAttackManagerBase implements Abstr
         this.speed = 4
         this.damage = 3
         this.spritesheet = CachedImages.getInstance().soundAttackLevel_5
-        this.interval = 400
+        this.interval = 250
         this.lifeTime = 60 * 5 //frames * sec
     }
 
@@ -79,8 +79,6 @@ export class SoundAttackManager5 extends SoundAttackManagerBase implements Abstr
         temp.speed = this.speed + 0.2
         temp.damage = this.damage + 0.2
         temp.name = this.name + "+"
-
-        console.log(temp)
         return temp
     }
 }

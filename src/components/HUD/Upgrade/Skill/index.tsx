@@ -1,22 +1,21 @@
-
-import { Game, GameStatus } from "@/application/entities/Game"
 import { AbstractSkillManager } from "@/application/entities/skills/Managers/AbstractSkillManager"
-import { SkillService } from "@/application/services/SkillService"
+import { EventManager } from "@/application/event/EventManager"
 
 
-export function Skill(props: AbstractSkillManager) {
+interface SkillProps {
+    skillManager: AbstractSkillManager
+}
 
-    const { name, category, spritesheet, speed, damage, interval } = props
+export function Skill(props: SkillProps) {
+    const { name, spritesheet, speed, damage, interval } = props.skillManager
 
     function handleClick() {
-        const game = Game.getInstance()
-        const skillService = SkillService.getInstance()
-        skillService.upgrade(category, game)
-        game.state.status = GameStatus.running
+        const eventManager = EventManager.getInstance()
+        eventManager.emit("skill:upgrade", props.skillManager)
     }
 
     return (
-        <div className="flex items-center md:items-start w-full h-[30%] md:h-full p-4 my-2 border border-white" onClick={handleClick}>
+        <div className="flex items-center w-full h-[30%] md:h-full p-4 my-2 border border-white" onClick={handleClick}>
             <div className="flex justify-center items-center mr-6 min-w-20 h-full">
                 <img src={spritesheet.src} alt="" className="h-16 w-16 object-cover object-left" />
             </div>

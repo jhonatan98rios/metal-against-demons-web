@@ -25,7 +25,7 @@ export default function HUD({ playerStatus, gameStatus }: IHUD) {
             }
 
             {
-                gameStatus.status == GameStatus.upgrade &&
+                gameStatus.status == GameStatus.levelup &&
                 <UpgradeModal />
             }
 

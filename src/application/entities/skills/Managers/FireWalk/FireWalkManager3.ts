@@ -24,8 +24,8 @@ export class FireWalkManager3 extends FireWalkManagerBase implements AbstractSki
         super()
         this.isActive = true
         this.name = "Damned Flames"
-        this.width = 64
-        this.height = 64
+        this.width = 96
+        this.height = 96
         this.speed = 0
         this.damage = 0.02
         this.spritesheet = CachedImages.getInstance().fireWalkLevel_3
@@ -38,7 +38,7 @@ export class FireWalkManager3 extends FireWalkManagerBase implements AbstractSki
         if (!(player && enemyService)) return
         
         const sound_attack_level = new FireWalkUnit({ 
-            initialX: player.x,
+            initialX: player.x + (player.width/2) - (this.width / 2),
             initialY: player.y + (player.height * 0.6),
             targetX: enemyService.enemies[0].x,
             targetY: enemyService.enemies[0].y + (enemyService.enemies[0].height / 2),

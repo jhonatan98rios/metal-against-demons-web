@@ -23,8 +23,8 @@ export class FireWalkManager5 extends FireWalkManagerBase implements AbstractSki
         super()
         this.isActive = true
         this.name = "Infernal Black Flames"
-        this.width = 100
-        this.height = 100
+        this.width = 150
+        this.height = 150
         this.speed = 0
         this.damage = 0.03
         this.spritesheet = CachedImages.getInstance().fireWalkLevel_5
@@ -37,8 +37,8 @@ export class FireWalkManager5 extends FireWalkManagerBase implements AbstractSki
         if (!(player && enemyService)) return
         
         const sound_attack_level = new FireWalkUnit({ 
-            initialX: player.x - 20,
-            initialY: player.y + (player.height * 0.3),
+            initialX: player.x + (player.width/2) - (this.width / 2),
+            initialY: player.y + player.height - this.height + 30,
             targetX: enemyService.enemies[0].x,
             targetY: enemyService.enemies[0].y + (enemyService.enemies[0].height / 2),
             damage: this.damage * player.status.baseDamage,
@@ -59,8 +59,6 @@ export class FireWalkManager5 extends FireWalkManagerBase implements AbstractSki
         temp.interval = this.interval - 50
         temp.damage = this.damage + 0.2
         temp.name = this.name + "+"
-
-        console.log(temp)
         return temp
     }
 }

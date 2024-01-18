@@ -83,7 +83,6 @@ export class EnemyService extends EventClient {
             let otherEnemy = this.enemies[index]
 
             if (isThereIntersection(body, otherEnemy)) {
-                console.log("There is Intersection!")
                 return false
             }
         }

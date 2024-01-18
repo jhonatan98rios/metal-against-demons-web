@@ -24,12 +24,12 @@ export class ForceFieldManager5 extends ForceFieldManagerBase implements Abstrac
     constructor() {
         super()
         this.isActive = true
-        this.name = "Blue Eye of the Dragon"
+        this.name = "Tesla Sphere of Destruction"
         this.category = "Force Field"
-        this.width = 220
-        this.height = 220
+        this.width = 300
+        this.height = 300
         this.speed = 0
-        this.damage = 0.07
+        this.damage = 0.1
         this.spritesheet = CachedImages.getInstance().forceFieldLevel_5
         this.interval = 100
         this.activeSkills = []
@@ -61,11 +61,9 @@ export class ForceFieldManager5 extends ForceFieldManagerBase implements Abstrac
     }
 
     upgrade(): AbstractSkillManager {
-        const sam = new ForceFieldManager5()
-        sam.damage = this.damage + 0.02
-        sam.name = this.name + "+"
-
-        console.log(sam)
-        return sam
+        const temp = new ForceFieldManager5()
+        temp.damage = this.damage + 0.02
+        temp.name = this.name + "+"
+        return temp
     }
 }
