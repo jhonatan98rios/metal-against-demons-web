@@ -27,8 +27,8 @@ export class ForceFieldManager2 extends ForceFieldManagerBase implements Abstrac
         this.isActive = true
         this.name = "Energy Force Field"
         this.category = "Force Field"
-        this.width = 160
-        this.height = 160
+        this.width = 180
+        this.height = 180
         this.speed = 0
         this.damage = 0.05
         this.spritesheet = CachedImages.getInstance().forceFieldLevel_2

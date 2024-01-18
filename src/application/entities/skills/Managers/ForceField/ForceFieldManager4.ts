@@ -27,8 +27,8 @@ export class ForceFieldManager4 extends ForceFieldManagerBase implements Abstrac
         this.isActive = true
         this.name = "Super Vortex Force Field"
         this.category = "Force Field"
-        this.width = 185
-        this.height = 185
+        this.width = 250
+        this.height = 250
         this.speed = 0
         this.damage = 0.85
         this.spritesheet = CachedImages.getInstance().forceFieldLevel_4

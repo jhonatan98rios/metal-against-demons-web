@@ -1,8 +1,5 @@
-
-import { Game, GameStatus } from "@/application/entities/Game"
 import { AbstractSkillManager } from "@/application/entities/skills/Managers/AbstractSkillManager"
 import { EventManager } from "@/application/event/EventManager"
-import { SkillService } from "@/application/services/SkillService"
 
 
 interface SkillProps {
@@ -18,7 +15,7 @@ export function Skill(props: SkillProps) {
     }
 
     return (
-        <div className="flex items-center md:items-start w-full h-[30%] md:h-full p-4 my-2 border border-white" onClick={handleClick}>
+        <div className="flex items-center w-full h-[30%] md:h-full p-4 my-2 border border-white" onClick={handleClick}>
             <div className="flex justify-center items-center mr-6 min-w-20 h-full">
                 <img src={spritesheet.src} alt="" className="h-16 w-16 object-cover object-left" />
             </div>

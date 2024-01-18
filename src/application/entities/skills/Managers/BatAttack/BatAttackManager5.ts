@@ -24,7 +24,7 @@ export class BatAttackManager5 extends BatAttackManagerBase implements AbstractS
         this.speed = 0.05
         this.damage = 0.75
         this.spritesheet = CachedImages.getInstance().batAttackLevel_5
-        this.interval = 5000 //ms
+        this.interval = 3000 //ms
         this.lifeTime = 7 //s
     }
 
