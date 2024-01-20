@@ -14,8 +14,8 @@ export default function Home() {
       <Link 
         href="play" 
         className={`
-          bg-gradient-to-b from-orange-400 to-red-600 fixed bottom-10 left-0 right-0 
-          mx-auto w-60 py-2 flex justify-center items-center rounded-xl font-extrabold text-white text-2xl
+          bg-gradient-to-b from-orange-400 to-red-600 fixed bottom-20 left-0 right-0 mx-auto
+          w-60 py-2 flex justify-center items-center rounded-xl font-extrabold text-white text-2xl
         `}
       > JOGAR </Link>
     </main>
