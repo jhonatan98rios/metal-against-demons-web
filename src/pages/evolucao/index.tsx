@@ -1,5 +1,6 @@
 'use client';
 
+import { CurrentStatus } from "@/components/menus/CurrentStatus";
 import Layout from "@/layout";
 import { useAnimation } from "@/store/AnimationContext";
 import { usePlayer } from "@/store/PlayerContext";
@@ -24,15 +25,8 @@ export default function Evolution() {
     }, [])
 
     return (
-        <main className={`flex min-h-screen flex-col items-center justify-between p-24 w-screen z-10`}>
-            <div>
-                <h1>Player Status</h1>
-                <p>Level: {playerState.level}</p>
-                <p>Money: {playerState.money}</p>
-                <p>Life: {playerState.life}</p>
-                <p>Attack: {playerState.baseAttack} </p>
-                <p>Speed: {playerState.speed}</p>
-            </div>
+        <main className={`flex min-h-screen flex-col items-center justify-between p-24 w-screen z-10 relative`}>
+            <CurrentStatus status={playerState}  />
         </main>
     )
 }

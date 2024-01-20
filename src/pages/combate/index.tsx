@@ -6,7 +6,7 @@ import { useAnimation } from "@/store/AnimationContext";
 
 export default function Combat() {
 
-    const { animationState, setAnimationState } = useAnimation();
+    const { setAnimationState } = useAnimation();
 
     const gradient = 'bg-gradient-to-b from-orange-400 to-red-600'
 

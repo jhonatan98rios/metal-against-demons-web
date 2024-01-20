@@ -1,7 +1,6 @@
 'use client';
 
 import Layout from "@/layout";
-import { usePlayer } from "@/store/PlayerContext";
 import { useAnimation } from "@/store/AnimationContext";
 import { useEffect } from "react";
 
