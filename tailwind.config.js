@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'header-menu-background': "url('/img/menu/header-bg.png')",
+        'header-menu': "url('/img/menu/header-bg.png')",
       }
     },
   },
