@@ -4,7 +4,11 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'header-menu-background': "url('/img/menu/header-bg.png')",
+      }
+    },
   },
   plugins: [],
 }

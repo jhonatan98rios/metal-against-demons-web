@@ -81,7 +81,7 @@ export class Game extends EventClient {
         if (this.state.status != GameStatus.running) return
             
         this.playerEventService.execute(this)
-        this.enemyService.move(this)
+        this.enemyService.move(this.camera, this.player, this.enemyService)
         this.skillService.update()
         this.moveCamera()
     }
