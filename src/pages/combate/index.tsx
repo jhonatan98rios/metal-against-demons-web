@@ -1,10 +1,22 @@
 import Link from "next/link";
 import Layout from "../../layout";
+import { useEffect } from "react";
+import { useAnimation } from "@/store/AnimationContext";
 
 
 export default function Combat() {
 
+    const { animationState, setAnimationState } = useAnimation();
+
     const gradient = 'bg-gradient-to-b from-orange-400 to-red-600'
+
+    useEffect(() => {
+        setAnimationState({
+            zoom: 1,
+            translateX: 0,
+            translateY: 0,
+        })
+    }, [])
 
     return (
         <>
