@@ -6,8 +6,6 @@ import { EventClient } from "../event/EventClient";
 import { Game } from "../entities/Game";
 import { selectRandomSkillsAlreadyAcquired, selectRandomSkillsNotAcquired } from "../entities/skills/Managers/skillUtils";
 import { SoundAttackManager1 } from "../entities/skills/Managers/SoundAttack/SoundAttackManager1";
-import { ForceFieldManager1 } from "../entities/skills/Managers/ForceField/ForceFieldManager1";
-import { FireWalkManager5 } from "../entities/skills/Managers/FireWalk/FireWalkManager5";
 
 export class SkillService extends EventClient {
 

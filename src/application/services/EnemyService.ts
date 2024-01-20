@@ -1,6 +1,6 @@
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../constants";
+import { Camera } from "../entities/Camera";
 import { Enemy } from "../entities/Enemy"
-import { Game } from "../entities/Game";
 import { Player } from "../entities/Player";
 import { EventClient } from "../event/EventClient";
 import { Element2D, isThereIntersection } from "../utils/utils";
@@ -22,9 +22,11 @@ export class EnemyService extends EventClient {
 
     spawn() {
         this.sortEnemies()
-        setTimeout(this.spawn.bind(this), 1000 - (this.player.status.level * 75))
+        //setTimeout(this.spawn.bind(this), 1000 - (this.player.status.level * 75))
+        setTimeout(this.spawn.bind(this), 50)
         
-        if (this.enemies.length >= this.player.status.level * 250) return
+        //if (this.enemies.length >= this.player.status.level * 250) return
+        if (this.enemies.length >= 5000) return
 
         const randomDistance = {
             x: Math.floor(Math.random() * 1000) + (SCREEN_WIDTH / 2),
@@ -45,9 +47,9 @@ export class EnemyService extends EventClient {
         this.enemies.push(createdEnemy)
     }
 
-    move(game: Game) {
+    move(camera: Camera, player: Player, enemyService: EnemyService) {
         this.enemies.forEach(enemy => {
-            enemy.move(game, isThereIntersection(game.camera, enemy))
+            enemy.move(isThereIntersection(camera, enemy), player, enemyService)
         })
     }
 

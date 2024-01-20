@@ -1,6 +1,4 @@
 import { EventClient } from "../event/EventClient";
-import { EnemyService } from "../services/EnemyService";
-import { Game } from "./Game";
 import { Player } from "./Player";
 
 export class PlayerStatus extends EventClient {
@@ -12,6 +10,7 @@ export class PlayerStatus extends EventClient {
     public vulnerable: boolean
     public currentXP: number
     public nextLevelXp: number
+    public totalXP: number
     public baseDamage: number
 
     constructor () {
@@ -22,6 +21,7 @@ export class PlayerStatus extends EventClient {
         this.vulnerable = true
         this.currentXP = 0
         this.nextLevelXp = 15
+        this.totalXP = 0
         this.baseDamage = 1
     }
 
@@ -50,17 +50,20 @@ export class PlayerStatus extends EventClient {
     }
 
     takeXp(xp: number) {
-        if (this.currentXP + xp >= this.nextLevelXp) {
-            return this.levelup()
+        let updateCurrentXP = this.currentXP + xp
+
+        if (updateCurrentXP >= this.nextLevelXp) {
+            return this.levelup(this.nextLevelXp - updateCurrentXP)
         } 
 
         this.currentXP += xp
+        this.totalXP += xp
     }
 
-    levelup() {
+    levelup(remainingXp: number) {
         this.level++
-        this.nextLevelXp += this.nextLevelXp * 0.1
-        this.currentXP = 0
+        this.nextLevelXp += this.nextLevelXp * 0.2
+        this.currentXP = remainingXp
         
         this.maxHealth += 1
         this.currentHealth += 1
