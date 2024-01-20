@@ -1,8 +1,9 @@
 'use client';
 
+import Layout from "@/layout";
 import { usePlayer } from "@/store/PlayerContext";
 
-export default function Player() {
+export default function Pacts() {
 
     const { playerState, setPlayerState } = usePlayer();
 
@@ -20,3 +21,10 @@ export default function Player() {
     )
 }
 
+Pacts.getLayout = function getLayout(page) {
+    return (
+        <Layout>
+            {page}
+        </Layout>
+    )
+}

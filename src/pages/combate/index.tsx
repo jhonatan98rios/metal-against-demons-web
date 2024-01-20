@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Layout from "../layout";
+import Layout from "../../layout";
 
 
-export default function Home() {
+export default function Combat() {
 
     const gradient = 'bg-gradient-to-b from-orange-400 to-red-600'
 
@@ -16,7 +16,7 @@ export default function Home() {
     )
 }
 
-Home.getLayout = function getLayout(page) {
+Combat.getLayout = function getLayout(page) {
     return (
         <Layout>
             {page}

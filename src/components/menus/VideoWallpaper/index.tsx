@@ -9,13 +9,3 @@ export default function VideoWallpaper() {
     )
 }
 
-
-/* 
-
-
-min-width: 1130px
-
-
-// 800px screen - left 145px
-
-*/
