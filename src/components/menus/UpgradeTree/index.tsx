@@ -1,7 +1,6 @@
 import { abilityNodeTree } from "@/database/upgradeTree/mock/AbilityNodeTree";
 import { healthNodeTree } from "@/database/upgradeTree/mock/HealthNodeTree";
 import { strengthNodeTree } from "@/database/upgradeTree/mock/StrengthNodeTree";
-import { usePlayer } from "@/store/PlayerContext";
 import { useEffect } from "react";
 
 
@@ -24,7 +23,7 @@ export function UpgradeTree() {
  
 
     return (
-        <div id="scroll" className="h-[900px] max-h-full absolute right-32 overflow-scroll pb-20 scale-75 md:scale-100">
+        <div id="scroll" className="h-[640px] md:h-[900px] max-h-full absolute bottom-24 md:right-32 overflow-scroll pb-20 scale-75 md:scale-100">
             <div className="flex justify-between">
 
                 {
