@@ -1,6 +1,7 @@
 'use client';
 
 import { CurrentStatus } from "@/components/menus/CurrentStatus";
+import { UpgradeTree } from "@/components/menus/UpgradeTree";
 import Layout from "@/layout";
 import { useAnimation } from "@/store/AnimationContext";
 import { usePlayer } from "@/store/PlayerContext";
@@ -27,6 +28,8 @@ export default function Evolution() {
     return (
         <main className={`flex min-h-screen flex-col items-center justify-between p-24 w-screen z-10 relative`}>
             <CurrentStatus status={playerState}  />
+
+            <UpgradeTree />
         </main>
     )
 }
