@@ -5,9 +5,7 @@ interface AnimationContextProps {
 }
 
 interface AnimationState {
-    zoom: number
-    translateX: number
-    translateY: number
+    className: string
 }
 
 interface AnimationContextType {
@@ -20,9 +18,7 @@ const AnimationContext = createContext<AnimationContextType | undefined>(undefin
 const AnimationProvider: React.FC<AnimationContextProps> = ({ children }) => {
     const [animationState, setAnimationState] = useState<AnimationState>(() => {
         return {
-            zoom: 1,
-            translateX: 0,
-            translateY: 0,
+            className: ''
         };
     });
 

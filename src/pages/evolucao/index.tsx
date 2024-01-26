@@ -10,19 +10,10 @@ import { useEffect } from "react";
 export default function Evolution() {
 
     const { playerState } = usePlayer();
-    const { setAnimationState } = useAnimation();
+    const { setAnimationState, animationState } = useAnimation();
 
     useEffect(() => {
-        /* setAnimationState({
-            zoom: 3,
-            translateX: 1440,
-            translateY: -840,
-        }) */
-        setAnimationState({
-            zoom: 3,
-            translateX: 480,
-            translateY: -840,
-        })
+        setAnimationState({ className: 'video-zoom-evolution' })
     }, [])
 
     return (

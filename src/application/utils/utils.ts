@@ -1,3 +1,7 @@
+import { Enemy } from "../entities/Enemy";
+import { Player } from "../entities/Player";
+import { EnemyService } from "../services/EnemyService";
+
 export type UUID = string
 
 export function generateUUID(): UUID {
@@ -10,6 +14,7 @@ export function generateUUID(): UUID {
 
 export type Vector2D = {x: number, y: number}
 export type Element2D = Vector2D & { width: number, height: number }
+export type Body = Element2D & { id?: string, speed: number }
 
 export function isThereIntersection(elementA: Element2D, elementB:Element2D) {
     const aLeft = elementA.x;
@@ -34,4 +39,47 @@ export function calculate2DMovement(body: Vector2D, target: Vector2D): Vector2D 
         x: deltaX / distance,
         y: deltaY / distance
     }
+}
+
+
+export function purePositionAnimation(player: Element2D, enemy: Body, enemies: Body[]) {
+
+    if (!player || !enemies) return
+    
+    const { x: directionX, y: directionY } = calculate2DMovement(enemy, player)
+    const velocityX = directionX * enemy.speed
+    const velocityY = directionY * enemy.speed
+
+    const newX = enemy.x + velocityX
+    const newY = enemy.y + velocityY
+
+    let shouldMoveX = !checkCollision(
+        { ...enemy, x: newX } as Body, 
+        enemies
+    )
+    let shouldMoveY = !checkCollision(
+        { ...enemy, y: newY } as Body, 
+        enemies
+    )
+
+    const x = shouldMoveX ? newX : enemy.x
+    const y = shouldMoveY ? newY : enemy.y
+
+    return { x, y }
+}
+
+
+function checkCollision(enemy: Body, enemies: Body[]) {
+
+    for (let index = 0; index < enemies.length; index++) {
+        let otherEnemy = enemies[index]
+
+        if (enemy.id != otherEnemy.id) {
+            if (isThereIntersection(enemy, otherEnemy)) {
+                return true
+            }
+        }
+    }
+
+    return false
 }

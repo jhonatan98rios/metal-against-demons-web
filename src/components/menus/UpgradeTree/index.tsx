@@ -23,7 +23,11 @@ export function UpgradeTree() {
  
 
     return (
-        <div id="scroll" className="h-[640px] md:h-[900px] max-h-full absolute bottom-24 md:right-32 overflow-scroll pb-20 scale-75 md:scale-100">
+        <div id="scroll" className={`
+            h-[760px] md:max-h-[76vh] lg:h-[900px] sm:max-h-full 
+            absolute top bottom-24 lg:right-32 
+            overflow-scroll pb-32 pt-8 scale-75 lg:scale-100 z-10
+        `}>
             <div className="flex justify-between">
 
                 {

@@ -8,21 +8,19 @@ export default function Combat() {
 
     const { setAnimationState } = useAnimation();
 
-    const gradient = 'bg-gradient-to-b from-orange-400 to-red-600'
-
     useEffect(() => {
-        setAnimationState({
-            zoom: 1,
-            translateX: 0,
-            translateY: 0,
-        })
+        setAnimationState({ className: 'video-without-zoom' })
     }, [])
 
     return (
         <>
             <Link
                 href="play"
-                className={`${gradient} fixed bottom-40 left-0 right-0 mx-auto w-60 py-2 flex justify-center items-center rounded-xl font-extrabold text-white text-2xl`}
+                className={`
+                    bg-gradient-to-b from-orange-400 to-red-600
+                    fixed bottom-40 left-0 right-0 mx-auto w-60 py-2 flex justify-center 
+                    items-center rounded-xl font-extrabold text-white text-2xl
+                `}
             > JOGAR </Link>
         </>
     )

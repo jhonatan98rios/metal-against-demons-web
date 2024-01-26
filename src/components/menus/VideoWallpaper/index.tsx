@@ -4,24 +4,19 @@ import { usePlayer } from "@/store/PlayerContext";
 export default function VideoWallpaper() {
 
     const { animationState, setAnimationState } = useAnimation();
-    const { translateX, translateY, zoom } = animationState
+    const { className } = animationState
 
     return (
         <div className="video-bg absolute bottom-0 left-0 w-full h-full">
             <video 
                 autoPlay muted loop id="bg"
-                style={{
-                    transform: `translate3d(${translateX}px, ${translateY}px, 0px) scale(${zoom})`,
-                    transition: 'all',
-                    transitionDuration: '1s',
-                    transitionTimingFunction: 'ease-in-out'
-                }}
                 className={`
                     fixed z-0 bottom-0 -left-[calc(540px-50vw)] lg:left-0 lg:right-0 mx-auto 
-                    h-screen max-w-max min-w-full min-h-full lg:h-auto anima
+                    h-screen max-w-max min-w-full min-h-full lg:h-auto
+                    ${className}
                 `}
             >
-                <source src="./video/background.mp4" type="video/mp4" />
+                <source src="./video/background-4k.mp4" type="video/mp4" />
             </video>
         </div>
     )
