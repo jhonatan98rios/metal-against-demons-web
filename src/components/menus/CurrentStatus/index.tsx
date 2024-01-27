@@ -19,19 +19,19 @@ export function CurrentStatus({ status }) {
             </div>
 
             <div className="flex justify-between">
-                <p className="text-[#69A8C6]">Health:</p>
+                <p className="text-[#69A8C6]">Max Health:</p>
                 <p className="text-[#D26968]">{life} </p>
             </div>
 
             <div className="flex justify-between">
-                <p className="text-[#69A8C6]">Attack:</p>
+                <p className="text-[#69A8C6]">Base Attack:</p>
                 <p className="text-[#D26968]">{parseFloat(baseAttack).toFixed(2)} </p>
             </div>
 
-            <div className="flex justify-between">
+            {/* <div className="flex justify-between">
                 <p className="text-[#69A8C6]">Speed:</p>
                 <p className="text-[#D26968]">{parseFloat(speed).toFixed(2)} </p>
-            </div>
+            </div> */}
         </div>
     )
 }

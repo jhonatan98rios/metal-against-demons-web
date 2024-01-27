@@ -8,7 +8,12 @@ export const healthNodeTree = new UpgradeTree([
         cost: 10,
         isLocked: false,
         isAcquired: true,
-        effect: () => {}
+        effect: (setPlayerState) => {
+            setPlayerState(prev => ({
+                ...prev,
+                life: Math.floor(prev.life * 1.1)
+            }))
+        }
     }),
 
     new UpgradeNode({
@@ -16,7 +21,12 @@ export const healthNodeTree = new UpgradeTree([
         cost: 10,
         isLocked: false,
         isAcquired: false,
-        effect: () => {}
+        effect: (setPlayerState) => {
+            setPlayerState(prev => ({
+                ...prev,
+                life: Math.floor(prev.life * 1.1)
+            }))
+        }
     }),
 
     new UpgradeNode({
@@ -24,7 +34,12 @@ export const healthNodeTree = new UpgradeTree([
         cost: 10,
         isLocked: true,
         isAcquired: false,
-        effect: () => {}
+        effect: (setPlayerState) => {
+            setPlayerState(prev => ({
+                ...prev,
+                life: Math.floor(prev.life * 1.1)
+            }))
+        }
     }),
 
     new UpgradeNode({
@@ -32,7 +47,12 @@ export const healthNodeTree = new UpgradeTree([
         cost: 10,
         isLocked: true,
         isAcquired: false,
-        effect: () => {}
+        effect: (setPlayerState) => {
+            setPlayerState(prev => ({
+                ...prev,
+                life: Math.floor(prev.life * 1.1)
+            }))
+        }
     }),
 
     new UpgradeNode({
@@ -40,7 +60,12 @@ export const healthNodeTree = new UpgradeTree([
         cost: 10,
         isLocked: true,
         isAcquired: false,
-        effect: () => {}
+        effect: (setPlayerState) => {
+            setPlayerState(prev => ({
+                ...prev,
+                life: Math.floor(prev.life * 1.1)
+            }))
+        }
     }),
 
     new UpgradeNode({
@@ -48,7 +73,12 @@ export const healthNodeTree = new UpgradeTree([
         cost: 10,
         isLocked: true,
         isAcquired: false,
-        effect: () => {}
+        effect: (setPlayerState) => {
+            setPlayerState(prev => ({
+                ...prev,
+                life: Math.floor(prev.life * 1.1)
+            }))
+        }
     }),
 
     new UpgradeNode({
@@ -56,7 +86,12 @@ export const healthNodeTree = new UpgradeTree([
         cost: 10,
         isLocked: true,
         isAcquired: false,
-        effect: () => {}
+        effect: (setPlayerState) => {
+            setPlayerState(prev => ({
+                ...prev,
+                life: Math.floor(prev.life * 1.1)
+            }))
+        }
     }),
 
     new UpgradeNode({
@@ -64,6 +99,11 @@ export const healthNodeTree = new UpgradeTree([
         cost: 10,
         isLocked: true,
         isAcquired: false,
-        effect: () => {}
+        effect: (setPlayerState) => {
+            setPlayerState(prev => ({
+                ...prev,
+                life: Math.floor(prev.life * 1.1)
+            }))
+        }
     }),
 ])

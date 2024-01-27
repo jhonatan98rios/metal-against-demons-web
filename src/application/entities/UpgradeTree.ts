@@ -1,11 +1,14 @@
+import { PlayerState } from "@/store/PlayerContext"
 import { Dispatch, SetStateAction } from "react"
+
+type SetPlayerState = Dispatch<SetStateAction<PlayerState>>
 
 interface IUpgradeNode {
     name: string
     cost: number
     isLocked: boolean
     isAcquired: boolean
-    effect: (setPlayerState: Dispatch<SetStateAction<any>>) => void
+    effect: (setPlayerState: SetPlayerState) => void
 }
 
 
@@ -14,7 +17,7 @@ export class UpgradeNode {
     cost: number
     isLocked: boolean
     isAcquired: boolean
-    effect: (setPlayerState: Dispatch<SetStateAction<any>>) => void
+    effect: (setPlayerState: SetPlayerState) => void
 
     constructor({ name, cost, isLocked, isAcquired, effect }: IUpgradeNode) {
         this.name = name

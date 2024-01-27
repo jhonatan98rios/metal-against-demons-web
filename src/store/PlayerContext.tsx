@@ -4,7 +4,7 @@ interface PlayerContextProps {
     children: ReactNode;
 }
 
-interface PlayerState {
+export interface PlayerState {
     level: number;
     money: number;
     life: number;
