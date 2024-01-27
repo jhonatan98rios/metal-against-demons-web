@@ -1,16 +1,16 @@
 'use client';
 
-import { CurrentStatus } from "@/components/menus/CurrentStatus";
-import { UpgradeTree } from "@/components/menus/UpgradeTree";
-import Layout from "@/layout";
-import { useAnimation } from "@/store/AnimationContext";
-import { usePlayer } from "@/store/PlayerContext";
 import { useEffect } from "react";
+import Layout from "@/layout";
+import { usePlayer } from "@/store/PlayerContext";
+import { useAnimation } from "@/store/AnimationContext";
+import { UpgradeTree } from "@/components/menus/UpgradeTree";
+import { CurrentStatus } from "@/components/menus/CurrentStatus";
 
 export default function Evolution() {
 
     const { playerState } = usePlayer();
-    const { setAnimationState, animationState } = useAnimation();
+    const { setAnimationState } = useAnimation();
 
     useEffect(() => {
         setAnimationState({ className: 'video-zoom-evolution' })

@@ -1,20 +1,22 @@
-interface IUpgradeNodeTree {
+import { Dispatch, SetStateAction } from "react"
+
+interface IUpgradeNode {
     name: string
     cost: number
     isLocked: boolean
     isAcquired: boolean
-    effect: () => void
+    effect: (setPlayerState: Dispatch<SetStateAction<any>>) => void
 }
 
 
-export class UpgradeNodeTree {
+export class UpgradeNode {
     name: string
     cost: number
     isLocked: boolean
     isAcquired: boolean
-    effect: () => void
+    effect: (setPlayerState: Dispatch<SetStateAction<any>>) => void
 
-    constructor({ name, cost, isLocked, isAcquired, effect }: IUpgradeNodeTree) {
+    constructor({ name, cost, isLocked, isAcquired, effect }: IUpgradeNode) {
         this.name = name
         this.cost = cost
         this.isLocked = isLocked
@@ -22,19 +24,15 @@ export class UpgradeNodeTree {
         this.effect = effect
     }
 
-    execute() {
-        this.effect()
-    }
-
     unlock() {
         this.isLocked = false
     }
 
-    acuire() {
+    acquire() {
         this.isAcquired = true
     }
 }
 
 export class UpgradeTree {
-    constructor(public upgradeNodes: UpgradeNodeTree[]){}
+    constructor(public upgradeNodes: UpgradeNode[]){}
 }

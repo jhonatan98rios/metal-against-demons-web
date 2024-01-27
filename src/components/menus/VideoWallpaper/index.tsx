@@ -1,5 +1,6 @@
+'use client';
+
 import { useAnimation } from "@/store/AnimationContext";
-import { usePlayer } from "@/store/PlayerContext";
 
 export default function VideoWallpaper() {
 
