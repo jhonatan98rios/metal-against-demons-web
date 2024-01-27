@@ -1,30 +1,31 @@
 import { PlayerState } from "@/store/PlayerContext"
 import { Dispatch, SetStateAction } from "react"
 
-type SetPlayerState = Dispatch<SetStateAction<PlayerState>>
-
 interface IUpgradeNode {
+    id: number
+    category: string
     name: string
     cost: number
     isLocked: boolean
     isAcquired: boolean
-    effect: (setPlayerState: SetPlayerState) => void
 }
 
-
 export class UpgradeNode {
+    id: number
+    category: string
     name: string
     cost: number
     isLocked: boolean
     isAcquired: boolean
-    effect: (setPlayerState: SetPlayerState) => void
+    
 
-    constructor({ name, cost, isLocked, isAcquired, effect }: IUpgradeNode) {
+    constructor({ id, category, name, cost, isLocked, isAcquired }: IUpgradeNode) {
+        this.id = id
+        this.category = category
         this.name = name
         this.cost = cost
         this.isLocked = isLocked
         this.isAcquired = isAcquired
-        this.effect = effect
     }
 
     unlock() {

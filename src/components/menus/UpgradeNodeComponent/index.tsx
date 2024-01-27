@@ -1,14 +1,34 @@
-import { UpgradeNode } from "@/application/entities/UpgradeTree"
+import { UpgradeNode, UpgradeTree } from "@/application/entities/UpgradeTree"
 import { usePlayer } from "@/store/PlayerContext";
+import { useUpgradeTree } from "@/store/UpgradeTreeContext";
 
 interface IUpgradeNode {
     upgrade: UpgradeNode
-    unlockNextNode: () => void
 }
 
-export function UpgradeNodeComponent({ upgrade, unlockNextNode }: IUpgradeNode) {
+export function UpgradeNodeComponent({ upgrade }: IUpgradeNode) {
 
     const { playerState, setPlayerState } = usePlayer()
+    const { upgradeTreeState, setUpgradeTreeState } = useUpgradeTree()
+
+
+    function handleUpgrade(columnIndex: string, upgradeIndex: number) {
+        
+        const updatedTree: UpgradeTree = structuredClone(upgradeTreeState[columnIndex])
+
+        updatedTree.upgradeNodes[upgradeIndex].isAcquired = true
+
+        if (updatedTree.upgradeNodes[upgradeIndex + 1]) {
+            updatedTree.upgradeNodes[upgradeIndex + 1].isLocked = false
+        }
+
+        setUpgradeTreeState(prev => {
+            return {
+                ...prev,
+                [columnIndex]: updatedTree
+            }
+        })
+    }
 
     function handleClick() {
         if (upgrade.isLocked || upgrade.isAcquired) return
@@ -19,9 +39,8 @@ export function UpgradeNodeComponent({ upgrade, unlockNextNode }: IUpgradeNode) 
                 money: previous.money - upgrade.cost
             }))
 
-            upgrade.acquire()
-            upgrade.effect(setPlayerState)
-            unlockNextNode()
+            handleUpgrade(upgrade.category, upgrade.id)
+            //upgrade.effect(setPlayerState)
         }
     }
 

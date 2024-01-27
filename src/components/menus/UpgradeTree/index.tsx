@@ -1,33 +1,23 @@
 import { useEffect } from "react";
-import { abilityNodeTree } from "@/database/upgradeTree/mock/AbilityNodeTree";
-import { healthNodeTree } from "@/database/upgradeTree/mock/HealthNodeTree";
-import { strengthNodeTree } from "@/database/upgradeTree/mock/StrengthNodeTree";
 import { UpgradeNodeComponent } from "../UpgradeNodeComponent";
+import { useUpgradeTree } from "@/store/UpgradeTreeContext";
 
 
-export function UpgradeTree() {
+export function UpgradeTreeComponent() {
 
-    const healthUpgrades = healthNodeTree
-    const strengthUpgrades = strengthNodeTree
-    const abilityUpgrades = abilityNodeTree
+    const { upgradeTreeState, setUpgradeTreeState } = useUpgradeTree()
+    const { healthTree, strengthTree, abilityTree } = upgradeTreeState
 
-    const columns = [
-        healthUpgrades,
-        strengthUpgrades,
-        abilityUpgrades
-    ]
+    const trees = {
+        healthTree,
+        strengthTree,
+        abilityTree
+    }
 
     useEffect(() => {
         const scrollHeight = document.querySelector("#scroll").clientHeight
         document.querySelector("#scroll").scrollTo({ top: scrollHeight, behavior: 'smooth' })
     }, [])
-
-
-    function unlockNextNode(columnIndex: any, upgradeIndex: any) {
-        if (columns[columnIndex].upgradeNodes[upgradeIndex + 1]) {
-            columns[columnIndex].upgradeNodes[upgradeIndex + 1].isLocked = false
-        }
-    }
 
 
     return (
@@ -39,7 +29,7 @@ export function UpgradeTree() {
             <div className="flex justify-between">
 
                 {
-                    columns.map((column, columnIndex) => (
+                    Object.entries(trees).map(([columnIndex, column]) => (
                         <div className="h-full flex flex-col-reverse" key={columnIndex}>
                             
                             {
@@ -47,7 +37,6 @@ export function UpgradeTree() {
                                     <UpgradeNodeComponent 
                                         key={upgradeIndex} 
                                         upgrade={upgrade} 
-                                        unlockNextNode={() => unlockNextNode(columnIndex, upgradeIndex)} 
                                     />
                                 ))
                             }

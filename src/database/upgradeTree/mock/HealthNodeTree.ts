@@ -4,106 +4,74 @@ import { UpgradeNode, UpgradeTree } from "@/application/entities/UpgradeTree";
 export const healthNodeTree = new UpgradeTree([
 
     new UpgradeNode({
-        name: 'HP +10%',
-        cost: 10,
-        isLocked: false,
-        isAcquired: true,
-        effect: (setPlayerState) => {
-            setPlayerState(prev => ({
-                ...prev,
-                life: Math.floor(prev.life * 1.1)
-            }))
-        }
-    }),
-
-    new UpgradeNode({
+        id: 0,
+        category: 'healthTree',
         name: 'HP +10%',
         cost: 10,
         isLocked: false,
         isAcquired: false,
-        effect: (setPlayerState) => {
-            setPlayerState(prev => ({
-                ...prev,
-                life: Math.floor(prev.life * 1.1)
-            }))
-        }
     }),
 
     new UpgradeNode({
+        id: 1,
+        category: 'healthTree',
         name: 'HP +10%',
         cost: 10,
         isLocked: true,
         isAcquired: false,
-        effect: (setPlayerState) => {
-            setPlayerState(prev => ({
-                ...prev,
-                life: Math.floor(prev.life * 1.1)
-            }))
-        }
     }),
 
     new UpgradeNode({
+        id: 2,
+        category: 'healthTree',
         name: 'HP +10%',
         cost: 10,
         isLocked: true,
         isAcquired: false,
-        effect: (setPlayerState) => {
-            setPlayerState(prev => ({
-                ...prev,
-                life: Math.floor(prev.life * 1.1)
-            }))
-        }
     }),
 
     new UpgradeNode({
+        id: 3,
+        category: 'healthTree',
         name: 'HP +10%',
         cost: 10,
         isLocked: true,
         isAcquired: false,
-        effect: (setPlayerState) => {
-            setPlayerState(prev => ({
-                ...prev,
-                life: Math.floor(prev.life * 1.1)
-            }))
-        }
     }),
 
     new UpgradeNode({
+        id: 4,
+        category: 'healthTree',
         name: 'HP +10%',
         cost: 10,
         isLocked: true,
         isAcquired: false,
-        effect: (setPlayerState) => {
-            setPlayerState(prev => ({
-                ...prev,
-                life: Math.floor(prev.life * 1.1)
-            }))
-        }
     }),
 
     new UpgradeNode({
+        id: 5,
+        category: 'healthTree',
         name: 'HP +10%',
         cost: 10,
         isLocked: true,
         isAcquired: false,
-        effect: (setPlayerState) => {
-            setPlayerState(prev => ({
-                ...prev,
-                life: Math.floor(prev.life * 1.1)
-            }))
-        }
     }),
 
     new UpgradeNode({
+        id: 6,
+        category: 'healthTree',
         name: 'HP +10%',
         cost: 10,
         isLocked: true,
         isAcquired: false,
-        effect: (setPlayerState) => {
-            setPlayerState(prev => ({
-                ...prev,
-                life: Math.floor(prev.life * 1.1)
-            }))
-        }
+    }),
+
+    new UpgradeNode({
+        id: 7,
+        category: 'healthTree',
+        name: 'HP +10%',
+        cost: 10,
+        isLocked: true,
+        isAcquired: false,
     }),
 ])
