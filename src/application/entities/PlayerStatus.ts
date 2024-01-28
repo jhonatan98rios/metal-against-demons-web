@@ -17,7 +17,7 @@ export class PlayerStatus extends EventClient {
         super()
         this.level = 1
         this.maxHealth = 50
-        this.currentHealth = 30
+        this.currentHealth = 50
         this.vulnerable = true
         this.currentXP = 0
         this.nextLevelXp = 15
