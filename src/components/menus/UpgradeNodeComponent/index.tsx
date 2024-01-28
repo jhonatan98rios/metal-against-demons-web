@@ -11,6 +11,32 @@ export function UpgradeNodeComponent({ upgrade }: IUpgradeNode) {
     const { playerState, setPlayerState } = usePlayer()
     const { upgradeTreeState, setUpgradeTreeState } = useUpgradeTree()
 
+    function improveDamage(value: number) {
+        setPlayerState(prev => ({
+            ...prev,
+            baseAttack: Math.floor(prev.baseAttack + ((prev.baseAttack / 100) * value))
+        }))
+    }
+
+    function improveHealth(value: number) {
+        setPlayerState(prev => ({
+            ...prev,
+            maxHealth: Math.floor(prev.maxHealth + ((prev.maxHealth / 100) * value))
+        }))
+    }
+
+    function improveStatus(category: string, value: number) {
+
+        const status = {
+            healthTree: improveHealth,
+            strengthTree: improveDamage,
+        }
+
+        if (status[category]) {
+            status[category](value)
+        }
+    }
+
 
     function handleUpgrade(columnIndex: string, upgradeIndex: number) {
         
@@ -28,6 +54,8 @@ export function UpgradeNodeComponent({ upgrade }: IUpgradeNode) {
                 [columnIndex]: updatedTree
             }
         })
+
+        improveStatus(columnIndex, upgrade.cost)
     }
 
     function handleClick() {
@@ -40,7 +68,6 @@ export function UpgradeNodeComponent({ upgrade }: IUpgradeNode) {
             }))
 
             handleUpgrade(upgrade.category, upgrade.id)
-            //upgrade.effect(setPlayerState)
         }
     }
 

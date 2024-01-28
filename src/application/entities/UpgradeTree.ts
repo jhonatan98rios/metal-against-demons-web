@@ -8,6 +8,7 @@ interface IUpgradeNode {
     cost: number
     isLocked: boolean
     isAcquired: boolean
+    value: number
 }
 
 export class UpgradeNode {
@@ -17,23 +18,17 @@ export class UpgradeNode {
     cost: number
     isLocked: boolean
     isAcquired: boolean
+    value: number
     
 
-    constructor({ id, category, name, cost, isLocked, isAcquired }: IUpgradeNode) {
+    constructor({ id, category, name, cost, isLocked, isAcquired, value }: IUpgradeNode) {
         this.id = id
         this.category = category
         this.name = name
         this.cost = cost
         this.isLocked = isLocked
         this.isAcquired = isAcquired
-    }
-
-    unlock() {
-        this.isLocked = false
-    }
-
-    acquire() {
-        this.isAcquired = true
+        this.value = value
     }
 }
 

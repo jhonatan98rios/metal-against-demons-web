@@ -10,6 +10,7 @@ export const strengthNodeTree = new UpgradeTree([
         cost: 10,
         isLocked: false,
         isAcquired: false,
+        value: 10
     }),
     
     new UpgradeNode({
@@ -19,6 +20,7 @@ export const strengthNodeTree = new UpgradeTree([
         cost: 20,
         isLocked: true,
         isAcquired: false,
+        value: 10
     }),
 
 
@@ -29,6 +31,7 @@ export const strengthNodeTree = new UpgradeTree([
         cost: 30,
         isLocked: true,
         isAcquired: false,
+        value: 10
     }),
 
     new UpgradeNode({
@@ -38,6 +41,7 @@ export const strengthNodeTree = new UpgradeTree([
         cost: 20,
         isLocked: true,
         isAcquired: false,
+        value: 10
     }),
 
 
@@ -48,6 +52,7 @@ export const strengthNodeTree = new UpgradeTree([
         cost: 20,
         isLocked: true,
         isAcquired: false,
+        value: 10
     }),
 
     new UpgradeNode({
@@ -57,6 +62,7 @@ export const strengthNodeTree = new UpgradeTree([
         cost: 20,
         isLocked: true,
         isAcquired: false,
+        value: 10
     }),
 
 
@@ -67,6 +73,7 @@ export const strengthNodeTree = new UpgradeTree([
         cost: 20,
         isLocked: true,
         isAcquired: false,
+        value: 10
     }),
 
     new UpgradeNode({
@@ -76,5 +83,6 @@ export const strengthNodeTree = new UpgradeTree([
         cost: 20,
         isLocked: true,
         isAcquired: false,
+        value: 10
     }),   
 ])

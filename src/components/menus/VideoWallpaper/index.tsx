@@ -1,11 +1,8 @@
-'use client';
-
 import { useAnimation } from "@/store/AnimationContext";
 
 export default function VideoWallpaper() {
 
-    const { animationState, setAnimationState } = useAnimation();
-    const { className } = animationState
+    const { animationState } = useAnimation();
 
     return (
         <div className="video-bg absolute bottom-0 left-0 w-full h-full">
@@ -14,7 +11,7 @@ export default function VideoWallpaper() {
                 className={`
                     fixed z-0 bottom-0 -left-[calc(540px-50vw)] lg:left-0 lg:right-0 mx-auto 
                     h-screen max-w-max min-w-full min-h-full lg:h-auto
-                    ${className}
+                    ${animationState.className}
                 `}
             >
                 <source src="./video/background-4k.mp4" type="video/mp4" />
