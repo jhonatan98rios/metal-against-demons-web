@@ -3,7 +3,7 @@ import { Camera } from "../entities/Camera";
 import { Enemy } from "../entities/Enemy"
 import { Player } from "../entities/Player";
 import { EventClient } from "../event/EventClient";
-import { Body, Element2D, isThereIntersection } from "../utils/utils";
+import { Element2D, isThereIntersection } from "../utils/utils";
 import { EnemyFactory } from "./EnemyFactory";
 
 export class EnemyService extends EventClient {

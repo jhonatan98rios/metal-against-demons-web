@@ -5,8 +5,6 @@ import { FireWalkManager1 } from "./FireWalk/FireWalkManager1"
 import { ForceFieldManager1 } from "./ForceField/ForceFieldManager1"
 import { SoundAttackManager1 } from "./SoundAttack/SoundAttackManager1"
 
-type BaseSkills = (FireWalkManager1 | SoundAttackManager1 | ForceFieldManager1 | BatAttackManager1)[]
-
 const baseSkillsClasses = [
     FireWalkManager1,
     SoundAttackManager1,

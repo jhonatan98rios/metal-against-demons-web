@@ -1,11 +1,9 @@
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../constants";
 import { isThereIntersection } from "../utils/utils";
 import { Enemy } from "./Enemy";
-import { Game, GameStatus } from "./Game";
+import { Game } from "./Game";
 import { PlayerStatus } from "./PlayerStatus";
-import { XPOrb } from "./XPOrb";
 import { CachedImages } from "./CachedImages";
-import { EventManager } from "../event/EventManager";
 import { EventClient } from "../event/EventClient";
 
 export enum DIRECTION {

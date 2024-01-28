@@ -1,7 +1,6 @@
 import { EnemyService } from "../services/EnemyService";
-import {  UUID, calculate2DMovement, generateUUID, isThereIntersection, purePositionAnimation } from "../utils/utils";
+import {  UUID, generateUUID, isThereIntersection, purePositionAnimation } from "../utils/utils";
 import { Camera } from "./Camera";
-import { Game } from "./Game";
 import { Player } from "./Player";
 
 export enum DIRECTION {
