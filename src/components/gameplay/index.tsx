@@ -5,24 +5,28 @@ import { Observer } from "@/application/utils/Observer"
 import { PlayerStatus } from "@/application/entities/PlayerStatus"
 import Canvas from "@/partials/GamePlay/Canvas"
 import HUD from "@/partials/GamePlay/HUD"
+import { usePlayer } from "@/store/PlayerContext"
 
 
 export default function GamePlay() {
 
-    const [ playerStatusLevel, setPlayerStatusLevel ] = useState<number>()
+    const { playerState } = usePlayer()
 
+    const [ playerStatusLevel, setPlayerStatusLevel ] = useState<number>()
     const [ playerStatusMaxHealth, setPlayerStatusMaxHealth ] = useState<number>()
     const [ playerStatusCurrentHealth, setPlayerStatusCurrentHealth ] = useState<number>()
-
     const [ playerStatusNextLevelXp, setPlayerStatusNextLevelXp ] = useState<number>()
     const [ playerStatusCurrentXP, setPlayerStatusCurrentXP ] = useState<number>()
-
     const [ gameStatus, setGameStatus ] = useState<GameStatus>()
+
+
 
     useEffect(() => {
         if (window !== undefined) {
             CachedImages.getInstance()
             const game = Game.getInstance()
+
+            getPlayerStatusFromStore(game)
 
             updatePlayerStatus(game.player.status)
             updateGameStatus(game.state)
@@ -36,6 +40,14 @@ export default function GamePlay() {
             })
         }
     }, [])
+
+
+    function getPlayerStatusFromStore(game: Game) {
+        game.player.status.baseDamage = playerState.baseAttack
+        game.player.status.maxHealth = playerState.maxHealth
+        game.player.status.currentHealth = playerState.maxHealth
+    }
+
 
     function updatePlayerStatus({ level, maxHealth, currentHealth, nextLevelXp, currentXP }: PlayerStatus) {
         if (playerStatusLevel !== level) {

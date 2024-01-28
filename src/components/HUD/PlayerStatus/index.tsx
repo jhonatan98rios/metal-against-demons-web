@@ -16,16 +16,23 @@ export function PlayerStatusComponent ({ level, currentHealth, maxHealth, curren
                 Level: { level }
             </p>
 
-            <AnimatedBar 
-                left={20}
-                top={40}
-                curentValue={currentHealth}
-                maxValue={maxHealth}
-                height={20}
-                width={200}
-                minColor="#FF5555"
-                maxColor="#55FF55"
-            />
+            <div className="flex">
+                <AnimatedBar 
+                    left={20}
+                    top={40}
+                    curentValue={currentHealth}
+                    maxValue={maxHealth}
+                    height={20}
+                    width={200}
+                    minColor="#FF5555"
+                    maxColor="#55FF55"
+                />
+
+                <p className="text-white z-20 text-2xl"> {maxHealth && maxHealth.toString()} </p>
+
+            </div>
+
+
 
             <AnimatedBar 
                 left={20}

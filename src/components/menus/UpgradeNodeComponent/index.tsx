@@ -14,7 +14,7 @@ export function UpgradeNodeComponent({ upgrade }: IUpgradeNode) {
     function improveDamage(value: number) {
         setPlayerState(prev => ({
             ...prev,
-            baseAttack: Math.floor(prev.baseAttack + ((prev.baseAttack / 100) * value))
+            baseAttack: prev.baseAttack + ((prev.baseAttack / 100) * value)
         }))
     }
 
