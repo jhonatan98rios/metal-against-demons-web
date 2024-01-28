@@ -20,7 +20,7 @@ export default function CurrentStatus() {
 
             <div className="flex justify-between">
                 <p className="text-[#69A8C6]">Base Attack:</p>
-                <p className="text-[#D26968]">{baseAttack.toFixed(2)} </p>
+                <p className="text-[#D26968]">{baseAttack} </p>
             </div>
         </div>
     )

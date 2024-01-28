@@ -8,7 +8,7 @@ export const pactList: Pact[] = [
     {
         title: 'Matar 10 demônios',
         subtitle: 'Ganhe 100 almas condenadas',
-        done: true
+        done: false
     },
     {
         title: 'Matar 20 demônios',
