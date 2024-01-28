@@ -3,7 +3,7 @@ import { Camera } from "../entities/Camera";
 import { Enemy } from "../entities/Enemy"
 import { Player } from "../entities/Player";
 import { EventClient } from "../event/EventClient";
-import { Element2D, isThereIntersection } from "../utils/utils";
+import { Body, Element2D, isThereIntersection } from "../utils/utils";
 import { EnemyFactory } from "./EnemyFactory";
 
 export class EnemyService extends EventClient {
@@ -24,9 +24,10 @@ export class EnemyService extends EventClient {
         this.sortEnemies()
         //setTimeout(this.spawn.bind(this), 1000 - (this.player.status.level * 75))
         setTimeout(this.spawn.bind(this), 100)
-        
-        if (this.enemies.length >= this.player.status.level * 250) return
-        
+
+        //if (this.enemies.length >= this.player.status.level * 10000) return
+        if (this.enemies.length >= 20000) return
+
 
         const randomDistance = {
             x: Math.floor(Math.random() * 1000) + (SCREEN_WIDTH / 2),
@@ -43,14 +44,22 @@ export class EnemyService extends EventClient {
         if (!this.checkEmptySpaceToSpawn(createdEnemy)) {
             return
         }
-        
+
         this.enemies.push(createdEnemy)
     }
 
-    move(camera: Camera, player: Player, enemyService: EnemyService) {
-        this.enemies.forEach(enemy => {
-            enemy.move(isThereIntersection(camera, enemy), player, enemyService)
+    move(camera: Camera, player: Player) {
+        const updatedEnemiesPosition = this.enemies.map(enemy => {
+            return enemy.move(player, this)
         })
+
+        this.enemies = this.enemies.map((enemy, index) => {
+            enemy.animate(player, camera)
+            enemy.x = updatedEnemiesPosition[index].x
+            enemy.y = updatedEnemiesPosition[index].y
+            return enemy
+        })
+
     }
 
     sortEnemies() {
@@ -61,7 +70,7 @@ export class EnemyService extends EventClient {
         });
     }
 
-    applyDamage({ enemy, damage }: {enemy: Enemy, damage: number}) {
+    applyDamage({ enemy, damage }: { enemy: Enemy, damage: number }) {
         enemy.currentHealth -= damage
 
         if (enemy.currentHealth <= 0) {
@@ -75,7 +84,7 @@ export class EnemyService extends EventClient {
 
         this.eventManager.emit("orb:spawn", {
             value: enemy.maxHealth,
-            x: x + (width / 2), 
+            x: x + (width / 2),
             y: y + (height / 2)
         })
     }
@@ -102,7 +111,7 @@ export class EnemyService extends EventClient {
         if (!EnemyService.instance) {
             EnemyService.instance = new EnemyService()
         }
-    
+
         return EnemyService.instance
     }
 }

@@ -1,5 +1,6 @@
 import { EnemyService } from "../services/EnemyService";
-import {  UUID, calculate2DMovement, generateUUID, isThereIntersection } from "../utils/utils";
+import {  UUID, calculate2DMovement, generateUUID, isThereIntersection, purePositionAnimation } from "../utils/utils";
+import { Camera } from "./Camera";
 import { Game } from "./Game";
 import { Player } from "./Player";
 
@@ -57,8 +58,12 @@ export class Enemy {
         this.spritesheet = spritesheet
     }
 
-    move(isVisible: boolean, player: Player, enemyService: EnemyService) {
-        this.positionAnimation(player, enemyService)
+    move(player: Player, enemyService: EnemyService) {
+        return purePositionAnimation(player, this, enemyService.enemies)
+    }
+
+    animate(player: Player, camera: Camera) {
+        const isVisible = isThereIntersection(camera, this)
 
         if (isVisible) {
             this.setDirection({ 
@@ -69,30 +74,6 @@ export class Enemy {
             })
             this.spriteAnimation()
         }
-    }
-
-    positionAnimation(player: Player, enemyService: EnemyService) {
-
-        if (!player || !enemyService) return
-        
-        const { x: directionX, y: directionY } = calculate2DMovement(this, player)
-        const velocityX = directionX * this.speed
-        const velocityY = directionY * this.speed
-
-        const newX = this.x + velocityX
-        const newY = this.y + velocityY
-
-        let shouldMoveX = !this.checkCollision(
-            { ...this, x: newX }, 
-            enemyService.enemies
-        )
-        let shouldMoveY = !this.checkCollision(
-            { ...this, y: newY }, 
-            enemyService.enemies
-        )
-
-        this.x = shouldMoveX ? newX : this.x
-        this.y = shouldMoveY ? newY : this.y
     }
 
     private setDirection({ mvLeft, mvUp, mvRight, mvDown }: Direction) {
@@ -125,20 +106,5 @@ export class Enemy {
         }
 
         this.srcX = SELECTED_FRAME * this.width;
-    }
-
-    public checkCollision(enemy: Enemy, enemies: Enemy[]) {
-
-        for (let index = 0; index < enemies.length; index++) {
-            let otherEnemy = enemies[index]
-
-            if (enemy.id != otherEnemy.id) {
-                if (isThereIntersection(enemy, otherEnemy)) {
-                    return true
-                }
-            }
-        }
-    
-        return false
     }
 }

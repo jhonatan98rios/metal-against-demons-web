@@ -81,7 +81,7 @@ export class Game extends EventClient {
         if (this.state.status != GameStatus.running) return
             
         this.playerEventService.execute(this)
-        this.enemyService.move(this.camera, this.player, this.enemyService)
+        this.enemyService.move(this.camera, this.player)
         this.skillService.update()
         this.moveCamera()
     }
@@ -106,6 +106,8 @@ export class Game extends EventClient {
         this.fpsCounter += 1
         this.eventManager.emit("canvas:render", this)
         requestAnimationFrame(this.loop.bind(this))
+
+        //setTimeout(this.loop.bind(this), 50)
     }
 
 

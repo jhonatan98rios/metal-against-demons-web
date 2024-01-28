@@ -1,49 +1,43 @@
-import { abilityNodeTree } from "@/database/upgradeTree/mock/AbilityNodeTree";
-import { healthNodeTree } from "@/database/upgradeTree/mock/HealthNodeTree";
-import { strengthNodeTree } from "@/database/upgradeTree/mock/StrengthNodeTree";
 import { useEffect } from "react";
+import { UpgradeNodeComponent } from "../UpgradeNodeComponent";
+import { useUpgradeTree } from "@/store/UpgradeTreeContext";
 
 
-export function UpgradeTree() {
+export function UpgradeTreeComponent() {
 
-    const healthUpgrades = healthNodeTree
-    const strengthUpgrades = strengthNodeTree
-    const abilityUpgrades = abilityNodeTree
+    const { upgradeTreeState, setUpgradeTreeState } = useUpgradeTree()
+    const { healthTree, strengthTree, abilityTree } = upgradeTreeState
 
-    const columns = [
-        healthUpgrades,
-        strengthUpgrades,
-        abilityUpgrades
-    ]
+    const trees = {
+        healthTree,
+        strengthTree,
+        abilityTree
+    }
 
     useEffect(() => {
         const scrollHeight = document.querySelector("#scroll").clientHeight
         document.querySelector("#scroll").scrollTo({ top: scrollHeight, behavior: 'smooth' })
     }, [])
- 
+
 
     return (
-        <div id="scroll" className="h-[640px] md:h-[900px] max-h-full absolute bottom-24 md:right-32 overflow-scroll pb-20 scale-75 md:scale-100">
+        <div id="scroll" className={`
+            h-[760px] md:max-h-[84vh] lg:h-[900px] sm:max-h-full 
+            absolute top bottom-24 lg:right-32 
+            overflow-scroll pb-32 pt-8 scale-75 lg:scale-100 z-10
+        `}>
             <div className="flex justify-between">
 
                 {
-                    columns.map(upgrades => (
-                        <div className="h-full flex flex-col-reverse">
+                    Object.entries(trees).map(([columnIndex, column]) => (
+                        <div className="h-full flex flex-col-reverse" key={columnIndex}>
                             
                             {
-                                upgrades.upgradeNodes.map(upgrade => (
-                                    <div className="m-2 w-[128px] h-[128px] rounded-full">
-                                        <img 
-                                            src={
-                                                upgrade.isAcquired 
-                                                    ? "./img/menu/health-acquired.png" 
-                                                    : !upgrade.isLocked
-                                                        ? "./img/menu/health.png"
-                                                        : "./img/menu/locked-skill.png"
-                                            } 
-                                            alt={upgrade.name} 
-                                        />
-                                    </div>
+                                column.upgradeNodes.map((upgrade, upgradeIndex) => (
+                                    <UpgradeNodeComponent 
+                                        key={upgradeIndex} 
+                                        upgrade={upgrade} 
+                                    />
                                 ))
                             }
 

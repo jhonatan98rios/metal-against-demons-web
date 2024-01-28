@@ -1,75 +1,88 @@
-import { UpgradeNodeTree, UpgradeTree } from "@/application/entities/UpgradeTree";
+import { UpgradeNode, UpgradeTree } from "@/application/entities/UpgradeTree";
 
 
 export const strengthNodeTree = new UpgradeTree([
 
-    new UpgradeNodeTree({
-        name: 'Damage + 10%',
-        cost: 20,
+    new UpgradeNode({
+        id: 0,
+        category: 'strengthTree',
+        name: 'Attack +10%',
+        cost: 10,
         isLocked: false,
         isAcquired: false,
-        effect: () => {}
+        value: 10
     }),
-
-
-    new UpgradeNodeTree({
-        name: 'Damage + 20%',
-        cost: 20,
-        isLocked: true,
-        isAcquired: false,
-        effect: () => {}
-    }),
-
-    new UpgradeNodeTree({
-        name: 'Damage + 10%',
-        cost: 20,
-        isLocked: true,
-        isAcquired: false,
-        effect: () => {}
-    }),
-
-
-    new UpgradeNodeTree({
-        name: 'Damage + 20%',
-        cost: 20,
-        isLocked: true,
-        isAcquired: false,
-        effect: () => {}
-    }),
-
-    new UpgradeNodeTree({
-        name: 'Damage + 10%',
-        cost: 20,
-        isLocked: true,
-        isAcquired: false,
-        effect: () => {}
-    }),
-
-
-    new UpgradeNodeTree({
-        name: 'Damage + 20%',
-        cost: 20,
-        isLocked: true,
-        isAcquired: false,
-        effect: () => {}
-    }),
-
-    new UpgradeNodeTree({
-        name: 'Damage + 10%',
-        cost: 20,
-        isLocked: true,
-        isAcquired: false,
-        effect: () => {}
-    }),
-
-
-    new UpgradeNodeTree({
-        name: 'Damage + 20%',
-        cost: 20,
-        isLocked: true,
-        isAcquired: false,
-        effect: () => {}
-    }),
-
     
+    new UpgradeNode({
+        id: 1,
+        category: 'strengthTree',
+        name: 'Attack +10%',
+        cost: 20,
+        isLocked: true,
+        isAcquired: false,
+        value: 10
+    }),
+
+
+    new UpgradeNode({
+        id: 2,
+        category: 'strengthTree',
+        name: 'Attack +10%',
+        cost: 30,
+        isLocked: true,
+        isAcquired: false,
+        value: 10
+    }),
+
+    new UpgradeNode({
+        id: 3,
+        category: 'strengthTree',
+        name: 'Attack +10%',
+        cost: 20,
+        isLocked: true,
+        isAcquired: false,
+        value: 10
+    }),
+
+
+    new UpgradeNode({
+        id: 4,
+        category: 'strengthTree',
+        name: 'Attack +10%',
+        cost: 20,
+        isLocked: true,
+        isAcquired: false,
+        value: 10
+    }),
+
+    new UpgradeNode({
+        id: 5,
+        category: 'strengthTree',
+        name: 'Attack +10%',
+        cost: 20,
+        isLocked: true,
+        isAcquired: false,
+        value: 10
+    }),
+
+
+    new UpgradeNode({
+        id: 6,
+        category: 'strengthTree',
+        name: 'Attack +10%',
+        cost: 20,
+        isLocked: true,
+        isAcquired: false,
+        value: 10
+    }),
+
+    new UpgradeNode({
+        id: 7,
+        category: 'strengthTree',
+        name: 'Attack +10%',
+        cost: 20,
+        isLocked: true,
+        isAcquired: false,
+        value: 10
+    }),   
 ])

@@ -32,3 +32,24 @@ body {
   align-items: center;
   overflow: hidden;
 }
+
+.video-zoom-pacts {
+  transform: translate3d(-100px, -550px, 0px) scale(2);
+  transition: all;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-out;
+}
+
+.video-zoom-evolution {
+  transform: translate3d(200px, -540px, 0px) scale(2);
+  transition: all;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-out;
+}
+
+.video-without-zoom {
+  transform: translate3d(0px, 0px, 0px) scale(1);
+  transition: all;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-out;
+}

@@ -1,40 +1,37 @@
-interface IUpgradeNodeTree {
+import { PlayerState } from "@/store/PlayerContext"
+import { Dispatch, SetStateAction } from "react"
+
+interface IUpgradeNode {
+    id: number
+    category: string
     name: string
     cost: number
     isLocked: boolean
     isAcquired: boolean
-    effect: () => void
+    value: number
 }
 
-
-export class UpgradeNodeTree {
+export class UpgradeNode {
+    id: number
+    category: string
     name: string
     cost: number
     isLocked: boolean
     isAcquired: boolean
-    effect: () => void
+    value: number
+    
 
-    constructor({ name, cost, isLocked, isAcquired, effect }: IUpgradeNodeTree) {
+    constructor({ id, category, name, cost, isLocked, isAcquired, value }: IUpgradeNode) {
+        this.id = id
+        this.category = category
         this.name = name
         this.cost = cost
         this.isLocked = isLocked
         this.isAcquired = isAcquired
-        this.effect = effect
-    }
-
-    execute() {
-        this.effect()
-    }
-
-    unlock() {
-        this.isLocked = false
-    }
-
-    acuire() {
-        this.isAcquired = true
+        this.value = value
     }
 }
 
 export class UpgradeTree {
-    constructor(public upgradeNodes: UpgradeNodeTree[]){}
+    constructor(public upgradeNodes: UpgradeNode[]){}
 }

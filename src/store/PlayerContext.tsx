@@ -4,10 +4,10 @@ interface PlayerContextProps {
     children: ReactNode;
 }
 
-interface PlayerState {
+export interface PlayerState {
     level: number;
     money: number;
-    life: number;
+    maxHealth: number;
     speed: number;
     baseAttack: number
 }
@@ -25,7 +25,7 @@ const PlayerProvider: React.FC<PlayerContextProps> = ({ children }) => {
         return storedState ? JSON.parse(storedState) : {
             level: 1,
             money: 0,
-            life: 100,
+            maxHealth: 100,
             speed: 1,
             baseAttack: 1,
         };
