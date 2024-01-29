@@ -5,7 +5,7 @@ import { useUpgradeTree } from "@/store/UpgradeTreeContext";
 
 export function UpgradeTreeComponent() {
 
-    const { upgradeTreeState, setUpgradeTreeState } = useUpgradeTree()
+    const { upgradeTreeState } = useUpgradeTree()
     const { healthTree, strengthTree, abilityTree } = upgradeTreeState
 
     const trees = {

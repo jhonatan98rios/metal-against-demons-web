@@ -6,7 +6,6 @@ import { Element } from "../../database/scenarios/mock";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../constants";
 import { EnemyService } from "../services/EnemyService";
 import { Enemy } from "./Enemy";
-import { AbstractSkill } from "@/application/entities/skills/Unit/AbstractSkill";
 import { XPOrb } from "./XPOrb";
 import { isThereIntersection } from "../utils/utils";
 import { drawAnimatedBar } from "../components/drawAnimatedBar";

@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import Layout from "@/layout";
 import { useAnimation } from "@/store/AnimationContext";
 import { UpgradeTreeComponent } from "@/components/menus/UpgradeTree";
-//import { CurrentStatus } from "@/components/menus/CurrentStatus";
 import dynamic from "next/dynamic";
 
 export default function Evolution() {

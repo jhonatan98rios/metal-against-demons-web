@@ -16,13 +16,13 @@ export class PlayerStatus extends EventClient {
     constructor () {
         super()
         this.level = 1
-        this.maxHealth = 50
-        this.currentHealth = 50
+        this.maxHealth = 500
+        this.currentHealth = 500
         this.vulnerable = true
         this.currentXP = 0
-        this.nextLevelXp = 15
+        this.nextLevelXp = 150
         this.totalXP = 0
-        this.baseDamage = 1
+        this.baseDamage = 10
     }
 
     public static getInstance(): PlayerStatus {

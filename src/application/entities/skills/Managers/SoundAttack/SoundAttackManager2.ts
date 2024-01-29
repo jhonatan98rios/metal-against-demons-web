@@ -5,6 +5,7 @@ import { SoundAttackUnit } from "../../Unit/SoundAttack/SoundAttackUnit";
 import { AbstractSkillManager } from "../AbstractSkillManager";
 import { SoundAttackManager3 } from "./SoundAttackManager3";
 import { SoundAttackManagerBase } from "./SoundAttackManagerBase";
+import { Player } from "@/application/entities/Player";
 
 
 export class SoundAttackManager2 extends SoundAttackManagerBase implements AbstractSkillManager {
@@ -27,7 +28,7 @@ export class SoundAttackManager2 extends SoundAttackManagerBase implements Abstr
         this.width = 38
         this.height = 38
         this.speed = 3.5
-        this.damage = 1.5
+        this.damage = 12 * (Player.getInstance().status.baseDamage / 10)
         this.spritesheet = CachedImages.getInstance().soundAttackLevel_2
         this.interval = 400
         this.lifeTime = 60 * 3 //frames * sec

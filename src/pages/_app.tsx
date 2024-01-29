@@ -1,6 +1,6 @@
 import { PlayerProvider } from '@/store/PlayerContext'
 import { AnimationProvider } from '@/store/AnimationContext'
-import '@/styles/globals.css'
+import '@/styles/globals.scss'
 import React from 'react'
 import { UpgradeTreeProvider } from '@/store/UpgradeTreeContext'
 

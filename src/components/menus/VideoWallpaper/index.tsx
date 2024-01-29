@@ -14,7 +14,7 @@ export default function VideoWallpaper() {
                     ${animationState.className}
                 `}
             >
-                <source src="./video/background-4k.mp4" type="video/mp4" />
+                <source src="./video/background-4k-resized.mp4" type="video/mp4" />
             </video>
         </div>
     )

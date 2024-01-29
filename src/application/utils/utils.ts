@@ -1,7 +1,3 @@
-import { Enemy } from "../entities/Enemy";
-import { Player } from "../entities/Player";
-import { EnemyService } from "../services/EnemyService";
-
 export type UUID = string
 
 export function generateUUID(): UUID {

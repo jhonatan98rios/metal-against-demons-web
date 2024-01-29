@@ -25,9 +25,9 @@ const PlayerProvider: React.FC<PlayerContextProps> = ({ children }) => {
         return storedState ? JSON.parse(storedState) : {
             level: 1,
             money: 0,
-            maxHealth: 100,
+            maxHealth: 500,
             speed: 1,
-            baseAttack: 1,
+            baseAttack: 10,
         };
     });
 

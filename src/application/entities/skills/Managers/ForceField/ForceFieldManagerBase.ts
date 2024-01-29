@@ -30,7 +30,7 @@ export class ForceFieldManagerBase extends EventClient implements AbstractSkillM
         this.width = 152
         this.height = 152
         this.speed = 0
-        this.damage = 0.02
+        this.damage = 0.2
         this.spritesheet = CachedImages.getInstance().forceFieldLevel_1
         this.interval = 100
         this.activeSkills = []

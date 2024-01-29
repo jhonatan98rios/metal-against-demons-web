@@ -55,7 +55,7 @@ export function UpgradeNodeComponent({ upgrade }: IUpgradeNode) {
             }
         })
 
-        improveStatus(columnIndex, upgrade.cost)
+        improveStatus(columnIndex, upgrade.value)
     }
 
     function handleClick() {

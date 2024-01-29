@@ -1,3 +1,4 @@
+import { Player } from "@/application/entities/Player";
 import { CachedImages } from "../../../CachedImages";
 import { AbstractSkill, ISpawn } from "../../Unit/AbstractSkill";
 import { FireWalkUnit } from "../../Unit/FireWalk/FireWalkUnit";
@@ -26,7 +27,7 @@ export class FireWalkManager5 extends FireWalkManagerBase implements AbstractSki
         this.width = 150
         this.height = 150
         this.speed = 0
-        this.damage = 0.03
+        this.damage = 0.3 * (Player.getInstance().status.baseDamage / 10)
         this.spritesheet = CachedImages.getInstance().fireWalkLevel_5
         this.interval = 500
         this.lifeTime = 60 * 12 //frames * sec
