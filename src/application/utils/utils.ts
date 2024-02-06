@@ -81,3 +81,8 @@ function checkCollision(enemy: Body, enemies: Body[]) {
 
     return false
 }
+
+
+export function isMobile () {
+    return window.innerWidth < 768; // Você pode ajustar esse valor conforme necessário
+};
