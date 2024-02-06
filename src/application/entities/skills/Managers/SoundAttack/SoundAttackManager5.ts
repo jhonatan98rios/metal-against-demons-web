@@ -27,7 +27,7 @@ export class SoundAttackManager5 extends SoundAttackManagerBase implements Abstr
         this.width = 48
         this.height = 48
         this.speed = 4
-        this.damage = 20 * (Player.getInstance().status.baseDamage / 10)
+        this.damage = 25 * (Player.getInstance().status.baseDamage / 10)
         this.spritesheet = CachedImages.getInstance().soundAttackLevel_5
         this.interval = 250
         this.lifeTime = 60 * 5 //frames * sec

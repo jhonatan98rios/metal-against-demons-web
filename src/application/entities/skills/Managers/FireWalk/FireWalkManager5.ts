@@ -27,7 +27,7 @@ export class FireWalkManager5 extends FireWalkManagerBase implements AbstractSki
         this.width = 150
         this.height = 150
         this.speed = 0
-        this.damage = 0.3 * (Player.getInstance().status.baseDamage / 10)
+        this.damage = 0.4 * (Player.getInstance().status.baseDamage / 10)
         this.spritesheet = CachedImages.getInstance().fireWalkLevel_5
         this.interval = 500
         this.lifeTime = 60 * 12 //frames * sec
@@ -58,7 +58,7 @@ export class FireWalkManager5 extends FireWalkManagerBase implements AbstractSki
     upgrade(): AbstractSkillManager {
         const temp = new FireWalkManager5()
         temp.interval = this.interval - 50
-        temp.damage = this.damage + 0.2
+        temp.damage = this.damage + 0.1
         temp.name = this.name + "+"
         return temp
     }
