@@ -29,7 +29,7 @@ export class ForceFieldManager5 extends ForceFieldManagerBase implements Abstrac
         this.width = 300
         this.height = 300
         this.speed = 0
-        this.damage = 0.75 * (Player.getInstance().status.baseDamage / 10)
+        this.damage = 1 * (Player.getInstance().status.baseDamage / 10)
         this.spritesheet = CachedImages.getInstance().forceFieldLevel_5
         this.interval = 100
         this.activeSkills = []
@@ -62,7 +62,7 @@ export class ForceFieldManager5 extends ForceFieldManagerBase implements Abstrac
 
     upgrade(): AbstractSkillManager {
         const temp = new ForceFieldManager5()
-        temp.damage = this.damage + 0.02
+        temp.damage = this.damage + 0.2
         temp.name = this.name + "+"
         return temp
     }

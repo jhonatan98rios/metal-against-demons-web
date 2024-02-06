@@ -13,15 +13,17 @@ export type Element2D = Vector2D & { width: number, height: number }
 export type Body = Element2D & { id?: string, speed: number }
 
 export function isThereIntersection(elementA: Element2D, elementB:Element2D) {
-    const aLeft = elementA.x;
-    const aRight = elementA.x + elementA.width;
-    const aTop = elementA.y;
-    const aBottom = elementA.y + elementA.height;
+    const bias = 10
+
+    const aLeft = elementA.x + bias;
+    const aRight = elementA.x + elementA.width - bias;
+    const aTop = elementA.y + bias;
+    const aBottom = elementA.y + elementA.height - bias;
     
-    const bLeft = elementB.x;
-    const bRight = elementB.x + elementB.width;
-    const bTop = elementB.y;
-    const bBottom = elementB.y + elementB.height;
+    const bLeft = elementB.x + bias;
+    const bRight = elementB.x + elementB.width - bias;
+    const bTop = elementB.y + bias;
+    const bBottom = elementB.y + elementB.height - bias;
 
     return (aLeft <= bRight && aRight >= bLeft && aTop <= bBottom && aBottom >= bTop);
 }

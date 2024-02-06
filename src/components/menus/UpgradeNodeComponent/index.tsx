@@ -74,7 +74,7 @@ export function UpgradeNodeComponent({ upgrade }: IUpgradeNode) {
 
     return (
         <Suspense key={playerState.level}>
-            <div className="m-2 w-[128px] h-[128px] rounded-full relative flex justify-center items-center" onClick={handleClick}>
+            <div className="m-2 w-[128px] h-[128px] rounded-full relative flex justify-center items-center cursor-pointer" onClick={handleClick}>
                 <img 
                     className="absolute left-0 right-0 top-0 bottom-0"
                     src={

@@ -12,6 +12,10 @@ export default function Navbar() {
     background: "linear-gradient(180deg, #4F1A2A 0%, #682843 0.01%, #A16A8A 7.5%, #61253F 32%, #5B2138 77.5%, #390814 100%)"
   }
 
+  const greyButtonTexture: CSSProperties = {
+    background: "linear-gradient(180deg, #888888 0%, #cccccc 0.01%, #aaaaaa 6.5%, #cccccc 41.5%, #555555 100%)"
+  }
+
   return (
     <nav className="w-screen h-20 bg-header-menu bg-no-repeat bg-cover bg-center z-10 fixed bottom-0 flex justify-center items-start border-t-4 border-t-gray-500">
       <div className="max-w-screen-lg mx-a md:w-4/5 w-full -mt-10 bg-gradient-to-r from-gray-600 to-gray-300 rounded-xl flex justify-center items-start">
@@ -19,7 +23,10 @@ export default function Navbar() {
         <div className="flex items-center justify-center h-16 md:h-20 w-[calc(100%-8px)] bg-header-menu my-1 rounded-xl">
           <Link href="evolucao" className={buttonStyle} style={blueButtonTexture}> EVOLUÇÃO </Link>
           <Link href="combate" className={buttonStyle} style={redButtonTexture}> COMBATE </Link>
-          <Link href="pactos" className={buttonStyle} style={blueButtonTexture}> PACTOS </Link>
+          {/* <Link href="pactos" className={buttonStyle} style={blueButtonTexture}> PACTOS </Link> */}
+          <div className={buttonStyle} style={greyButtonTexture}>
+            <img src="./img/menu/lock.png" alt="" height={32} width={32} />
+          </div>
         </div>
       </div>
     </nav>

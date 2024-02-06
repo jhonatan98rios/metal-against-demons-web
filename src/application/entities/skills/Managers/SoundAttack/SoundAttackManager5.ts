@@ -70,15 +70,15 @@ export class SoundAttackManager5 extends SoundAttackManagerBase implements Abstr
         }
     }
 
-    collision(skill: AbstractSkill, enemy: Enemy) {
+    /* collision(skill: AbstractSkill, enemy: Enemy) {
         this.eventManager.emit("skill:damage", { enemy, damage: this.damage })
-    }
+    } */
 
     upgrade(): AbstractSkillManager {
         const temp = new SoundAttackManager5()
-        temp.interval = this.interval - 50
-        temp.speed = this.speed + 0.2
-        temp.damage = this.damage + 0.2
+        temp.interval = this.interval - 10
+        temp.speed = this.speed + 0.1
+        temp.damage = this.damage + 0.1
         temp.name = this.name + "+"
         return temp
     }
