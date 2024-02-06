@@ -30,7 +30,7 @@ export class ForceFieldManager4 extends ForceFieldManagerBase implements Abstrac
         this.width = 250
         this.height = 250
         this.speed = 0
-        this.damage = 0.7 * (Player.getInstance().status.baseDamage / 10)
+        this.damage = 0.8 * (Player.getInstance().status.baseDamage / 10)
         this.spritesheet = CachedImages.getInstance().forceFieldLevel_4
         this.interval = 100
         this.activeSkills = []

@@ -1,5 +1,5 @@
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../constants";
-import { isThereIntersection } from "../utils/utils";
+import { isMobile, isThereIntersection } from "../utils/utils";
 import { Enemy } from "./Enemy";
 import { Game } from "./Game";
 import { PlayerStatus } from "./PlayerStatus";
@@ -36,9 +36,9 @@ export class Player extends EventClient {
         this.status = PlayerStatus.getInstance()
         this.x = SCREEN_WIDTH / 2
         this.y = SCREEN_HEIGHT / 2
-        this.width = 200 / 4
-        this.height = 400 / 4
-        this.speed = 3
+        this.width = (200 / 4) * (isMobile() ? 0.75 : 1)
+        this.height = (400 / 4) * (isMobile() ? 0.75 : 1)
+        this.speed = 3 * (isMobile() ? 0.75 : 1)
         this.srcX = 0
         this.srcY = 100
         this.direction = DIRECTION.RIGHT
@@ -128,7 +128,7 @@ export class Player extends EventClient {
             let enemy = enemies[index]
 
             if (isThereIntersection(this, enemy)) {
-                return this.status.takeDamage(this, enemy.damage)
+                //return this.status.takeDamage(this, enemy.damage)
             }
         }
     }

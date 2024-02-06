@@ -14,7 +14,8 @@ export default function VideoWallpaper() {
                     ${animationState.className}
                 `}
             >
-                <source src="./video/background-4k-resized.mp4" type="video/mp4" />
+                <source src="./video/background-4k-resized.mp4" type="video/mp4" className="hidden md:block" />
+                <source src="./video/mobile.mp4" type="video/mp4" className="block md:hidden" />
             </video>
         </div>
     )

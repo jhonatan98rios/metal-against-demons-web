@@ -5,6 +5,7 @@ import { SoundAttackUnit } from "../../Unit/SoundAttack/SoundAttackUnit";
 import { AbstractSkillManager } from "../AbstractSkillManager";
 import { SoundAttackManager5 } from "./SoundAttackManager5";
 import { SoundAttackManagerBase } from "./SoundAttackManagerBase";
+import { Enemy } from "@/application/entities/Enemy";
 
 
 export class SoundAttackManager4 extends SoundAttackManagerBase implements AbstractSkillManager {
@@ -69,6 +70,10 @@ export class SoundAttackManager4 extends SoundAttackManagerBase implements Abstr
             this.activeSkills.push(sound_attack_level)
         }
     }
+
+    /* collision(skill: AbstractSkill, enemy: Enemy) {
+        this.eventManager.emit("skill:damage", { enemy, damage: this.damage })
+    } */
 
     upgrade(): AbstractSkillManager {
         return new SoundAttackManager5()
