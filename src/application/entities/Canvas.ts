@@ -59,7 +59,7 @@ export class Canvas extends EventClient {
         this.renderPlayer(this.player)
         this.renderSkills(game.skillService.availableSkills)
 
-        this.renderEnemies(game.enemyService.enemies.filter(enemy => enemy.y > this.player.y))
+        //this.renderEnemies(game.enemyService.enemies.filter(enemy => enemy.y > this.player.y))
         
 
         this.renderEnemiesHealth(game.enemyService)
