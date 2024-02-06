@@ -35,12 +35,16 @@ body {
 
 .video-zoom-pacts {
 
-  transform: translate3d(-1000px, 0px, 0px) scale(1.2);
+/*   transform: translate3d(-1000px, 0px, 0px) scale(1.2); */
   transition: all;
   transition-duration: 1s;
   transition-timing-function: ease-in-out;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 768px) {
+    transform: translate3d(0px, 0px, 0px) scale(1);
+  }
+
+  @media (max-width: 1024px) and (min-width: 769) {
     transform: translate3d(-350px, -500px, 0px) scale(2);
   }
 
@@ -53,9 +57,13 @@ body {
   transition: all;
   transition-duration: 1s;
   transition-timing-function: ease-in-out;
-  transform: translate3d(-300px, -200px, 0px) scale(1.5);
+/*   transform: translate3d(-300px, -200px, 0px) scale(1.5); */
 
-  @media (max-width: 1024px) {
+  @media (max-width: 768px) {
+    transform: translate3d(0px, 0px, 0px) scale(1);
+  }
+
+  @media (max-width: 1024px) and (min-width: 769) {
     transform: translate3d(400px, -500px, 0px) scale(2);
   }
 
@@ -68,9 +76,13 @@ body {
   transition: all;
   transition-duration: 1s;
   transition-timing-function: ease-in-out;
-  transform: translate3d(-1000px, 300px, 0px) scale(0.7);
+  /* transform: translate3d(-1000px, 300px, 0px) scale(0.7); */
 
-  @media (max-width: 1024px) {
+  @media (max-width: 768px) {
+    transform: translate3d(0px, 0px, 0px) scale(1);
+  }
+
+  @media (max-width: 1024px) and (min-width: 769px) {
     transform: translate3d(-170px, 0px, 0px) scale(1);
   }
 
