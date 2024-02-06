@@ -76,9 +76,9 @@ export class SoundAttackManager5 extends SoundAttackManagerBase implements Abstr
 
     upgrade(): AbstractSkillManager {
         const temp = new SoundAttackManager5()
-        temp.interval = this.interval - 10
+        temp.interval = this.interval - 50
         temp.speed = this.speed + 0.1
-        temp.damage = this.damage + 0.1
+        temp.damage = this.damage + 2
         temp.name = this.name + "+"
         return temp
     }
