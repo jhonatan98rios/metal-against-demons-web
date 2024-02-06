@@ -18,12 +18,12 @@ export function isThereIntersection(elementA: Element2D, elementB:Element2D) {
     const aLeft = elementA.x + bias;
     const aRight = elementA.x + elementA.width - bias;
     const aTop = elementA.y + bias;
-    const aBottom = elementA.y + elementA.height - bias;
+    const aBottom = elementA.y + elementA.height;
     
     const bLeft = elementB.x + bias;
     const bRight = elementB.x + elementB.width - bias;
     const bTop = elementB.y + bias;
-    const bBottom = elementB.y + elementB.height - bias;
+    const bBottom = elementB.y + elementB.height;
 
     return (aLeft <= bRight && aRight >= bLeft && aTop <= bBottom && aBottom >= bTop);
 }
