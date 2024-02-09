@@ -15,8 +15,8 @@ export function UpgradeTreeComponent() {
     }
 
     useEffect(() => {
-        const scrollHeight = document.querySelector("#scroll").clientHeight
-        document.querySelector("#scroll").scrollTo({ top: scrollHeight + 500, behavior: 'smooth' })
+        //const scrollHeight = document.querySelector("#scroll").clientHeight
+        document.querySelector("#scroll").scrollTo({ top: 10000, behavior: 'smooth' })
     }, [])
 
 

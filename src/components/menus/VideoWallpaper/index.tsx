@@ -9,7 +9,7 @@ export default function VideoWallpaper() {
             <video 
                 autoPlay muted loop id="bg"
                 className={`
-                    fixed z-0 bottom-0 -left-[calc(540px-50vw)] lg:left-0 lg:right-0 mx-auto 
+                    fixed z-0 mx-auto video-zoom
                     h-screen max-w-max min-w-full min-h-full lg:h-auto
                     ${animationState.className}
                 `}

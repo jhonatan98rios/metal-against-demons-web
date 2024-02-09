@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Layout from "../layout";
+import { GetServerSideProps } from "next";
 
 
 export default function Home() {
@@ -23,3 +24,16 @@ Home.getLayout = function getLayout(page) {
         </Layout>
     )
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    ctx.res.setHeader('Location', '/combate');
+    ctx.res.statusCode = 302;
+    ctx.res.end();
+    return {
+        redirect: {
+          permanent: false,
+          destination: "/combate",
+        },
+        props:{},
+    };
+};

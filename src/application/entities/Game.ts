@@ -117,6 +117,14 @@ export class Game extends EventClient {
 
 
     createEventListeners() {
+        this.eventManager.on('player:pause', () => {
+            this.state.status = GameStatus.paused
+        });
+
+        this.eventManager.on('player:play', () => {
+            this.state.status = GameStatus.running
+        });
+
         this.eventManager.on('player:die', () => {
             this.stopGame();
         });

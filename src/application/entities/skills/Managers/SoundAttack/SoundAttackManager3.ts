@@ -5,6 +5,7 @@ import { SoundAttackUnit } from "../../Unit/SoundAttack/SoundAttackUnit";
 import { AbstractSkillManager } from "../AbstractSkillManager";
 import { SoundAttackManager4 } from "./SoundAttackManager4";
 import { SoundAttackManagerBase } from "./SoundAttackManagerBase";
+import { Game, GameStatus } from "@/application/entities/Game";
 
 
 export class SoundAttackManager3 extends SoundAttackManagerBase implements AbstractSkillManager {
@@ -38,6 +39,7 @@ export class SoundAttackManager3 extends SoundAttackManagerBase implements Abstr
     spawn({ player, enemyService }: ISpawn) {
 
         if (!(player && enemyService)) return
+
         const range_area = {
             left: player.x - 500,
             top: player.y - 500,

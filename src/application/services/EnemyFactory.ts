@@ -1,6 +1,6 @@
 import { CachedImages } from "../entities/CachedImages"
 import { DIRECTION, Enemy } from "../entities/Enemy"
-import { isMobile } from "../utils/utils"
+import { generateWeightedRandomNumber, isMobile } from "../utils/utils"
 
 type RandomPos = {
     x: number,
@@ -10,13 +10,15 @@ type RandomPos = {
 export class EnemyFactory {
 
     static randomCreate(randomPos: RandomPos) {
-        const random = Math.floor(Math.random() * 4)
+        //const random = Math.floor(Math.random() * 4)
+        const random = generateWeightedRandomNumber()
 
         return ([
-            this.createCyclops(randomPos),
             this.createSpirit(randomPos),
-            this.createDragon(randomPos),
+            this.createCyclops(randomPos),
             this.createCrawler(randomPos),
+            this.createDragon(randomPos),
+            this.createBlueDragon(randomPos)
         ])[random]
     }
 
@@ -52,21 +54,6 @@ export class EnemyFactory {
         })
     }
 
-    static createDragon(randomPos: RandomPos) {
-        return new Enemy({
-            maxHealth: 50,
-            damage: 25,
-            x: randomPos.x, 
-            y: randomPos.y,
-            width: (380 / 4) * (isMobile() ? 0.75 : 1),
-            height: (200 / 2) * (isMobile() ? 0.75 : 1),
-            speed: 2 * (isMobile() ? 0.75 : 1),
-            srcX: 0,
-            srcY: 0,
-            direction: DIRECTION.LEFT,
-            spritesheet: CachedImages.getInstance().dragon
-        })
-    } 
 
     static createCrawler(randomPos: RandomPos) {
         return new Enemy({
@@ -83,4 +70,38 @@ export class EnemyFactory {
             spritesheet: CachedImages.getInstance().crawler
         })
     } 
+
+    static createDragon(randomPos: RandomPos) {
+        return new Enemy({
+            maxHealth: 50,
+            damage: 25,
+            x: randomPos.x, 
+            y: randomPos.y,
+            width: (380 / 4) * (isMobile() ? 0.75 : 1),
+            height: (200 / 2) * (isMobile() ? 0.75 : 1),
+            speed: 2 * (isMobile() ? 0.75 : 1),
+            srcX: 0,
+            srcY: 0,
+            direction: DIRECTION.LEFT,
+            spritesheet: CachedImages.getInstance().dragon
+        })
+    }
+
+    static createBlueDragon(randomPos: RandomPos) {
+        return new Enemy({
+            maxHealth: 75,
+            damage: 30,
+            x: randomPos.x, 
+            y: randomPos.y,
+            width: (456 / 4) * (isMobile() ? 0.75 : 1),
+            height: (240 / 2) * (isMobile() ? 0.75 : 1),
+            speed: 2 * (isMobile() ? 0.75 : 1),
+            srcX: 0,
+            srcY: 0,
+            direction: DIRECTION.LEFT,
+            spritesheet: CachedImages.getInstance().blueDragon
+        })
+    } 
+
+    
 }
