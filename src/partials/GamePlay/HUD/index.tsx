@@ -1,5 +1,7 @@
 import { GameStatus } from "@/application/entities/Game";
 import { DeadNotification } from "@/components/HUD/DeadNotification";
+import { PauseButton } from "@/components/HUD/PauseButton";
+import { PauseModal } from "@/components/HUD/PauseModal";
 import { IPlayerStatus, PlayerStatusComponent } from "@/components/HUD/PlayerStatus";
 import { UpgradeModal } from "@/components/HUD/Upgrade/UpgradeModal";
 
@@ -20,8 +22,18 @@ export default function HUD({ playerStatus, gameStatus }: IHUD) {
             }
 
             {
+                gameStatus.status == GameStatus.running &&
+                <PauseButton />
+            }
+
+            {
                 gameStatus.status == GameStatus.stopped &&
                 <DeadNotification />
+            }
+
+            {
+                gameStatus.status == GameStatus.paused &&
+                <PauseModal />
             }
 
             {

@@ -51,17 +51,18 @@ export function purePositionAnimation(player: Element2D, enemy: Body, enemies: B
     const newX = enemy.x + velocityX
     const newY = enemy.y + velocityY
 
-    let shouldMoveX = !checkCollision(
+    let isThereCollisionX = checkCollision(
         { ...enemy, x: newX } as Body, 
         enemies
     )
-    let shouldMoveY = !checkCollision(
+
+    let isThereCollisionY = checkCollision(
         { ...enemy, y: newY } as Body, 
         enemies
     )
 
-    const x = shouldMoveX ? newX : enemy.x
-    const y = shouldMoveY ? newY : enemy.y
+    const x = !isThereCollisionX ? newX : enemy.x
+    const y = !isThereCollisionY ? newY : enemy.y
 
     return { x, y }
 }
@@ -86,3 +87,20 @@ function checkCollision(enemy: Body, enemies: Body[]) {
 export function isMobile () {
     return window.innerWidth < 768; // Você pode ajustar esse valor conforme necessário
 };
+
+
+export function generateWeightedRandomNumber(): number {
+    const weights = [32, 16, 8, 4, 1]; // Pesos correspondentes aos números 0, 1, 2 e 3
+    const totalWeight = weights.reduce((sum, weight) => sum + weight, 0);
+    const randomNumber = Math.random() * totalWeight;
+
+    let cumulativeWeight = 0;
+    for (let i = 0; i < weights.length; i++) {
+        cumulativeWeight += weights[i];
+        if (randomNumber < cumulativeWeight) {
+            return i;
+        }
+    }
+
+    return weights.length - 1; // Retornar o último número se algo der errado
+}

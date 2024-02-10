@@ -25,7 +25,7 @@ export function DeadNotification() {
                     Tentar novamente
                 </button>
 
-                <button className="border border-white py-1 px-4 my-2" onClick={() => { location.href = "/" }}>
+                <button className="border border-white py-1 px-4 my-2" onClick={() => { location.href = "/combate" }}>
                     Voltar ao inicio
                 </button>
 

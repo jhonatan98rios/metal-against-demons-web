@@ -128,7 +128,7 @@ export class Player extends EventClient {
             let enemy = enemies[index]
 
             if (isThereIntersection(this, enemy)) {
-                //return this.status.takeDamage(this, enemy.damage)
+                return this.status.takeDamage(this, enemy.damage)
             }
         }
     }

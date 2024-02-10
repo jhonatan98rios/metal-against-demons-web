@@ -9,6 +9,7 @@ export class CachedImages {
     cyclop: HTMLImageElement
     spirit: HTMLImageElement
     dragon: HTMLImageElement
+    blueDragon: HTMLImageElement
     crawler: HTMLImageElement
 
     soundAttackLevel_1: HTMLImageElement
@@ -47,9 +48,11 @@ export class CachedImages {
         this.spirit = new Image()
         this.spirit.src = isMobile() ? "img/enemies/spirit-mobile.png" : 'img/enemies/spirit.png'
         this.cyclop = new Image()
-        this.cyclop.src = isMobile() ? "img/enemies/cyclope-mobile.png" : 'img/enemies/cyclope.png'
+        this.cyclop.src = isMobile() ? "img/enemies/cyclope-mobile-2.png" : 'img/enemies/cyclope-2.png'
         this.dragon = new Image()
         this.dragon.src = isMobile() ? "img/enemies/dragon-mobile.png" : 'img/enemies/dragon.png'
+        this.blueDragon = new Image()
+        this.blueDragon.src = isMobile() ? "img/enemies/blue-dragon-mobile.png" : 'img/enemies/blue-dragon.png'
         this.crawler = new Image()
         this.crawler.src = isMobile() ? "img/enemies/crawler-mobile.png" : 'img/enemies/crawler.png'
     }

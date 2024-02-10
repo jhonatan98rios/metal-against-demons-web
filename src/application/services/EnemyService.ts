@@ -22,11 +22,14 @@ export class EnemyService extends EventClient {
 
     spawn() {
         this.sortEnemies()
-        //setTimeout(this.spawn.bind(this), 1000 - (this.player.status.level * 75))
-        setTimeout(this.spawn.bind(this), 100)
+        let interval = 1000 - (this.player.status.level * 50)
+        interval = interval > 50 ? interval : 50
 
-        //if (this.enemies.length >= this.player.status.level * 10000) return
-        if (this.enemies.length >= 10000) return
+        setTimeout(this.spawn.bind(this), interval)
+        //setTimeout(this.spawn.bind(this), 100)
+
+        if (this.enemies.length >= this.player.status.level * 1000) return
+        //if (this.enemies.length >= 10000) return
 
 
         const randomDistance = {

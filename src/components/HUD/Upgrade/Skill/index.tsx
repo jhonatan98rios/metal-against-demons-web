@@ -22,9 +22,9 @@ export function Skill(props: SkillProps) {
             <div className="flex flex-col mt-2 h-full justify-center">
                 <p className="font-bold whitespace-nowrap"> { name } </p>
 
-                <p> Damage: { damage.toFixed(2) } </p>
-                <p> Speed: { speed.toFixed(2) } </p>
-                <p> Fire rate: { (1000 / interval).toFixed(2) }/s </p>
+                <p> Dano: { damage.toFixed(2) } </p>
+                <p> Velocidade: { speed.toFixed(2) } </p>
+                <p> Frequencia: { (1000 / interval).toFixed(2) }/s </p>
             </div>
         </div>
     )

@@ -33,60 +33,56 @@ body {
   overflow: hidden;
 }
 
-.video-zoom-pacts {
-
-/*   transform: translate3d(-1000px, 0px, 0px) scale(1.2); */
+.video-zoom {
+  transform: translate3d(150px, -400px, 0px) scale(1.2);
   transition: all;
   transition-duration: 1s;
   transition-timing-function: ease-in-out;
 
-  @media (max-width: 768px) {
-    transform: translate3d(0px, 0px, 0px) scale(1);
+  @media (min-width: 560px) and (max-width: 768px) {
+    transform: translate3d(150px, -150px, 0px) scale(1.2);
+  }
+  
+  @media (min-width: 769px) and (max-width: 1240px) {
+    transform: translate3d(300px, -400px, 0px) scale(1.5);
   }
 
-  @media (max-width: 1023px) and (min-width: 769) {
-    transform: translate3d(-350px, -500px, 0px) scale(2);
+  @media (min-width: 1240px) {
+    transform: translate3d(0px, -450px, 0px) scale(1);
+    //transform: translate3d(0px, -150px, 0px) scale(1.5);
+    //transform: translate3d(-1000px, -1000px, 0px) scale(0.75);
   }
+}
 
-  @media (max-width: 1920px) and (min-width: 1024px) {
-    transform: translate3d(-1000px, 0px, 0px) scale(1.2);
-  }
+.video-zoom-pacts {
+  transition: all;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-out;
 }
 
 .video-zoom-evolution {
   transition: all;
   transition-duration: 1s;
   transition-timing-function: ease-in-out;
-/*   transform: translate3d(-300px, -200px, 0px) scale(1.5); */
-
-  @media (max-width: 768px) {
-    transform: translate3d(0px, 0px, 0px) scale(1);
-  }
-
-  @media (max-width: 1023px) and (min-width: 769) {
-    transform: translate3d(400px, -500px, 0px) scale(1.5);
-  }
-
-  @media (max-width: 1920px) and (min-width: 1024px) {
-    transform: translate3d(-700px, 0px, 0px) scale(1.1);
-  }
 }
 
 .video-without-zoom {
   transition: all;
   transition-duration: 1s;
   transition-timing-function: ease-in-out;
-  /* transform: translate3d(-1000px, 300px, 0px) scale(0.7); */
+}
 
-  @media (max-width: 768px) {
-    transform: translate3d(0px, 0px, 0px) scale(1);
-  }
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
 
-  @media (max-width: 1023px) and (min-width: 769px) {
-    transform: translate3d(-170px, 0px, 0px) scale(1);
-  }
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba($color: #000000, $alpha: 0);
+}
 
-  @media (max-width: 1920px) and (min-width: 1024px) {
-    transform: translate3d(-1000px, 300px, 0px) scale(0.7);
-  }
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
 }

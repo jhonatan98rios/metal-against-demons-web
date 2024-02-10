@@ -1,6 +1,6 @@
-import { Enemy } from "@/application/entities/Enemy";
+import { Game, GameStatus } from "@/application/entities/Game";
 import { CachedImages } from "../../../CachedImages";
-import { AbstractSkill, ISpawn } from "../../Unit/AbstractSkill";
+import { ISpawn } from "../../Unit/AbstractSkill";
 import { SoundAttackUnit } from "../../Unit/SoundAttack/SoundAttackUnit";
 import { AbstractSkillManager } from "../AbstractSkillManager";
 import { SoundAttackManager3 } from "./SoundAttackManager3";
@@ -27,16 +27,17 @@ export class SoundAttackManager2 extends SoundAttackManagerBase implements Abstr
         this.category = "Sound Attack"
         this.width = 38
         this.height = 38
-        this.speed = 3.5
+        this.speed = 3.2
         this.damage = 12 * (Player.getInstance().status.baseDamage / 10)
         this.spritesheet = CachedImages.getInstance().soundAttackLevel_2
-        this.interval = 400
+        this.interval = 450
         this.lifeTime = 60 * 3 //frames * sec
     }
 
     spawn({ player, enemyService }: ISpawn) {
 
         if (!(player && enemyService)) return
+
         const range_area = {
             left: player.x - 500,
             top: player.y - 500,
