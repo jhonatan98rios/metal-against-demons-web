@@ -20,7 +20,7 @@ export default function Evolution() {
     }, [])
 
     return (
-        <main className={`flex min-h-screen flex-col items-center justify-between p-24 w-screen z-10 relative`}>
+        <main className={`flex min-h-screen flex-col items-center justify-between md:p-24 w-screen z-10 relative`}>
             <CurrentStatus  />
 
             <UpgradeTreeComponent />

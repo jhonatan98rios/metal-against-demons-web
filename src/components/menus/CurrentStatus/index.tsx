@@ -6,7 +6,7 @@ export default function CurrentStatus() {
     const { money, maxHealth, baseAttack } = playerState
 
     return (
-        <div className="w-[400px] border-4 border-gray-300 bg-black absolute top-32 lg:top-32 lg:left-12 rounded-xl text-white text-xl font-bold p-6 z-20">
+        <div className="w-[400px] border-4 border-gray-300 bg-black absolute top-16 lg:top-32 lg:left-12 rounded-xl text-white text-xl font-bold p-6 z-30">
 
             <div className="flex justify-between">
                 <p className="text-[#69A8C6]">Almas condenadas:</p>
