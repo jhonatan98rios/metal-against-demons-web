@@ -2,7 +2,7 @@ import { useAnimation } from "@/store/AnimationContext";
 
 export default function VideoWallpaper() {
 
-    const { animationState } = useAnimation();
+    //const { animationState } = useAnimation();
 
     return (
         <div className="video-bg absolute bottom-0 left-0 w-full h-full flex justify-center items-center">
