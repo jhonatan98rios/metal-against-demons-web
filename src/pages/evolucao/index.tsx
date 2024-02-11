@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import Layout from "@/layout";
 import { useAnimation } from "@/store/AnimationContext";
-import { UpgradeTreeComponent } from "@/components/menus/UpgradeTree";
+import { UpgradeTree } from "@/components/menus/UpgradeTree";
 import dynamic from "next/dynamic";
 
 export default function Evolution() {
@@ -23,7 +23,7 @@ export default function Evolution() {
         <main className={`flex min-h-screen flex-col items-center justify-between md:p-24 w-screen z-10 relative`}>
             <CurrentStatus  />
 
-            <UpgradeTreeComponent />
+            <UpgradeTree />
         </main>
     )
 }

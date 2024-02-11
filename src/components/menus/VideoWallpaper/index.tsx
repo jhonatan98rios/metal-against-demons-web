@@ -20,9 +20,3 @@ export default function VideoWallpaper() {
         </div>
     )
 }
-
-
-
-/* 
-transform: translate3d(480px, -840px, 0px) scale(3);
-*/
