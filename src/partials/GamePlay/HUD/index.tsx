@@ -1,4 +1,4 @@
-import { GameStatus } from "@/application/entities/Game";
+import { GameStatus } from "@/application/entities/GameState";
 import { DeadNotification } from "@/components/HUD/DeadNotification";
 import { PauseButton } from "@/components/HUD/PauseButton";
 import { PauseModal } from "@/components/HUD/PauseModal";

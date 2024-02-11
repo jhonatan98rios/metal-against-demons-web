@@ -10,17 +10,8 @@ import { OrbService } from "../services/OrbService"
 import { EventManager } from "../event/EventManager"
 import { EventClient } from "../event/EventClient"
 import { AbstractSkillManager } from "./skills/Managers/AbstractSkillManager"
+import { GameState, GameStatus } from "./GameState"
 
-export enum GameStatus {
-    stopped = 0,
-    running = 1,
-    paused = 2,
-    levelup = 3,
-}
-
-type GameState = {
-    status: GameStatus
-}
 
 export class Game extends EventClient {
 
@@ -46,9 +37,7 @@ export class Game extends EventClient {
     constructor() {
         super()
 
-        this.state = {
-            status: GameStatus.running
-        }
+        this.state = GameState.getInstance()
 
         this.player = Player.getInstance()
         this.player.loadSpritesheetEventListener(this)

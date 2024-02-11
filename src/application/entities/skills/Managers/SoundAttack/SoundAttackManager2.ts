@@ -1,4 +1,3 @@
-import { Game, GameStatus } from "@/application/entities/Game";
 import { CachedImages } from "../../../CachedImages";
 import { ISpawn } from "../../Unit/AbstractSkill";
 import { SoundAttackUnit } from "../../Unit/SoundAttack/SoundAttackUnit";

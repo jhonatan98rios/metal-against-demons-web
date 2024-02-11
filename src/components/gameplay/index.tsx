@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
-import { Game, GameStatus } from "@/application/entities/Game"
+import { Game } from "@/application/entities/Game"
 import { CachedImages } from "@/application/entities/CachedImages"
 import { Observer } from "@/application/utils/Observer"
 import { PlayerStatus } from "@/application/entities/PlayerStatus"
 import Canvas from "@/partials/GamePlay/Canvas"
 import HUD from "@/partials/GamePlay/HUD"
 import { usePlayer } from "@/store/PlayerContext"
+import { GameStatus } from "@/application/entities/GameState"
 
 
 export default function GamePlay() {

@@ -1,7 +1,7 @@
 import { Camera } from "./Camera";
 import { Scenario } from "./Scenario";
 import { Player } from "./Player";
-import { Game, GameStatus } from "./Game";
+import { Game } from "./Game";
 import { Element } from "../../database/scenarios/mock";
 import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../constants";
 import { EnemyService } from "../services/EnemyService";
@@ -12,6 +12,7 @@ import { drawAnimatedBar } from "../components/drawAnimatedBar";
 import { drawText } from "../components/drawText";
 import { EventClient } from "../event/EventClient";
 import { AbstractSkillManager } from "./skills/Managers/AbstractSkillManager";
+import { GameStatus } from "./GameState";
 
 
 export class Canvas extends EventClient {

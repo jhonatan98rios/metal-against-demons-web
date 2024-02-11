@@ -5,7 +5,6 @@ import { SoundAttackUnit } from "../../Unit/SoundAttack/SoundAttackUnit";
 import { AbstractSkillManager } from "../AbstractSkillManager";
 import { SoundAttackManager5 } from "./SoundAttackManager5";
 import { SoundAttackManagerBase } from "./SoundAttackManagerBase";
-import { Game, GameStatus } from "@/application/entities/Game";
 
 
 export class SoundAttackManager4 extends SoundAttackManagerBase implements AbstractSkillManager {

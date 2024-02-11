@@ -1,4 +1,5 @@
-import { Game, GameStatus } from "@/application/entities/Game"
+import { Game } from "@/application/entities/Game"
+import { GameStatus } from "@/application/entities/GameState"
 
 export function PauseButton() {
 

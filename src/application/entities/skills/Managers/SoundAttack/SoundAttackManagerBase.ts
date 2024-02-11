@@ -6,6 +6,7 @@ import { EventClient } from "@/application/event/EventClient";
 import { Enemy } from "@/application/entities/Enemy";
 import { EnemyService } from "@/application/services/EnemyService";
 import { Player } from "@/application/entities/Player";
+import { GameState, GameStatus } from "@/application/entities/GameState";
 
 
 export class SoundAttackManagerBase extends EventClient implements AbstractSkillManager {
@@ -44,7 +45,10 @@ export class SoundAttackManagerBase extends EventClient implements AbstractSkill
     intervaledSpawn(player: Player, enemyService: EnemyService) {
         /* Each skill manaager is a type of attack */
         if (this.isActive) {
-            this.spawn({ player, enemyService })
+
+            if (GameState.getInstance().status == GameStatus.running && document.hasFocus()) {
+                this.spawn({ player, enemyService })
+            }
 
             setTimeout(() => {
                 this.intervaledSpawn(player, enemyService)

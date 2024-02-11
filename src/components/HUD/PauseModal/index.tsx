@@ -1,5 +1,6 @@
-import { Game, GameStatus } from "@/application/entities/Game";
+import { Game } from "@/application/entities/Game";
 import { Modal } from "../Modal";
+import { GameStatus } from "@/application/entities/GameState";
 
 export function PauseModal() {
 

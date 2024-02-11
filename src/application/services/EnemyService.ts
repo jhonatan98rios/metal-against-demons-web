@@ -3,7 +3,7 @@ import { Camera } from "../entities/Camera";
 import { Enemy } from "../entities/Enemy"
 import { Player } from "../entities/Player";
 import { EventClient } from "../event/EventClient";
-import { Element2D, isThereIntersection } from "../utils/utils";
+import { Element2D, generateRandomPositionOutsideScreen, isThereIntersection } from "../utils/utils";
 import { EnemyFactory } from "./EnemyFactory";
 
 export class EnemyService extends EventClient {
@@ -12,10 +12,12 @@ export class EnemyService extends EventClient {
 
     player: Player
     enemies: Enemy[]
+    camera: Camera
 
     constructor() {
         super()
         this.player = Player.getInstance()
+        this.camera = Camera.getInstance()
         this.enemies = []
         this.spawn()
     }
@@ -31,16 +33,7 @@ export class EnemyService extends EventClient {
         if (this.enemies.length >= this.player.status.level * 1000) return
         //if (this.enemies.length >= 10000) return
 
-
-        const randomDistance = {
-            x: Math.floor(Math.random() * 1000) + (SCREEN_WIDTH / 2),
-            y: Math.floor(Math.random() * 1000) + (SCREEN_HEIGHT / 2)
-        }
-
-        const randomPos = {
-            x: randomDistance.x % 2 ? this.player.x - randomDistance.x : this.player.x + randomDistance.x,
-            y: randomDistance.y % 2 ? this.player.y - randomDistance.y : this.player.y + randomDistance.y,
-        }
+        const randomPos = generateRandomPositionOutsideScreen(this.camera)
 
         const createdEnemy = EnemyFactory.randomCreate(randomPos)
 

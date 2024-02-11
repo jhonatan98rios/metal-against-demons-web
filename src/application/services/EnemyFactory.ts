@@ -89,8 +89,8 @@ export class EnemyFactory {
 
     static createBlueDragon(randomPos: RandomPos) {
         return new Enemy({
-            maxHealth: 75,
-            damage: 30,
+            maxHealth: 100,
+            damage: 50,
             x: randomPos.x, 
             y: randomPos.y,
             width: (456 / 4) * (isMobile() ? 0.75 : 1),
@@ -102,6 +102,4 @@ export class EnemyFactory {
             spritesheet: CachedImages.getInstance().blueDragon
         })
     } 
-
-    
 }
