@@ -13,7 +13,7 @@ export type Element2D = Vector2D & { width: number, height: number }
 export type Body = Element2D & { id?: string, speed: number }
 
 export function isThereIntersection(elementA: Element2D, elementB:Element2D) {
-    const bias = 10
+    const bias = 5
 
     const aLeft = elementA.x + bias;
     const aRight = elementA.x + elementA.width - bias;

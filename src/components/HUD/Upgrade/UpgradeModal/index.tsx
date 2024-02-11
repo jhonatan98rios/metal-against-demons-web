@@ -8,7 +8,7 @@ export function UpgradeModal() {
     const upgradeOptions = SkillService.getInstance().getUpgradeOptions()
 
     return (
-        <Modal className="w-4/5 max-w-4xl h-fit p-6">
+        <Modal className="w-full md:w-4/5 max-w-4xl h-fit p-4 md:p-6">
             <div className="w-full h-full flex flex-col justify-center items-center text-white">
                 {
                     upgradeOptions &&
