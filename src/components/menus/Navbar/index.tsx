@@ -21,8 +21,8 @@ export default function Navbar() {
       <div className="max-w-screen-lg mx-a md:w-4/5 w-full -mt-10 bg-gradient-to-r from-gray-600 to-gray-300 rounded-xl flex justify-center items-start">
 
         <div className="flex items-center justify-center h-16 md:h-20 w-[calc(100%-8px)] bg-header-menu my-1 rounded-xl">
-          <Link href="evolucao" className={buttonStyle} style={blueButtonTexture}> EVOLUÇÃO </Link>
-          <Link href="combate" className={buttonStyle} style={redButtonTexture}> COMBATE </Link>
+          <Link href="/evolucao" className={buttonStyle} style={blueButtonTexture}> EVOLUÇÃO </Link>
+          <Link href="/" className={buttonStyle} style={redButtonTexture}> COMBATE </Link>
           {/* <Link href="pactos" className={buttonStyle} style={blueButtonTexture}> PACTOS </Link> */}
           <div className={buttonStyle} style={greyButtonTexture}>
             <img src="./img/menu/lock.png" alt="" height={32} width={32} />
